@@ -393,8 +393,8 @@
             "deleteSuccess": "提示词已删除"
         },
         "buttons": {
-            "selectPrompt": "常用提示",
-            "useLastPrompt": "上次提示",
+            "selectPrompt": "常用提示1",
+            "useLastPrompt": "上次提示1",
             "noPrompts": "尚无常用提示词，请先在设置中新增",
             "noLastPrompt": "尚无最近使用的提示词",
             "lastPromptApplied": "已套用上次使用的提示词",
