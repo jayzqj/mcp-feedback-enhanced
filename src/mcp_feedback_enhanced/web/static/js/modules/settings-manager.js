@@ -322,6 +322,15 @@
     SettingsManager.prototype.applyTheme = function(theme) {
         const htmlElement = document.documentElement;
 
+        // 检查当前主题是否已经正确设置（避免重复设置导致闪烁）
+        const currentTheme = htmlElement.getAttribute('data-theme') || 'dark';
+        const targetTheme = theme || 'dark';
+
+        if (currentTheme === targetTheme) {
+            console.log('🎨 主題已經正確設置，跳過重複應用:', theme);
+            return;
+        }
+
         // 移除現有的主題屬性
         htmlElement.removeAttribute('data-theme');
 
@@ -330,7 +339,7 @@
             htmlElement.setAttribute('data-theme', theme);
         }
 
-        console.log('🎨 主題已應用:', theme);
+        console.log('🎨 主題已應用:', theme, '(從', currentTheme, '切換)');
     };
 
     /**

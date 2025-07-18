@@ -45,6 +45,28 @@ def load_user_layout_settings() -> str:
         return "combined-vertical"
 
 
+def load_user_theme_settings() -> str:
+    """載入用戶的主題設定"""
+    try:
+        # 使用統一的設定檔案路徑
+        config_dir = Path.home() / ".config" / "mcp-feedback-enhanced"
+        settings_file = config_dir / "ui_settings.json"
+
+        if settings_file.exists():
+            with open(settings_file, encoding="utf-8") as f:
+                settings = json.load(f)
+                theme = settings.get("theme", "light")
+                debug_log(f"從設定檔案載入主題: {theme}")
+                # 確保返回 str 類型
+                return str(theme)
+        else:
+            debug_log("設定檔案不存在，使用預設主題: light")
+            return "light"
+    except Exception as e:
+        debug_log(f"載入主題設定失敗: {e}，使用預設主題: light")
+        return "light"
+
+
 # 使用統一的訊息代碼系統
 # 從 ..constants 導入的 get_msg_code 函數會處理所有訊息代碼
 # 舊的 key 會自動映射到新的常量
@@ -74,6 +96,8 @@ def setup_routes(manager: "WebUIManager"):
         # 有活躍會話時顯示回饋頁面
         # 載入用戶的佈局模式設定
         layout_mode = load_user_layout_settings()
+        # 載入用戶的主題設定
+        theme = load_user_theme_settings()
 
         return manager.templates.TemplateResponse(
             "feedback.html",
@@ -85,6 +109,7 @@ def setup_routes(manager: "WebUIManager"):
                 "version": __version__,
                 "has_session": True,
                 "layout_mode": layout_mode,
+                "theme": theme,
             },
         )
 

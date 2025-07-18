@@ -1,9 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh-CN" id="html-root">
+<html lang="zh-CN" id="html-root"{% if theme and theme != 'dark' %} data-theme="{{ theme }}"{% endif %}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+
+    <!-- 防止主题闪烁的内联脚本 - 必须在任何CSS加载之前执行 -->
+    <script>
+        (function() {
+            // 从服务器端传递的主题设置
+            var serverTheme = '{{ theme }}';
+
+            // 如果有主题设置且不是深色主题，立即应用
+            if (serverTheme && serverTheme !== 'dark') {
+                document.documentElement.setAttribute('data-theme', serverTheme);
+            }
+
+            // 记录主题应用状态，供后续JavaScript使用
+            window.initialTheme = serverTheme;
+            console.log('🎨 页面加载时应用主题:', serverTheme);
+        })();
+    </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
