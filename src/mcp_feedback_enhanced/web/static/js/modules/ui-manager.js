@@ -415,13 +415,13 @@
     };
 
     /**
-     * 安全地渲染 Markdown 內容
+     * 安全地渲染 Markdown 内容
      */
     UIManager.prototype.renderMarkdownSafely = function(content) {
         try {
-            // 檢查 marked 和 DOMPurify 是否可用
+            // 检查 marked 和 DOMPurify 是否可用
             if (typeof window.marked === 'undefined' || typeof window.DOMPurify === 'undefined') {
-                console.warn('⚠️ Markdown 庫未載入，使用純文字顯示');
+                console.warn('⚠️ Markdown 库未载入，使用纯文本显示');
                 return this.escapeHtml(content);
             }
 

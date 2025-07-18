@@ -165,36 +165,36 @@ class WebFeedbackSession:
             "resources_cleaned": 0,
         }
 
-        # 新增：活躍標籤頁管理
+        # 新增：活跃标签页管理
         self.active_tabs: dict[str, Any] = {}
 
-        # 新增：用戶設定的會話超時
+        # 新增：用户设定的会话超时
         self.user_timeout_enabled = False
-        self.user_timeout_seconds = 3600  # 預設 1 小時
+        self.user_timeout_seconds = 3600  # 默认 1 小时
         self.user_timeout_timer: threading.Timer | None = None
 
-        # 確保臨時目錄存在
+        # 确保临时目录存在
         TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
-        # 獲取資源管理器實例
+        # 获取资源管理器实例
         self.resource_manager = get_resource_manager()
 
-        # 啟動自動清理定時器
+        # 启动自动清理定时器
         self._schedule_auto_cleanup()
 
         debug_log(
-            f"會話 {self.session_id} 初始化完成，自動清理延遲: {auto_cleanup_delay}秒，最大空閒: {max_idle_time}秒"
+            f"会话 {self.session_id} 初始化完成，自动清理延迟: {auto_cleanup_delay}秒，最大空闲: {max_idle_time}秒"
         )
 
     def get_message_code(self, key: str) -> str:
         """
-        獲取訊息代碼
+        获取消息代码
 
         Args:
-            key: 訊息 key
+            key: 消息 key
 
         Returns:
-            訊息代碼（用於前端 i18n）
+            消息代码（用于前端 i18n）
         """
         return get_message_code(key)
 

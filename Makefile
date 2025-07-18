@@ -1,11 +1,11 @@
 # Makefile for mcp-feedback-enhanced development
-# 適用於 mcp-feedback-enhanced 專案開發
+# 适用于 mcp-feedback-enhanced 项目开发
 # Compatible with Windows PowerShell and Unix systems
-# 兼容 Windows PowerShell 和 Unix 系統
+# 兼容 Windows PowerShell 和 Unix 系统
 
 .PHONY: help install install-dev install-hooks lint format type-check test clean pre-commit-run pre-commit-all update-deps check-rust build-desktop build-desktop-release test-desktop clean-desktop build-all test-all test-func test-web test-desktop-func
 
-# 預設目標 - 顯示幫助訊息
+# 默认目标 - 显示帮助信息
 help: ## Show this help message
 	@echo "Available commands:"
 	@echo ""
@@ -47,7 +47,7 @@ help: ## Show this help message
 	@echo "  clean-desktop        Clean desktop build artifacts"
 	@echo "  check-rust           Check Rust development environment"
 
-# 安裝相關命令
+# 安装相关命令
 install: ## Install the package
 	uv sync
 
@@ -58,7 +58,7 @@ install-hooks: ## Install pre-commit hooks
 	uv run pre-commit install
 	@echo "✅ Pre-commit hooks installed successfully!"
 
-# 程式碼品質檢查命令
+# 程序代码质量检查命令
 lint: ## Run linting with Ruff
 	uv run ruff check .
 
@@ -74,12 +74,12 @@ format-check: ## Check code formatting
 type-check: ## Run type checking with mypy
 	uv run mypy
 
-# 組合品質檢查命令
+# 组合质量检查命令
 check: lint format-check type-check ## Run all code quality checks
 
 check-fix: lint-fix format type-check ## Run all checks with auto-fix
 
-# Pre-commit 相關命令
+# Pre-commit 相关命令
 pre-commit-run: ## Run pre-commit on staged files
 	uv run pre-commit run
 
@@ -127,14 +127,14 @@ clean: ## Clean up cache and temporary files
 update-deps: ## Update dependencies
 	uv sync --upgrade
 
-# 建置相關命令
+# 构建相关命令
 build: ## Build the package
 	uv build
 
 build-check: ## Check the built package
 	uv run twine check dist/*
 
-# 版本發布命令
+# 版本发布命令
 bump-patch: ## Bump patch version
 	uv run bump2version patch
 
@@ -144,7 +144,7 @@ bump-minor: ## Bump minor version
 bump-major: ## Bump major version
 	uv run bump2version major
 
-# 開發工作流程
+# 开发工作流程
 dev-setup: install-dev install-hooks ## Complete development setup
 	@echo "🎉 Development environment setup complete!"
 	@echo ""
@@ -153,7 +153,7 @@ dev-setup: install-dev install-hooks ## Complete development setup
 	@echo "  2. Start coding! Pre-commit hooks will run automatically"
 	@echo "  3. Use 'make help' to see all available commands"
 
-# CI 流程模擬
+# CI 流程模拟
 ci: clean install-dev pre-commit-all test ## Simulate CI pipeline locally
 
 # 快速开发命令
@@ -163,7 +163,7 @@ quick-check: lint-fix format type-check ## Quick check with auto-fix (recommende
 ps-clean: ## PowerShell version of clean (Windows)
 	powershell -Command "Get-ChildItem -Path . -Recurse -Name '__pycache__' | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue; Get-ChildItem -Path . -Recurse -Name '*.pyc' | Remove-Item -Force -ErrorAction SilentlyContinue; @('.mypy_cache', '.ruff_cache', '.pytest_cache', 'htmlcov', 'dist', 'build') | ForEach-Object { if (Test-Path $$_) { Remove-Item $$_ -Recurse -Force } }"
 
-# 桌面應用程式相關命令
+# 桌面应用程序相关命令
 check-rust: ## Check Rust development environment
 	@echo "🔍 Checking Rust environment..."
 	@rustc --version || (echo "❌ Rust not installed. Please visit https://rustup.rs/" && exit 1)

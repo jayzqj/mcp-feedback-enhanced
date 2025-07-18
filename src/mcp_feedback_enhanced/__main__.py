@@ -20,9 +20,13 @@ import warnings
 # 抑制 Windows 上的 asyncio ResourceWarning
 if sys.platform == "win32":
     warnings.filterwarnings(
-        "ignore", category=ResourceWarning, message=".*unclosed transport.*"
+        "ignore",
+        category=ResourceWarning,
+        message=".*unclosed transport.*",
     )
-    warnings.filterwarnings("ignore", category=ResourceWarning, message=".*unclosed.*")
+    warnings.filterwarnings(
+        "ignore", category=ResourceWarning, message=".*unclosed.*"
+    )
 
     # 设置 asyncio 事件循环策略以减少警告
     try:
@@ -32,9 +36,9 @@ if sys.platform == "win32":
 
 
 def main():
-    """主程式入口點"""
+    """主程序入口点"""
     parser = argparse.ArgumentParser(
-        description="MCP Feedback Enhanced Enhanced - 互動式回饋收集 MCP 伺服器"
+        description="MCP Feedback Enhanced Enhanced - 交互式回馈收集 MCP 服务器"
     )
 
     subparsers = parser.add_subparsers(dest="command", help="可用命令")
@@ -66,7 +70,7 @@ def main():
     elif args.command == "server" or args.command is None:
         run_server()
     else:
-        # 不應該到達這裡
+        # 不应该到达这里
         parser.print_help()
         sys.exit(1)
 
@@ -93,7 +97,9 @@ def run_tests(args):
         )
         warnings.filterwarnings("ignore", category=ResourceWarning)
         warnings.filterwarnings("ignore", message=".*unclosed transport.*")
-        warnings.filterwarnings("ignore", message=".*I/O operation on closed pipe.*")
+        warnings.filterwarnings(
+            "ignore", message=".*I/O operation on closed pipe.*"
+        )
         warnings.filterwarnings("ignore", message=".*unclosed.*")
         # 抑制 asyncio 相关的所有警告
         warnings.filterwarnings("ignore", module="asyncio.*")
@@ -239,7 +245,7 @@ def process_feedback(data):
                         print(f"💡 请手动打开浏览器并访问: {url}")
 
                     print("📝 Web UI 测试完成，进入持续模式...")
-                    print("💡 提示：服务器将持续运行，可在浏览器中测试互动功能")
+                    print("💡 提示：服务器将持续运行，可在浏览器中测试交互功能")
                     print("💡 按 Ctrl+C 停止服务器")
 
                     try:

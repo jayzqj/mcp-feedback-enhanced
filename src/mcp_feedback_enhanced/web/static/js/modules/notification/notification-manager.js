@@ -9,23 +9,23 @@
 (function() {
     'use strict';
 
-    // 確保命名空間存在
+    // 确保命名空间存在
     window.MCPFeedback = window.MCPFeedback || {};
     const Utils = window.MCPFeedback.Utils;
 
     /**
-     * 通知管理器建構函數
+     * 通知管理器构造函数
      */
     function NotificationManager(options) {
         options = options || {};
-        
-        // 通知設定
+
+        // 通知设置
         this.enabled = false;
         this.permission = 'default';
-        this.triggerMode = 'focusLost';  // 預設為失去焦點時通知
-        
-        // 狀態追蹤
-        this.lastSessionId = null;  // 避免重複通知同一會話
+        this.triggerMode = 'focusLost';  // 默认为失去焦点时通知
+
+        // 状态跟踪
+        this.lastSessionId = null;  // 避免重复通知同一会话
         this.isInitialized = false;
         this.hasFocus = true;  // 追蹤視窗焦點狀態
         

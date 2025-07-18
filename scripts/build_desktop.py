@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-桌面應用程式構建腳本
+桌面应用程序构建脚本
 
-此腳本負責構建 Tauri 桌面應用程式和 Python 擴展模組，
-確保在 PyPI 發布時包含預編譯的二進制檔案。
+此脚本负责构建 Tauri 桌面应用程序和 Python 扩展模块，
+确保在 PyPI 发布时包含预编译的二进制文件。
 
 使用方法：
     python scripts/build_desktop.py [--release] [--clean]

@@ -355,7 +355,7 @@ class I18nManager {
     }
 
     updateAudioSelectTranslations() {
-        // 更新音效設定區域的所有翻譯
+        // 更新音效设置区域的所有翻译
         if (window.feedbackApp && window.feedbackApp.audioSettingsUI) {
             if (typeof window.feedbackApp.audioSettingsUI.updateTranslations === 'function') {
                 window.feedbackApp.audioSettingsUI.updateTranslations();
@@ -372,5 +372,5 @@ class I18nManager {
     }
 }
 
-// 創建全域實例
-window.i18nManager = new I18nManager(
+// 创建全局实例
+window.i18nManager = new I18nManager();

@@ -451,23 +451,23 @@ class ResourceManager:
                 if not auto_cleanup:
                     continue
 
-                # 檢查進程是否還在運行
+                # 检查进程是否还在运行
                 if process_obj and hasattr(process_obj, "poll"):
-                    if process_obj.poll() is None:  # 進程還在運行
+                    if process_obj.poll() is None:  # 进程还在运行
                         if force:
-                            debug_log(f"強制終止進程: PID {pid}")
+                            debug_log(f"强制终止进程: PID {pid}")
                             process_obj.kill()
                         else:
-                            debug_log(f"優雅終止進程: PID {pid}")
+                            debug_log(f"优雅终止进程: PID {pid}")
                             process_obj.terminate()
 
-                        # 等待進程結束
+                        # 等待进程结束
                         try:
                             process_obj.wait(timeout=5)
                             cleaned_count += 1
                         except subprocess.TimeoutExpired:
                             if not force:
-                                debug_log(f"進程 {pid} 優雅終止超時，強制終止")
+                                debug_log(f"进程 {pid} 优雅终止超时，强制终止")
                                 process_obj.kill()
                                 process_obj.wait(timeout=3)
                                 cleaned_count += 1

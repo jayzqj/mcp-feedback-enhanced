@@ -167,21 +167,21 @@ flowchart TD
     style ERROR fill:#ffebee
 ```
 
-**參數說明**：
-- `project_directory`: 專案目錄路徑，用於命令執行上下文
-- `summary`: AI 工作摘要，顯示給用戶確認
-- `timeout`: 等待超時時間，預設 600 秒（10 分鐘）
+**参数说明**：
+- `project_directory`: 项目目录路径，用于命令执行上下文
+- `summary`: AI 工作摘要，显示给用户确认
+- `timeout`: 等待超时时间，默认 600 秒（10 分钟）
 
 **返回格式**：
 ```python
 # 成功返回
 [
-    TextContent(type="text", text="用戶回饋內容"),
-    MCPImage(data="base64_encoded_image", mimeType="image/png")  # 可選
+    TextContent(type="text", text="用户反馈内容"),
+    MCPImage(data="base64_encoded_image", mimeType="image/png")  # 可选
 ]
 
-# 錯誤返回
-[TextContent(type="text", text="錯誤描述")]
+# 错误返回
+[TextContent(type="text", text="错误描述")]
 ```
 
 ### i18n.py - 国际化支持

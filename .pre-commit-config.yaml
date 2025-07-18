@@ -3,33 +3,33 @@
 # See https://pre-commit.com/hooks.html for more hooks
 
 repos:
-  # 通用檔案檢查
+  # 通用文件检查
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
       # 移除行尾空白
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
-      # 確保檔案以換行符結尾
+      # 确保文件以换行符结尾
       - id: end-of-file-fixer
-      # 檢查合併衝突標記
+      # 检查合并冲突标记
       - id: check-merge-conflict
-      # 檢查 YAML 語法
+      # 检查 YAML 语法
       - id: check-yaml
-        args: [--unsafe]  # 允許自定義 YAML 標籤
-      # 檢查 TOML 語法
+        args: [--unsafe]  # 允许自定义 YAML 标签
+      # 检查 TOML 语法
       - id: check-toml
-      # 檢查 JSON 語法
+      # 检查 JSON 语法
       - id: check-json
-      # 檢查是否有大檔案（排除桌面應用二進制文件）
+      # 检查是否有大文件（排除桌面应用二进制文件）
       - id: check-added-large-files
         args: [--maxkb=1000]
         exclude: ^src/mcp_feedback_enhanced/desktop_release/.*\.(exe|mcp-feedback-enhanced-desktop-.*)$
-      # 檢查檔案名稱
+      # 检查文件名称
       - id: check-case-conflict
-      # 檢查可執行檔案有 shebang
+      # 检查可执行文件有 shebang
       - id: check-executables-have-shebangs
-      # 修復混合行結尾
+      # 修复混合行结尾
       - id: mixed-line-ending
         args: [--fix=lf]
 
@@ -45,7 +45,7 @@ repos:
       - id: ruff-format
         types_or: [python, pyi]
 
-  # mypy - 靜態類型檢查（暫時禁用，需要修復類型問題）
+  # mypy - 静态类型检查（暂时禁用，需要修复类型问题）
   # - repo: https://github.com/pre-commit/mirrors-mypy
   #   rev: v1.16.0
   #   hooks:
@@ -57,7 +57,7 @@ repos:
   #       files: ^src/
   #       exclude: ^tests/
 
-  # 檢查 Python 安全性問題（可選，較嚴格）
+  # 检查 Python 安全性问题（可选，较严格）
   # - repo: https://github.com/PyCQA/bandit
   #   rev: 1.7.10
   #   hooks:
@@ -65,11 +65,11 @@ repos:
   #       args: ["-c", "pyproject.toml"]
   #       additional_dependencies: ["bandit[toml]"]
 
-# 全域配置
+# 全局配置
 default_language_version:
   python: python3.11
 
-# 排除的檔案和目錄
+# 排除的文件和目录
 exclude: |
   (?x)^(
     \.git/|

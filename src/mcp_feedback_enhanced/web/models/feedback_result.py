@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-回饋結果資料模型
+回馈结果数据模型
 
-定義回饋收集的資料結構，用於 Web UI 與後端的資料傳輸。
+定义回馈收集的数据结构，用于 Web UI 与后端的数据传输。
 """
 
 from typing import TypedDict
 
 
 class FeedbackResult(TypedDict):
-    """回饋結果的型別定義"""
+    """回馈结果的类型定义"""
 
     command_logs: str
     interactive_feedback: str

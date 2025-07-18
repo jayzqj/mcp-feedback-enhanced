@@ -97,7 +97,7 @@
             OPERATION_FAILED: 'error.operationFailed'
         },
 
-        // 命令執行訊息
+        // 命令执行消息
         COMMAND: {
             EXECUTING: 'commandStatus.executing',
             COMPLETED: 'commandStatus.completed',
@@ -109,7 +109,7 @@
     };
 
     /**
-     * 訊息嚴重程度
+     * 消息严重程度
      */
     const MessageSeverity = {
         INFO: 'info',
@@ -119,11 +119,11 @@
     };
 
     /**
-     * 建立標準訊息物件
-     * @param {string} code - 訊息代碼
-     * @param {Object} params - 動態參數
-     * @param {string} severity - 嚴重程度
-     * @returns {Object} 標準訊息物件
+     * 建立标准消息对象
+     * @param {string} code - 消息代码
+     * @param {Object} params - 动态参数
+     * @param {string} severity - 严重程度
+     * @returns {Object} 标准消息对象
      */
     function createMessage(code, params = {}, severity = MessageSeverity.INFO) {
         return {
