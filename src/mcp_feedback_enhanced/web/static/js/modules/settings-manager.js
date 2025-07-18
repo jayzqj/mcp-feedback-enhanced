@@ -24,13 +24,14 @@
         options = options || {};
         
         // 從 i18nManager 獲取當前語言作為預設值
-        const defaultLanguage = window.i18nManager ? window.i18nManager.getCurrentLanguage() : 'zh-TW';
+        const defaultLanguage = window.i18nManager ? window.i18nManager.getCurrentLanguage() : 'zh-CN';
         
         // 預設設定
         this.defaultSettings = {
             layoutMode: 'combined-vertical',
             autoClose: false,
             language: defaultLanguage,  // 使用 i18nManager 的當前語言
+            theme: 'light',  // 預設淺色主題
             imageSizeLimit: 0,
             enableBase64Detail: false,
             // 移除 activeTab - 頁籤切換無需持久化
@@ -66,6 +67,7 @@
         // 回調函數
         this.onSettingsChange = options.onSettingsChange || null;
         this.onLanguageChange = options.onLanguageChange || null;
+        this.onThemeChange = options.onThemeChange || null;
         this.onAutoSubmitStateChange = options.onAutoSubmitStateChange || null;
 
         console.log('✅ SettingsManager 建構函數初始化完成 - 即時保存模式');
@@ -100,7 +102,12 @@
                             window.i18nManager.setLanguage(self.currentSettings.language);
                         }
                     }
-                    
+
+                    // 應用主題設定
+                    if (self.currentSettings.theme) {
+                        self.applyTheme(self.currentSettings.theme);
+                    }
+
                     resolve(self.currentSettings);
                 })
                 .catch(function(error) {
@@ -115,7 +122,7 @@
      * 從伺服器載入設定
      */
     SettingsManager.prototype.loadFromServer = function() {
-        const lang = window.i18nManager ? window.i18nManager.getCurrentLanguage() : 'zh-TW';
+        const lang = window.i18nManager ? window.i18nManager.getCurrentLanguage() : 'zh-CN';
         return fetch('/api/load-settings?lang=' + lang)
             .then(function(response) {
                 if (response.ok) {
@@ -235,6 +242,11 @@
             this.handleLanguageChange(value);
         }
 
+        // 特殊處理主題變更
+        if (key === 'theme' && oldValue !== value) {
+            this.handleThemeChange(value);
+        }
+
         // 所有設定變更都即時保存
         this.saveSettings();
 
@@ -287,6 +299,38 @@
         if (this.onLanguageChange) {
             this.onLanguageChange(newLanguage);
         }
+    };
+
+    /**
+     * 處理主題變更
+     */
+    SettingsManager.prototype.handleThemeChange = function(newTheme) {
+        console.log('🎨 SettingsManager.handleThemeChange: ' + newTheme);
+
+        // 應用主題到 HTML 根元素
+        this.applyTheme(newTheme);
+
+        // 觸發主題變更回調
+        if (this.onThemeChange) {
+            this.onThemeChange(newTheme);
+        }
+    };
+
+    /**
+     * 應用主題
+     */
+    SettingsManager.prototype.applyTheme = function(theme) {
+        const htmlElement = document.documentElement;
+
+        // 移除現有的主題屬性
+        htmlElement.removeAttribute('data-theme');
+
+        // 設置新的主題屬性
+        if (theme && theme !== 'dark') {
+            htmlElement.setAttribute('data-theme', theme);
+        }
+
+        console.log('🎨 主題已應用:', theme);
     };
 
     /**
@@ -412,7 +456,10 @@
         
         // 應用語言設定
         this.applyLanguageSettings();
-        
+
+        // 應用主題設定
+        this.applyThemeSettings();
+
         // 應用圖片設定
         this.applyImageSettings();
 
@@ -480,6 +527,24 @@
         languageOptions.forEach(function(option) {
             option.classList.toggle('active', option.getAttribute('data-lang') === this.currentSettings.language);
         }.bind(this));
+    };
+
+    /**
+     * 應用主題設定
+     */
+    SettingsManager.prototype.applyThemeSettings = function() {
+        // 應用主題到頁面
+        if (this.currentSettings.theme) {
+            this.applyTheme(this.currentSettings.theme);
+        }
+
+        // 更新主題選擇器
+        const themeSelect = Utils.safeQuerySelector('#settingsThemeSelect');
+        if (themeSelect) {
+            console.log(`🎨 SettingsManager.applyThemeSettings: 設置 select.value = ${this.currentSettings.theme}`);
+            themeSelect.value = this.currentSettings.theme;
+            console.log(`🎨 SettingsManager.applyThemeSettings: 實際 select.value = ${themeSelect.value}`);
+        }
     };
 
     /**
@@ -705,6 +770,16 @@
                 self.set('language', lang);
             });
         });
+
+        // 主題切換 - 支援下拉選單
+        const themeSelect = Utils.safeQuerySelector('#settingsThemeSelect');
+        if (themeSelect) {
+            themeSelect.addEventListener('change', function(e) {
+                const theme = e.target.value;
+                console.log(`🎨 SettingsManager theme change event: ${theme}`);
+                self.set('theme', theme);
+            });
+        }
 
         // 圖片設定 - 大小限制選擇器
         const settingsImageSizeLimit = Utils.safeQuerySelector('#settingsImageSizeLimit');

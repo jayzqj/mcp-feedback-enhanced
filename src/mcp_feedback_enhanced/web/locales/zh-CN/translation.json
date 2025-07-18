@@ -127,7 +127,9 @@
         "combinedHorizontalDesc": "AI 摘要在左，反馈输入在右，适合宽屏幕使用",
         "autoClose": "自动关闭页面",
         "autoCloseDesc": "提交回馈后自动关闭页面",
-        "theme": "主题",
+        "theme": "🎨 主题设置",
+        "currentTheme": "当前主题",
+        "themeDesc": "选择界面显示主题",
         "notifications": "通知",
         "advanced": "🔧 进阶设定",
         "save": "储存设定",
@@ -153,9 +155,8 @@
         "en": "English"
     },
     "themes": {
-        "dark": "深色",
         "light": "浅色",
-        "auto": "自动"
+        "dark": "深色"
     },
     "timeUnits": {
         "seconds": "秒",
@@ -268,7 +269,7 @@
             "unknown": "未知"
         },
         "copySessionContent": "复制会话内容",
-        "copyUserContent": "复制用户内容",
+        "copyUserContent": "复制内容",
         "exportSession": "导出此会话"
     },
     "sessionHistory": {

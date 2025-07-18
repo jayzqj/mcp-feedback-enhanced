@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主题切换测试</title>
+    <style>
+        /* 深色主题（默认） */
+        :root {
+            --bg-primary: #1e1e1e;
+            --bg-secondary: #2d2d30;
+            --bg-tertiary: #252526;
+            --surface-color: #333333;
+            --text-primary: #cccccc;
+            --text-secondary: #9e9e9e;
+            --accent-color: #007acc;
+            --accent-hover: #005a9e;
+            --border-color: #464647;
+        }
+
+        /* 浅色主题 */
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --bg-tertiary: #fafafa;
+            --surface-color: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --accent-color: #0066cc;
+            --accent-hover: #004499;
+            --border-color: #e0e0e0;
+        }
+
+        /* 自动主题 */
+        @media (prefers-color-scheme: light) {
+            [data-theme="auto"] {
+                --bg-primary: #ffffff;
+                --bg-secondary: #f5f5f5;
+                --bg-tertiary: #fafafa;
+                --surface-color: #ffffff;
+                --text-primary: #333333;
+                --text-secondary: #666666;
+                --accent-color: #0066cc;
+                --accent-hover: #004499;
+                --border-color: #e0e0e0;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            [data-theme="auto"] {
+                --bg-primary: #1e1e1e;
+                --bg-secondary: #2d2d30;
+                --bg-tertiary: #252526;
+                --surface-color: #333333;
+                --text-primary: #cccccc;
+                --text-secondary: #9e9e9e;
+                --accent-color: #007acc;
+                --accent-hover: #005a9e;
+                --border-color: #464647;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-selector {
+            margin-bottom: 20px;
+        }
+
+        select {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+            min-width: 140px;
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
+        }
+
+        select:hover {
+            border-color: var(--accent-color);
+        }
+
+        .demo-content {
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            margin-top: 20px;
+        }
+
+        .demo-text {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .demo-button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .demo-button:hover {
+            background: var(--accent-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>主题切换测试</h1>
+        
+        <div class="theme-selector">
+            <label for="themeSelect">选择主题：</label>
+            <select id="themeSelect">
+                <option value="dark">深色</option>
+                <option value="light">浅色</option>
+                <option value="auto">自动</option>
+            </select>
+        </div>
+
+        <div class="demo-content">
+            <h2>演示内容</h2>
+            <p class="demo-text">这是一段演示文字，用于测试主题切换效果。</p>
+            <p>当前主题应该会影响：</p>
+            <ul>
+                <li>背景颜色</li>
+                <li>文字颜色</li>
+                <li>边框颜色</li>
+                <li>按钮颜色</li>
+            </ul>
+            <button class="demo-button">演示按钮</button>
+        </div>
+    </div>
+
+    <script>
+        function applyTheme(theme) {
+            const htmlElement = document.documentElement;
+            
+            // 移除现有的主题属性
+            htmlElement.removeAttribute('data-theme');
+            
+            // 设置新的主题属性
+            if (theme && theme !== 'dark') {
+                htmlElement.setAttribute('data-theme', theme);
+            }
+            
+            console.log('🎨 主题已应用:', theme);
+        }
+
+        // 主题选择器事件监听
+        document.getElementById('themeSelect').addEventListener('change', function(e) {
+            const theme = e.target.value;
+            applyTheme(theme);
+        });
+
+        // 初始化
+        applyTheme('dark');
+    </script>
+</body>
+</html>

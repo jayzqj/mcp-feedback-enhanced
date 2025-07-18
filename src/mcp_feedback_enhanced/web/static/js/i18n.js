@@ -38,9 +38,9 @@ class I18nManager {
             return 'en';
         }
         
-        // 3. 預設使用繁體中文
-        console.log('🌐 使用預設語言: zh-TW');
-        return 'zh-TW';
+        // 3. 預設使用簡體中文
+        console.log('🌐 使用預設語言: zh-CN');
+        return 'zh-CN';
     }
 
     async init() {
@@ -74,8 +74,8 @@ class I18nManager {
                 
                 // 檢查當前語言是否有翻譯數據
                 if (!this.translations[this.currentLanguage] || Object.keys(this.translations[this.currentLanguage]).length === 0) {
-                    console.warn(`當前語言 ${this.currentLanguage} 沒有翻譯數據，回退到 zh-TW`);
-                    this.currentLanguage = 'zh-TW';
+                    console.warn(`當前語言 ${this.currentLanguage} 沒有翻譯數據，回退到 zh-CN`);
+                    this.currentLanguage = 'zh-CN';
                 }
             })
             .catch(error => {

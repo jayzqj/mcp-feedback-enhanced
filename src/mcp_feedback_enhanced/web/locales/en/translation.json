@@ -127,7 +127,9 @@
         "combinedHorizontalDesc": "AI summary on left, feedback input on right, suitable for widescreen displays",
         "autoClose": "Auto Close Page",
         "autoCloseDesc": "Automatically close page after submitting feedback",
-        "theme": "Theme",
+        "theme": "🎨 Theme Settings",
+        "currentTheme": "Current Theme",
+        "themeDesc": "Choose interface display theme",
         "notifications": "Notifications",
         "advanced": "🔧 Advanced Settings",
         "save": "Save Settings",
@@ -152,9 +154,8 @@
         "en": "English"
     },
     "themes": {
-        "dark": "Dark",
         "light": "Light",
-        "auto": "Auto"
+        "dark": "Dark"
     },
     "timeUnits": {
         "seconds": "seconds",
