@@ -184,27 +184,27 @@ flowchart TD
 [TextContent(type="text", text="錯誤描述")]
 ```
 
-### i18n.py - 國際化支援
+### i18n.py - 国际化支持
 
-**多語言架構**：
+**简体中文架构**：
 ```python
 class I18nManager:
     def __init__(self):
-        self._supported_languages = ["zh-TW", "en", "zh-CN"]
-        self._fallback_language = "en"
+        self._supported_languages = ["zh-CN"]
+        self._fallback_language = "zh-CN"
         self._locales_dir = Path(__file__).parent / "web" / "locales"
 
     def t(self, key: str, **kwargs) -> str:
-        """翻譯函數，支援巢狀鍵值和參數替換"""
+        """翻译函数，支持嵌套键值和参数替换"""
 ```
 
 **核心功能**：
-- **三語支援**: 繁體中文、簡體中文、英文
-- **智能檢測**: 基於系統語言自動選擇
-- **動態切換**: 運行時語言切換無需重啟
-- **巢狀翻譯**: 支援 `buttons.submit` 格式的鍵值
-- **參數替換**: 支援 `{name}` 格式的動態內容
-- **回退機制**: 翻譯缺失時自動使用英文
+- **简体中文支持**: 完整的简体中文界面
+- **智能检测**: 基于系统语言自动选择
+- **动态切换**: 运行时语言切换无需重启
+- **嵌套翻译**: 支持 `buttons.submit` 格式的键值
+- **参数替换**: 支持 `{name}` 格式的动态内容
+- **回退机制**: 翻译缺失时自动使用简体中文
 
 **翻譯文件結構**：
 ```json

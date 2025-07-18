@@ -1,367 +1,427 @@
-# Changelog (English)
+# 更新日志 (简体中文)
 
-This document records all version updates for **MCP Feedback Enhanced**.
+本文件记录了 **MCP Feedback Enhanced** 的所有版本更新内容。
 
-## [v2.6.0] - 2025-06-28 - Intelligent Session Management & Automation Enhancement
+## [v2.6.0] - 2025-06-28 - 智能会话管理与自动化功能强化
 
-### 🌟 Version Highlights
-Significantly enhanced session management capabilities with automatic command execution, export features, and notification system, providing a more intelligent development experience.
+### 🌟 版本亮点
+大幅强化会话管理功能，新增自动执行命令、导出功能和通知系统，提供更智能的开发体验。
 
-### ✨ New Features
-- 🚀 **Auto Command Execution**: Automatically execute preset commands after creating new sessions or commits
-- 📊 **Session Export Feature**: Support exporting session records to multiple formats
-- ⏸️ **Auto-commit Control**: Added pause and resume buttons for better control over auto-commit timing
-- 🔔 **System Notifications**: System-level notifications for important events with real-time alerts
+### ✨ 新功能
+- 🚀 **自动执行命令**: 新建会话和提交后可自动执行预设命令
+- 📊 **会话导出功能**: 支持将会话记录导出为多种格式
+- ⏸️ **自动提交控制**: 新增暂停和开始按钮，让用户更好控制自动提交时机
+- 🔔 **系统通知**: 新增系统级通知功能，重要事件即时提醒
 
-### 🚀 Improvements
-- ⏱️ **Session Timeout Optimization**: Redesigned session management with more flexible configuration options
-- 🌏 **I18n Enhancement**: Refactored internationalization architecture with full multilingual support for notifications
-- 🎨 **UI Simplification**: Significantly simplified user interface for improved user experience
+### 🚀 改进功能
+- ⏱️ **会话超时机制优化**: 重新设计会话管理，提供更弹性的设置选项
+- 🌏 **多语系强化**: 重构多语系架构，通知系统也完整支持多语言
+- 🎨 **界面简化**: 大幅简化用户界面，提升使用体验
 
-### 🐛 Bug Fixes
-- Fixed command execution functionality issues
-- Fixed WebSocket status detection import errors
-- Improved session history multilingual support
-
----
-
-## [v2.5.0] - 2025-06-15 - Desktop Application & Performance Optimization
-
-### 🌟 Version Highlights
-Introducing cross-platform desktop application supporting Windows, macOS, and Linux. Significant performance improvements with debounce/throttle mechanisms and enhanced system stability.
-
-### ✨ New Features
-- 🖥️ **Desktop Application**: Native cross-platform desktop app based on Tauri framework, supporting Windows x64, macOS (Intel/Apple Silicon), Linux x64
-- 📊 **Server-side Session History Storage**: Session records migrated from localStorage to server-side local file storage for improved data consistency and reliability
-- 🔧 **Multi-platform Build Support**: Complete CI/CD pipeline supporting automated multi-platform desktop application builds
-- 📝 **Desktop Mode Configuration**: Added `MCP_DESKTOP_MODE` environment variable for desktop/web mode switching
-- 📋 **AI Work Summary Markdown Display**: Support for Markdown syntax rendering including headers, bold text, code blocks, lists, links and other formats
-
-### 🚀 Improvements
-- ⚡ **Significant Performance Enhancement**: Introduced debounce/throttle mechanisms to reduce unnecessary rendering and network requests
-- 🌐 **Network Connection Stability**: Improved WebSocket reconnection mechanism with network status detection and intelligent reconnection
-- 🎨 **UI Rendering Optimization**: Optimized rendering performance for session management, statistics, and status indicators
-- 📱 **Responsive Improvements**: Adjusted heartbeat frequency and timeout thresholds to reduce system load
-- 🔄 **Enhanced Modularity**: Optimized JavaScript module structure with better logging management
-
-### 🐛 Bug Fixes
-- 🌐 **Network Reconnection Improvements**: Optimized reconnection algorithm with exponential backoff strategy and random jitter
-- 🖥️ **Desktop Mode Adaptation**: Fixed browser auto-launch issues in desktop mode
-- 📊 **Rendering Performance Fixes**: Resolved duplicate rendering and unnecessary state update issues
-
-### 🛠️ Technical Improvements
-- 🏗️ **Build Process Optimization**: Added Makefile desktop application build commands supporting debug/release modes
-- 📦 **Dependency Management**: Integrated Rust toolchain supporting cross-platform compilation and packaging
-- 🔍 **Enhanced Development Tools**: Added environment checks, build validation, and cleanup tools
-- 📚 **Documentation Enhancement**: Added desktop application build guide and workflow documentation
-- 🔒 **Security Enhancement**: Introduced DOMPurify for XSS protection ensuring content security
-
-### 📋 Usage Instructions
-- **Desktop Mode**: Set `"MCP_DESKTOP_MODE": "true"` in MCP configuration (refer to `examples/mcp-config-desktop.json`)
-- **Web Mode**: Set `"MCP_DESKTOP_MODE": "false"` in MCP configuration (default, refer to `examples/mcp-config-web.json`)
-- **Test Desktop Mode**: `uvx mcp-feedback-enhanced@latest test --desktop`
-- **Build Desktop Application**: `make build-desktop-release`
+### 🐛 问题修复
+- 修复命令执行功能的相关问题
+- 修正 WebSocket 状态检测的导入错误
+- 完善会话历史的多语言支持
 
 ---
 
-## [v2.4.3] - 2025-06-14 - Session Management Refactoring & Audio Notifications
+## [v2.5.6] - 2025-06-21 - 设置保存机制优化与界面美化
 
-### 🌟 Version Highlights
-Migrated session management from sidebar to dedicated tab, resolving browser compatibility issues. Added audio notification system with custom audio support.
+### 🌟 版本亮点
+重构设置保存机制，解决语系切换保存问题，并为设置界面增加可视化图标，提升用户体验。
 
-### ✨ New Features
-- 🔊 **Audio Notification System**: Play audio alerts for session updates, supports built-in and custom audio uploads
-- 📚 **Session History Management**: Local session record storage with export and cleanup functionality
-- 💾 **Input Height Memory**: Automatically save and restore textarea input height settings
-- 📋 **One-Click Copy**: Project path and session ID support click-to-copy
+### 🚀 改进功能
+- 🔨 **设置保存机制重构**: 完全移除 localStorage 依赖，改用统一的 FastAPI 后端保存机制
+  - 解决语系切换时设置无法正确保存的问题
+  - 移除防抖机制，确保设置即时保存
+  - 提升设置保存的可靠性和一致性
+- ✨ **设置界面美化**: 为设置页签内的各功能区块新增对应图标
+  - 提升界面视觉效果和用户体验
+  - 更直观的功能识别
 
-### 🚀 Improvements
-- 📋 **Session Management Refactoring**: Migrated from sidebar to "Session Management" tab, fixing button click issues in small windows
-- 🎨 **Interface Layout Optimization**: AI summary auto-expansion, submit button repositioning, removed redundant descriptions
-- 🌐 **Multilingual Enhancement**: Added tooltip and button multilingual support
-
-### 🐛 Bug Fixes
-- Fixed current session details button unresponsive issue
-- Fixed session details modal close delay issue
-- Fixed audio notification language initialization issue
-- Corrected auto-submit processing logic
+### 🛠️ 技术改进
+- 📊 **统一存储架构**: 所有设置统一使用 JSON 文件存储，确保跨环境一致性
+- 🔧 **代码简化**: 移除复杂的 localStorage 相关代码，降低维护成本
 
 ---
 
-## [v2.4.2] - Web-Only Architecture Refactoring & Smart Feature Enhancement
+## [v2.5.5] - 2025-06-21 - SSH 远程开发支持与稳定性增强
 
-### 🌟 Version Highlights
-This version underwent major architectural refactoring, **completely removing PyQt6 GUI dependencies** and transitioning to a pure Web UI architecture, dramatically simplifying deployment and maintenance. Additionally, multiple smart features were added, including prompt management, auto-submit, session management, and more, comprehensively enhancing user experience and work efficiency.
+### 🌟 版本亮点
+新增 SSH 远程开发环境支持，解决远程开发时无法访问 Web UI 的问题。同时改进 macOS 编译支持和桌面应用稳定性，提升开发者体验。
 
-### 🔄 Major Architectural Changes
-- 🏗️ **Complete PyQt6 GUI Removal**: Thoroughly removed desktop application dependencies, simplifying installation and deployment processes
-- 🌐 **Pure Web UI Architecture**: Unified use of Web interface, supporting all platforms and environments
-- 📦 **Dramatically Simplified Dependencies**: Removed PyQt6, related GUI libraries and other heavy dependencies, significantly reducing installation package size
-- 🚀 **Simpler Deployment**: No need to consider GUI environment configuration, suitable for all development environments
+### ✨ 新功能
+- 🌐 **SSH 远程开发支持**: 新增 `MCP_WEB_HOST` 环境变量，支持设置 Web 服务器主机绑定
+  - 默认为 `127.0.0.1` 确保安全性
+  - 可设置为 `0.0.0.0` 允许远程访问
+  - 解决 Cursor SSH Remote 等远程开发环境的访问问题
+- 🍎 **macOS 编译支持增强**: 新增 `.cargo/config.toml` 配置文件
+  - 支持 Intel (x86_64) 和 Apple Silicon (aarch64) 架构
+  - 解决 macOS 上 PyO3 undefined dynamic_lookup 编译问题
+  - 遵循 PyO3 官方推荐的最佳实践
 
-### ✨ Brand New Features
-- 📝 **Smart Prompt Management System**:
-  - CRUD operations for common prompts (Create, Edit, Delete, Use)
-  - Usage frequency statistics and intelligent sorting
-  - Quick selection and one-click application functionality
-  - Support for auto-submit marking and priority display
-- ⏰ **Auto-Timed Submit Feature**:
-  - Configurable countdown timer from 1-86400 seconds
-  - Visual countdown display and status indicators
-  - Deep integration with prompt management system
-  - Support for pause, resume, and cancel operations
-- 📊 **Session Management & Tracking**:
-  - Real-time current session status display
-  - Session history records and statistical analysis
-  - Today's session count and average duration statistics
-  - Session detail viewing and management functions
-- 🔗 **Connection Monitoring System**:
-  - Real-time WebSocket connection status monitoring
-  - Latency measurement and connection quality indicators
-  - Auto-reconnection mechanism and error handling
-  - Detailed connection statistical information
-- ⌨️ **Enhanced Shortcuts**: Added Ctrl+I quick focus input box feature (Thanks @penn201500)
+### 🚀 改进功能
+- 📝 **工具文档优化**: 将 LLM 指令移至工具 docstring，提升 token 效率
+- 🎨 **用户配置简化**: 移除复杂的 Cursor 规则配置
+- 📊 **AI 工作摘要 Markdown 增强**: 改进 Markdown 渲染效果和兼容性
+- 🔄 **会话历史流程优化**: 改进会话保存和管理机制
 
-### 🚀 Feature Improvements
-- 🎨 **Comprehensive UI/UX Optimization**:
-  - Added left session management panel with collapse/expand support
-  - Top connection status bar with real-time system status display
-  - Responsive design adapting to different screen sizes
-  - Unified design language and visual style
-- 🌐 **Enhanced Multi-language System**:
-  - Optimized language switching mechanism with instant switching support
-  - Added extensive translation text, improving localization coverage
-  - Improved language selector UI with dropdown design
-  - Fixed display issues during language switching
-- 🖼️ **Image Settings Integration**:
-  - Moved image settings from workspace to settings tab
-  - Unified settings management interface
-  - Improved organization and layout of setting items
-- 📱 **Interface Layout Optimization**:
-  - Adjusted layout to accommodate multi-language display requirements
-  - Optimized button styles and spacing
-  - Improved visual design of form elements
-  - Enhanced accessibility and usability
+### 🐛 问题修复
+- 🖥️ **桌面应用 MCP 协议修复**: 修正桌面模式下 MCP 协议通信污染问题
+- 📦 **打包流程修复**: 修正多平台桌面应用打包和发布问题
+- 🔧 **发布流程优化**: 改进自动化发布工作流程的稳定性
+- 🔥 **移除 ESC 快捷键**: 移除可能造成意外关闭的 ESC 快捷键功能
 
-### 🐛 Bug Fixes
-- 🔧 **Session Management Fixes**:
-  - Fixed session statistics information not updating correctly
-  - Fixed session count calculation errors
-  - Improved session state tracking mechanism
-- 🎯 **Prompt Feature Fixes**:
-  - Fixed common prompt management unable to correctly set auto-submit
-  - Improved prompt selection and application logic
-- 🌐 **Localization Switch Fixes**:
-  - Fixed partial text not updating during language switching
-  - Improved multi-language text loading mechanism
-- 🏗️ **Architecture Stability Fixes**:
-  - Fixed session management initialization issues
-  - Improved error handling and resource cleanup
-  - Optimized module loading order and dependencies
+### 🛠️ 技术改进
+- 🏗️ **构建系统增强**: 改进跨平台编译配置和依赖管理
+- 📚 **文档自动化**: 改进工具自我文档化，遵循 FastMCP 最佳实践
+- 🔍 **调试功能增强**: 新增更详细的调试信息和错误处理
 
-### 🛠️ Technical Improvements
-- 📦 **Modular Architecture**:
-  - Complete JavaScript code modular refactoring
-  - Adopted ES6+ syntax and modern development patterns
-  - Clear module separation and responsibility division
-- 📊 **Performance Enhancement**:
-  - Optimized WebSocket communication efficiency
-  - Improved frontend resource loading speed
-  - Reduced memory usage and CPU load
-
-### 📚 Documentation Updates
-- 📖 **Architecture Documentation Update**: Updated system architecture description to reflect Web-Only design
-- 🔧 **Installation Guide Simplification**: Removed GUI-related installation steps and dependency descriptions
-- 🖼️ **Screenshot Updates**: Updated all interface screenshots to showcase new Web UI design
-- 📋 **Enhanced API Documentation**: Added API descriptions for new features like prompt management and auto-submit
+### 📋 使用说明
+- **SSH 远程开发**: 在 MCP 配置中设置 `"MCP_WEB_HOST": "0.0.0.0"` 允许远程访问
+- **本地开发**: 保持默认 `"MCP_WEB_HOST": "127.0.0.1"` 确保安全性
+- **macOS 开发**: 新的编译配置将自动生效，无需额外设置
 
 ---
 
-## [v2.3.0] - System Stability & Resource Management Enhancement
+## [v2.5.0] - 2025-06-15 - 桌面应用程序与性能优化
 
-### 🌟 Highlights
-This version focuses on improving system stability and user experience, particularly solving the browser launch issue in Cursor SSH Remote environments.
+### 🌟 版本亮点
+全新推出跨平台桌面应用程序，支持 Windows、macOS、Linux 三大平台。同时大幅提升系统性能与稳定性，引入防抖/节流机制优化用户体验。
 
-### ✨ New Features
-- 🌐 **SSH Remote Environment Support**: Solved Cursor SSH Remote browser launch issues with clear usage guidance
-- 🛡️ **Error Message Improvements**: Provides more user-friendly error messages and solution suggestions when errors occur
-- 🧹 **Auto-cleanup Features**: Automatically cleans temporary files and expired sessions to keep the system tidy
-- 📊 **Memory Monitoring**: Monitors memory usage to prevent system resource shortage
+### ✨ 新功能
+- 🖥️ **桌面应用程序**: 基于 Tauri 框架的原生桌面应用，支持 Windows x64、macOS (Intel/Apple Silicon)、Linux x64
+- 📊 **会话历史本地文件存储**: 会话记录从 localStorage 改为服务器端本地文件保存，支持跨环境数据一致性
+- 🔧 **多平台构建支持**: 完整的 CI/CD 流程，支持自动化多平台桌面应用构建
+- 📝 **桌面模式配置**: 新增 `MCP_DESKTOP_MODE` 环境变量，支持桌面/Web 模式切换
+- 📋 **AI 工作摘要 Markdown 显示**: 支持 Markdown 语法渲染，包含标题、粗体、代码区块、列表、链接等格式
 
-### 🚀 Improvements
-- 💾 **Resource Management Optimization**: Better system resource management for improved performance
-- 🔧 **Enhanced Error Handling**: Provides clearer explanations and solutions when problems occur
-- 🌐 **Connection Stability**: Improved Web UI connection stability
-- 🖼️ **Image Upload Optimization**: Enhanced stability of image upload functionality
-- 🎯 **Auto-focus Input Box**: Automatically focus on feedback input box when window opens, improving user experience (Thanks @penn201500)
+### 🚀 改进功能
+- ⚡ **性能大幅提升**: 引入防抖/节流机制，减少不必要的渲染和网络请求
+- 🌐 **网络连接稳定性**: 改进 WebSocket 重连机制，支持网络状态检测和智能重连
+- 📊 **会话历史存储改进**: 从 localStorage 改为服务器端本地文件存储，提升跨环境一致性
+- 🎨 **UI 渲染优化**: 优化会话管理、统计信息、状态指示器的渲染性能
+- 📱 **响应式改进**: 调整心跳频率和超时阈值，减少系统负载
+- 🔄 **模块化增强**: JavaScript 模块结构优化，支持更好的日志管理
 
-### 🐛 Bug Fixes
-- 🌐 **Connection Issues**: Fixed WebSocket connection related problems
-- 🔄 **Session Management**: Fixed session state tracking issues
-- 🖼️ **Image Processing**: Fixed event handling issues during image upload
+### 🐛 问题修复
+- 🌐 **网络重连改进**: 优化重连算法，采用指数退避策略和随机抖动
+- 🖥️ **桌面模式适配**: 修复桌面模式下浏览器自动开启的问题
+- 📊 **渲染性能修复**: 解决重复渲染和不必要的状态更新问题
 
----
+### 🛠️ 技术改进
+- 🏗️ **构建流程优化**: 新增 Makefile 桌面应用构建命令，支持 debug/release 模式
+- 📦 **依赖管理**: 整合 Rust 工具链，支持跨平台编译和打包
+- 🔍 **开发工具增强**: 新增环境检查、构建验证、清理工具
+- 📚 **文档完善**: 新增桌面应用构建指南和工作流程说明
+- 🔒 **安全性增强**: 引入 DOMPurify 进行 XSS 防护，确保内容安全
 
-## [v2.2.5] - WSL Environment Support & Cross-Platform Enhancement
-
-### ✨ New Features
-- 🐧 **WSL Environment Detection**: Automatically identifies WSL environments and provides specialized support logic
-- 🌐 **Smart Browser Launching**: Automatically invokes Windows browser in WSL environments with multiple launch methods
-- 🔧 **Cross-Platform Testing Enhancement**: Test functionality integrates WSL detection for improved test coverage
-
-### 🚀 Improvements
-- 🎯 **Environment Detection Optimization**: Improved remote environment detection logic, WSL no longer misidentified as remote environment
-- 📊 **System Information Enhancement**: System information tool now displays WSL environment status
-- 🧪 **Testing Experience Improvement**: Test mode automatically attempts browser launching for better testing experience
-
----
-
-## [v2.2.4] - GUI Experience Optimization & Bug Fixes
-
-### 🐛 Bug Fixes
-- 🖼️ **Image Duplicate Paste Fix**: Fixed the issue where Ctrl+V image pasting in GUI would create duplicate images
-- 🌐 **Localization Switch Fix**: Fixed image settings area text not translating correctly when switching languages
-- 📝 **Font Readability Improvement**: Adjusted font sizes in image settings area for better readability
+### 📋 使用说明
+- **桌面模式**: 在 MCP 配置中设定 `"MCP_DESKTOP_MODE": "true"` (参考 `examples/mcp-config-desktop.json`)
+- **Web 模式**: 在 MCP 配置中设定 `"MCP_DESKTOP_MODE": "false"` (默认，参考 `examples/mcp-config-web.json`)
+- **测试桌面模式**: `uvx mcp-feedback-enhanced@latest test --desktop`
+- **构建桌面应用**: `make build-desktop-release`
 
 ---
 
-## [v2.2.3] - Timeout Control & Image Settings Enhancement
+## [v2.4.3] - 2025-06-14 - 会话管理重构与音效通知
 
-### ✨ New Features
-- ⏰ **User Timeout Control**: Added customizable timeout settings with flexible range from 30 seconds to 2 hours
-- ⏱️ **Countdown Timer**: Real-time countdown timer display at the top of the interface for visual time reminders
-- 🖼️ **Image Size Limits**: Added image upload size limit settings (unlimited/1MB/3MB/5MB)
-- 🔧 **Base64 Compatibility Mode**: Added Base64 detail mode to improve image recognition compatibility with AI models
-- 🧹 **UV Cache Management Tool**: Added `cleanup_cache.py` script to help manage and clean UV cache space
+### 🌟 版本亮点
+将会话管理从左侧边栏迁移到独立页签，解决浏览器兼容性问题。新增音效通知系统，支持自定义音效。
 
-### 🚀 Improvements
-- 📚 **Documentation Structure Optimization**: Reorganized documentation directory structure, moved images to `docs/{language}/images/` paths
-- 📖 **Cache Management Guide**: Added detailed UV Cache management guide with automated cleanup solutions
-- 🎯 **Smart Compatibility Hints**: Automatically display Base64 compatibility mode suggestions when image upload fails
+### ✨ 新功能
+- 🔊 **音效通知系统**: 会话更新时播放音效提醒，支持内建音效和自定义音效上传
+- 📚 **会话历史管理**: 本地保存会话记录，支持导出和清理功能
+- 💾 **输入框高度记忆**: 自动保存和恢复文字输入框的高度设定
+- 📋 **一键复制**: 项目路径和会话ID支持点击复制
 
-### 🐛 Bug Fixes
-- 🛡️ **Timeout Handling Optimization**: Improved coordination between user-defined timeout and MCP system timeout
-- 🖥️ **Interface Auto-close**: Fixed interface auto-close and resource cleanup logic after timeout
-- 📱 **Responsive Layout**: Optimized timeout control component display on small screen devices
+### 🚀 改进功能
+- 📋 **会话管理重构**: 从左侧边栏迁移到"会话管理"页签，解决小窗口下按钮无法点击的问题
+- 🎨 **界面布局优化**: AI摘要区域自动扩展，提交按钮位置调整，移除多余描述文字
+- 🌐 **多语言增强**: 新增tooltip和按钮的多语言支持
 
----
-
-## [v2.2.2] - Timeout Auto-cleanup Fix
-
-### 🐛 Bug Fixes
-- 🔄 **Timeout Auto-cleanup**: Fixed GUI/Web UI not automatically closing after MCP session timeout (default 600 seconds)
-- 🛡️ **Resource Management Optimization**: Improved timeout handling mechanism to ensure proper cleanup and closure of all UI resources on timeout
-- ⚡ **Enhanced Timeout Detection**: Strengthened timeout detection logic to correctly handle timeout events in various scenarios
+### 🐛 问题修复
+- 修复当前会话详细信息按钮无反应问题
+- 修复会话详情弹窗关闭延迟问题
+- 修复音效通知语系初始化问题
+- 修正自动提交处理逻辑
 
 ---
 
-## [v2.2.1] - Window Optimization & Unified Settings Interface
+## [v2.4.2] - Web-Only 架构重构与智能功能增强
 
-### 🚀 Improvements
-- 🖥️ **Window Size Constraint Removal**: Removed GUI main window minimum size limit from 1000×800 to 400×300
-- 💾 **Real-time Window State Saving**: Implemented real-time saving mechanism for window size and position changes
-- ⚙️ **Unified Settings Interface Optimization**: Improved GUI settings page configuration saving logic to avoid setting conflicts
+### 🌟 版本亮点
+本版本进行了重大架构重构，**完全移除 PyQt6 GUI 依赖**，转为纯 Web UI 架构，大幅简化部署和维护。同时新增多项智能功能，包括提示词管理、自动提交、会话管理等，全面提升用户体验和工作效率。
 
-### 🐛 Bug Fixes
-- 🔧 **Window Size Constraint**: Fixed GUI window unable to resize to small dimensions issue
-- 🛡️ **Setting Conflicts**: Fixed potential configuration conflicts during settings save operations
+### 🔄 重大架构变更
+- 🏗️ **完全移除 PyQt6 GUI**: 彻底移除桌面应用程序依赖，简化安装和部署流程
+- 🌐 **纯 Web UI 架构**: 统一使用 Web 界面，支持所有平台和环境
+- 📦 **依赖大幅简化**: 移除 PyQt6、相关 GUI 库等重型依赖，安装包体积显著减小
+- 🚀 **部署更简单**: 无需考虑 GUI 环境配置，适用于所有开发环境
 
----
+### ✨ 全新功能
+- 📝 **智能提示词管理系统**:
+  - 常用提示词的 CRUD 操作（新增、编辑、删除、使用）
+  - 使用频率统计和智能排序
+  - 快速选择和一键应用功能
+  - 支持自动提交标记和优先显示
+- ⏰ **自动定时提交功能**:
+  - 可设定 1-86400 秒的倒数计时器
+  - 可视化倒数显示和状态指示
+  - 与提示词管理系统深度整合
+  - 支持暂停、恢复、取消操作
+- 📊 **会话管理与追踪**:
+  - 当前会话状态即时显示
+  - 会话历史记录和统计分析
+  - 今日会话数量和平均时长统计
+  - 会话详情查看和管理功能
+- 🔗 **连接监控系统**:
+  - WebSocket 连接状态即时监控
+  - 延迟测量和连接品质指示
+  - 自动重连机制和错误处理
+  - 详细的连接统计信息
+- ⌨️ **快捷键增强**: 新增 Ctrl+I 快速聚焦输入框功能 (感谢 @penn201500)
 
-## [v2.2.0] - Layout & Settings UI Enhancements
+### 🚀 功能改进
+- 🎨 **UI/UX 全面优化**:
+  - 新增左侧会话管理面板，支持收合/展开
+  - 顶部连接状态栏，即时显示系统状态
+  - 响应式设计，适配不同屏幕尺寸
+  - 统一的设计语言和视觉风格
+- 🌐 **多语言系统增强**:
+  - 优化语言切换机制，支持即时切换
+  - 新增大量翻译文本，提升本地化覆盖率
+  - 改进语言选择器 UI，使用下拉菜单设计
+  - 修复语言切换时的显示问题
+- 🖼️ **图片设置整合**:
+  - 将图片设置从工作区移至设置标签页
+  - 统一的设置管理界面
+  - 改进设置项目的组织和布局
+- 📱 **界面布局优化**:
+  - 调整版面配置，符合多语言显示需求
+  - 优化按钮样式和间距
+  - 改进表单元素的视觉设计
+  - 增强可访问性和易用性
 
-### ✨ New Features
-- 🎨 **Horizontal Layout Mode**: GUI & Web UI combined mode adds left-right layout option for summary and feedback
+### 🐛 问题修复
+- 🔧 **会话管理修复**:
+  - 修复会话统计信息无法正确更新的问题
+  - 修复会话数量计算错误
+  - 改进会话状态追踪机制
+- 🎯 **提示词功能修复**:
+  - 修复常用提示词管理无法正确设置自动提交的问题
+  - 改进提示词选择和应用逻辑
+- 🌐 **语系切换修复**:
+  - 修复语言切换时部分文字未更新的问题
+  - 改进多语言文本的加载机制
+- 🏗️ **架构稳定性修复**:
+  - 修复会话管理初始化问题
+  - 改进错误处理和资源清理
+  - 优化模块加载顺序和依赖关系
 
-### 🚀 Improvements
-- 🎨 **Improved Settings Interface**: Optimized the settings page for both GUI and Web UI
-- ⌨️ **GUI Shortcut Enhancement**: Submit feedback shortcut now fully supports numeric keypad Enter key
+### 🛠️ 技术改进
+- 📦 **模块化架构**:
+  - JavaScript 代码完全模块化重构
+  - 采用 ES6+ 语法和现代化开发模式
+  - 清晰的模块分离和职责划分
+- 📊 **性能提升**:
+  - 优化 WebSocket 通信效率
+  - 改进前端资源加载速度
+  - 减少内存使用和 CPU 负载
 
-### 🐛 Bug Fixes
-- 🔧 **Image Duplication Fix**: Resolved Web UI image pasting duplication issue
-
----
-
-## [v2.1.1] - Window Positioning Optimization
-
-### ✨ New Features
-- 🖥️ **Smart Window Positioning**: Added "Always show window at primary screen center" setting option
-- 🌐 **Multi-Monitor Support**: Perfect solution for complex multi-monitor setups like T-shaped screen arrangements
-- 💾 **Position Memory**: Auto-save and restore window position with intelligent visibility detection
-
----
-
-## [v2.1.0] - Complete Refactored Version
-
-### 🎨 Major Refactoring
-- 🏗️ **Complete Refactoring**: GUI and Web UI adopt modular architecture
-- 📁 **Centralized Management**: Reorganized folder structure, improved maintainability
-- 🖥️ **Interface Optimization**: Modern design and improved user experience
-
-### ✨ New Features
-- 🍎 **macOS Interface Optimization**: Specialized improvements for macOS user experience
-- ⚙️ **Feature Enhancement**: New settings options and auto-close page functionality
-- ℹ️ **About Page**: Added about page with version info, project links, and acknowledgments
-
----
-
-## [v2.0.14] - Shortcut & Image Feature Enhancement
-
-### 🚀 Improvements
-- ⌨️ **Enhanced Shortcuts**: Ctrl+Enter supports numeric keypad
-- 🖼️ **Smart Image Pasting**: Ctrl+V directly pastes clipboard images
-
----
-
-## [v2.0.9] - Multi-language Architecture Refactor
-
-### 🔄 Refactoring
-- 🌏 **Multi-language Architecture Refactor**: Support for dynamic loading
-- 📁 **Modularized Language Files**: Modular organization of language files
-
----
-
-## [v2.0.3] - Encoding Issues Fix
-
-### 🐛 Critical Fixes
-- 🛡️ **Complete Chinese Character Encoding Fix**: Resolved all Chinese display related issues
-- 🔧 **JSON Parsing Error Fix**: Fixed data parsing errors
-
----
-
-## [v2.0.0] - Web UI Support
-
-### 🌟 Major Features
-- ✅ **Added Web UI Support**: Support for remote environments
-- ✅ **Auto Environment Detection**: Automatically choose appropriate interface
-- ✅ **WebSocket Real-time Communication**: Real-time bidirectional communication
-
----
-
-## Legend
-
-| Icon | Meaning |
-|------|---------|
-| 🌟 | Version Highlights |
-| ✨ | New Features |
-| 🚀 | Improvements |
-| 🐛 | Bug Fixes |
-| 🔄 | Refactoring Changes |
-| 🎨 | UI Optimization |
-| ⚙️ | Settings Related |
-| 🖥️ | Window Related |
-| 🌐 | Multi-language/Network Related |
-| 📁 | File Structure |
-| ⌨️ | Shortcuts |
-| 🖼️ | Image Features |
-| 📝 | Prompt Management |
-| ⏰ | Auto-Submit |
-| 📊 | Session Management |
-| 🔗 | Connection Monitoring |
-| 🏗️ | Architecture Changes |
-| 🛠️ | Technical Improvements |
-| 📚 | Documentation Updates |
+### 📚 文档更新
+- 📖 **架构文档更新**: 更新系统架构说明，反映 Web-Only 设计
+- 🔧 **安装指南简化**: 移除 GUI 相关安装步骤和依赖说明
+- 🖼️ **截图更新**: 更新所有界面截图，展示新的 Web UI 设计
+- 📋 **API 文档增强**: 新增提示词管理、自动提交等新功能的 API 说明
 
 ---
 
-**Full Project Info:** [GitHub - mcp-feedback-enhanced](https://github.com/Minidoracat/mcp-feedback-enhanced)
+## [v2.3.0] - 系统稳定性与资源管理增强
+
+### 🌟 亮点
+本版本专注于提升系统稳定性和使用体验，特别解决了 Cursor SSH Remote 环境下无法启动浏览器的问题。
+
+### ✨ 新功能
+- 🌐 **SSH Remote 环境支持**: 解决 Cursor SSH Remote 无法启动浏览器的问题，提供清晰的使用指引
+- 🛡️ **错误提示改善**: 当发生错误时，提供更友善的错误信息和解决建议
+- 🧹 **自动清理功能**: 自动清理临时文件和过期会话，保持系统整洁
+- 📊 **内存监控**: 监控内存使用情况，防止系统资源不足
+
+### 🚀 改进功能
+- 💾 **资源管理优化**: 更好地管理系统资源，提升运行效率
+- 🔧 **错误处理增强**: 遇到问题时提供更清楚的说明和解决方案
+- 🌐 **连接稳定性**: 改善 Web UI 的连接稳定性
+- 🖼️ **图片上传优化**: 改善图片上传功能的稳定性
+- 🎯 **自动聚焦输入框**: 反馈窗口开启时自动聚焦到输入框，提升用户体验 (感谢 @penn201500)
+
+### 🐛 问题修复
+- 🌐 **连接问题**: 修复 WebSocket 连接的相关问题
+- 🔄 **会话管理**: 修复会话状态跟踪的问题
+- 🖼️ **图片处理**: 修复图片上传时的事件处理问题
+
+---
+
+## [v2.2.5] - WSL 环境支持与跨平台增强
+
+### ✨ 新功能
+- 🐧 **WSL 环境检测**: 自动识别 WSL 环境，提供专门的支持逻辑
+- 🌐 **智能浏览器启动**: WSL 环境下自动调用 Windows 浏览器，支持多种启动方式
+- 🔧 **跨平台测试增强**: 测试功能整合 WSL 检测，提升测试覆盖率
+
+### 🚀 改进功能
+- 🎯 **环境检测优化**: 改进远程环境检测逻辑，WSL 不再被误判为远程环境
+- 📊 **系统信息增强**: 系统信息工具新增 WSL 环境状态显示
+- 🧪 **测试体验提升**: 测试模式下自动尝试启动浏览器，提供更好的测试体验
+
+---
+
+## [v2.2.4] - GUI 体验优化与问题修复
+
+### 🐛 问题修复
+- 🖼️ **图片重复粘贴修复**: 解决 GUI 界面中使用 Ctrl+V 复制粘贴图片时出现重复粘贴的问题
+- 🌐 **语系切换修复**: 修复图片设定区域在语言切换时文字没有正确翻译的问题
+- 📝 **字体可读性改善**: 调整图片设定区域的字体大小，提升文字可读性
+
+---
+
+## [v2.2.3] - 超时控制与图片设置增强
+
+### ✨ 新功能
+- ⏰ **用户超时控制**: 新增可自定义的超时设置功能，支持 30 秒至 2 小时的弹性设置
+- ⏱️ **倒数计时器**: 界面顶部显示实时倒数计时器，提供可视化的时间提醒
+- 🖼️ **图片大小限制**: 新增图片上传大小限制设置（无限制/1MB/3MB/5MB）
+- 🔧 **Base64 兼容模式**: 新增 Base64 详细模式，提升部分 AI 模型的图片识别兼容性
+- 🧹 **UV Cache 管理工具**: 新增 `cleanup_cache.py` 脚本，协助管理和清理 UV cache 空间
+
+### 🚀 改进功能
+- 📚 **文档结构优化**: 重新整理文档目录结构，将图片移至 `docs/{语言}/images/` 路径
+- 📖 **Cache 管理指南**: 新增详细的 UV Cache 管理指南，包含自动化清理方案
+- 🎯 **智能兼容性提示**: 当图片上传失败时自动显示 Base64 兼容模式建议
+
+### 🐛 问题修复
+- 🛡️ **超时处理优化**: 改进用户自定义超时与 MCP 系统超时的协调机制
+- 🖥️ **界面自动关闭**: 修复超时后界面自动关闭和资源清理逻辑
+- 📱 **响应式布局**: 优化超时控制组件在小屏幕设备上的显示效果
+
+---
+
+## [v2.2.2] - 超时自动清理修复
+
+### 🐛 问题修复
+- 🔄 **超时自动清理**: 修复 GUI/Web UI 在 MCP session timeout (默认 600 秒) 后没有自动关闭的问题
+- 🛡️ **资源管理优化**: 改进超时处理机制，确保在超时时正确清理和关闭所有 UI 资源
+- ⚡ **超时检测增强**: 加强超时检测逻辑，确保在各种情况下都能正确处理超时事件
+
+---
+
+## [v2.2.1] - 窗口优化与统一设置接口
+
+### 🚀 改进功能
+- 🖥️ **窗口大小限制解除**: 解除 GUI 主窗口最小大小限制，从 1000×800 降至 400×300
+- 💾 **窗口状态实时保存**: 实现窗口大小与位置的即时保存机制，支持防抖延迟
+- ⚙️ **统一设置接口优化**: 改进 GUI 设置版面的配置保存逻辑，避免设置冲突
+
+### 🐛 问题修复
+- 🔧 **窗口大小限制**: 解决 GUI 窗口无法调整至小尺寸的问题
+- 🛡️ **设置冲突**: 修复设置保存时可能出现的配置冲突问题
+
+---
+
+## [v2.2.0] - 布局与设置界面优化
+
+### ✨ 新功能
+- 🎨 **水平布局模式**: GUI 与 Web UI 的合并模式新增摘要与反馈的左右布局选项
+
+### 🚀 改进功能
+- 🎨 **设置界面改进**: 优化了 GUI 与 Web UI 的设置页面，提升布局清晰度
+- ⌨️ **快捷键完善**: 提交反馈快捷键现已完整支持数字键盘的 Enter 键
+
+### 🐛 问题修复
+- 🔧 **图片重复粘贴**: 解决了在 Web UI 文字输入区使用 Ctrl+V 粘贴图片时的重复问题
+
+---
+
+## [v2.1.1] - 窗口定位优化
+
+### ✨ 新功能
+- 🖥️ **智能窗口定位**: 新增「总是在主屏幕中心显示窗口」设置选项
+- 🌐 **多屏幕支持**: 完美解决 T 字型屏幕排列等复杂多屏幕环境的窗口定位问题
+- 💾 **位置记忆**: 自动保存和恢复窗口位置，智能检测窗口可见性
+
+---
+
+## [v2.1.0] - 全面重构版
+
+### 🎨 重大重构
+- 🏗️ **全面重构**: GUI 和 Web UI 采用模块化架构
+- 📁 **集中管理**: 重新组织文件夹结构，提升维护性
+- 🖥️ **界面优化**: 现代化设计和改进的用户体验
+
+### ✨ 新功能
+- 🍎 **macOS 界面优化**: 针对 macOS 用户体验进行专项改进
+- ⚙️ **功能增强**: 新增设置选项和自动关闭页面功能
+- ℹ️ **关于页面**: 新增关于页面，包含版本信息、项目链接和致谢内容
+
+---
+
+## [v2.0.14] - 快捷键与图片功能增强
+
+### 🚀 改进功能
+- ⌨️ **增强快捷键**: Ctrl+Enter 支持数字键盘
+- 🖼️ **智能图片粘贴**: Ctrl+V 直接粘贴剪贴板图片
+
+---
+
+## [v2.0.9] - 多语言架构重构
+
+### 🔄 重构
+- 🌏 **多语言架构重构**: 支持动态载入
+- 📁 **语言文件模块化**: 模块化组织语言文件
+
+---
+
+## [v2.0.3] - 编码问题修复
+
+### 🐛 重要修复
+- 🛡️ **完全修复中文字符编码问题**: 解决所有中文显示相关问题
+- 🔧 **解决 JSON 解析错误**: 修复数据解析错误
+
+---
+
+## [v2.0.0] - Web UI 支持
+
+### 🌟 重大功能
+- ✅ **新增 Web UI 支持**: 支持远程环境使用
+- ✅ **自动环境检测**: 自动选择合适的界面
+- ✅ **WebSocket 即时通讯**: 实现即时双向通讯
+
+---
+
+## 图例说明
+
+| 图标 | 意义 |
+|------|------|
+| 🌟 | 版本亮点 |
+| ✨ | 新功能 |
+| 🚀 | 改进功能 |
+| 🐛 | 问题修复 |
+| 🔄 | 重构变更 |
+| 🎨 | 界面优化 |
+| ⚙️ | 设置相关 |
+| 🖥️ | 窗口相关 |
+| 🌐 | 多语言/网络相关 |
+| 📁 | 文件结构 |
+| ⌨️ | 快捷键 |
+| 🖼️ | 图片功能 |
+| 📝 | 提示词管理 |
+| ⏰ | 自动提交 |
+| 📊 | 会话管理 |
+| 🔗 | 连接监控 |
+| 🏗️ | 架构变更 |
+| 🛠️ | 技术改进 |
+| 📚 | 文档更新 |
+
+---
+
+**完整项目信息：** [GitHub - mcp-feedback-enhanced](https://github.com/Minidoracat/mcp-feedback-enhanced)

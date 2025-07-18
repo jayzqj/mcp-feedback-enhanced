@@ -1,103 +1,101 @@
-# MCP Feedback Enhanced
+# MCP Feedback Enhanced（交互反馈增强版）
 
-**🌐 Language / 語言切換:** **English** | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md)
+**原作者：** [Fábio Ferreira](https://x.com/fabiomlferreira) | [原始项目](https://github.com/noopstudios/interactive-feedback-mcp) ⭐
+**增强分支：** [Minidoracat](https://github.com/Minidoracat)
+**UI 设计参考：** [sanshao85/mcp-feedback-collector](https://github.com/sanshao85/mcp-feedback-collector)
 
-**Original Author:** [Fábio Ferreira](https://x.com/fabiomlferreira) | [Original Project](https://github.com/noopstudios/interactive-feedback-mcp) ⭐
-**Enhanced Fork:** [Minidoracat](https://github.com/Minidoracat)
-**UI Design Reference:** [sanshao85/mcp-feedback-collector](https://github.com/sanshao85/mcp-feedback-collector)
+## 🎯 核心概念
 
-## 🎯 Core Concept
+这是一个 [MCP 服务器](https://modelcontextprotocol.io/)，建立**反馈导向的开发工作流程**，提供**Web UI 和桌面应用程序**双重选择，完美适配本地、**SSH 远程开发环境**与 **WSL (Windows Subsystem for Linux) 环境**。通过引导 AI 与用户确认而非进行推测性操作，可将多次工具调用合并为单次反馈导向请求，大幅节省平台成本并提升开发效率。
 
-This is an [MCP server](https://modelcontextprotocol.io/) that establishes **feedback-oriented development workflows**, providing **Web UI and Desktop Application** dual interface options, perfectly adapting to local, **SSH Remote environments**, and **WSL (Windows Subsystem for Linux) environments**. By guiding AI to confirm with users rather than making speculative operations, it can consolidate multiple tool calls into a single feedback-oriented request, dramatically reducing platform costs and improving development efficiency.
+**🌐 双重界面架构优势：**
+- 🖥️ **桌面应用程序**：原生跨平台桌面体验，支持 Windows、macOS、Linux
+- 🌐 **Web UI 界面**：无需 GUI 依赖，适合远程和 WSL 环境
+- 🔧 **灵活部署**：根据环境需求选择最适合的界面模式
+- 📦 **统一功能**：两种界面提供完全相同的功能体验
 
-**🌐 Dual Interface Architecture Advantages:**
-- 🖥️ **Desktop Application**: Native cross-platform desktop experience, supporting Windows, macOS, Linux
-- 🌐 **Web UI**: No GUI dependencies required, suitable for remote and WSL environments
-- 🔧 **Flexible Deployment**: Choose the most suitable interface mode based on environment requirements
-- 📦 **Unified Functionality**: Both interfaces provide exactly the same functional experience
+**🖥️ 桌面应用程序：** v2.5.0 新增跨平台桌面应用程序支持，基于 Tauri 框架，支持 Windows、macOS、Linux 三大平台，提供原生桌面体验。
 
-**🖥️ Desktop Application:** v2.5.0 introduces cross-platform desktop application support based on Tauri framework, supporting Windows, macOS, and Linux platforms with native desktop experience.
+**支持平台：** [Cursor](https://www.cursor.com) | [Cline](https://cline.bot) | [Windsurf](https://windsurf.com) | [Augment](https://www.augmentcode.com) | [Trae](https://www.trae.ai)
 
-**Supported Platforms:** [Cursor](https://www.cursor.com) | [Cline](https://cline.bot) | [Windsurf](https://windsurf.com) | [Augment](https://www.augmentcode.com) | [Trae](https://www.trae.ai)
+### 🔄 工作流程
+1. **AI 调用** → `mcp-feedback-enhanced` 工具
+2. **界面启动** → 自动开启桌面应用程序或浏览器界面（根据配置）
+3. **智能互动** → 提示词选择、文字输入、图片上传、自动提交
+4. **即时反馈** → WebSocket 连线即时传递信息给 AI
+5. **会话追踪** → 自动记录会话历史与统计
+6. **流程继续** → AI 根据反馈调整行为或结束任务
 
-### 🔄 Workflow
-1. **AI Call** → `mcp-feedback-enhanced` tool
-2. **Interface Launch** → Auto-open desktop application or browser interface (based on configuration)
-3. **Smart Interaction** → Prompt selection, text input, image upload, auto-submit
-4. **Real-time Feedback** → WebSocket connection delivers information to AI instantly
-5. **Session Tracking** → Auto-record session history and statistics
-6. **Process Continuation** → AI adjusts behavior or ends task based on feedback
+## 🌟 主要功能
 
-## 🌟 Key Features
+### 🖥️ 双重界面支持
+- **桌面应用程序**：基于 Tauri 的跨平台原生应用程序，支持 Windows、macOS、Linux
+- **Web UI 界面**：轻量级浏览器界面，适合远程和 WSL 环境
+- **自动环境检测**：智能识别 SSH Remote、WSL 和其他特殊环境
+- **统一功能体验**：两种界面提供完全相同的功能
 
-### 🖥️ Dual Interface Support
-- **Desktop Application**: Cross-platform native application based on Tauri, supporting Windows, macOS, Linux
-- **Web UI Interface**: Lightweight browser interface suitable for remote and WSL environments
-- **Automatic Environment Detection**: Intelligently recognizes SSH Remote, WSL and other special environments
-- **Unified Feature Experience**: Both interfaces provide exactly the same functionality
+### 📝 智能工作流
+- **提示词管理**：常用提示词的 CRUD 操作、使用统计、智能排序
+- **自动定时提交**：1-86400 秒灵活计时器，支持暂停、恢复、取消，新增暂停/恢复按钮控制
+- **自动命令执行** (v2.6.0)：在创建新会话或提交后自动执行预设命令，提升开发效率
+- **会话管理与追踪**：本地文件存储、隐私控制、历史导出（支持 JSON、CSV、Markdown 格式）、实时统计、灵活超时设置
+- **连接监控**：WebSocket 状态监控、自动重连、质量指标
+- **AI 工作摘要 Markdown 显示**：支持丰富的 Markdown 语法渲染，包括标题、粗体文本、代码块、列表、链接等格式，增强内容可读性
 
-### 📝 Smart Workflow
-- **Prompt Management**: CRUD operations for common prompts, usage statistics, intelligent sorting
-- **Auto-Timed Submit**: 1-86400 second flexible timer, supports pause, resume, cancel with new pause/resume button controls
-- **Auto Command Execution** (v2.6.0): Automatically execute preset commands after creating new sessions or commits for improved development efficiency
-- **Session Management & Tracking**: Local file storage, privacy controls, history export (supports JSON, CSV, Markdown formats), real-time statistics, flexible timeout settings
-- **Connection Monitoring**: WebSocket status monitoring, auto-reconnection, quality indicators
-- **AI Work Summary Markdown Display**: Support for rich Markdown syntax rendering including headers, bold text, code blocks, lists, links and other formats for enhanced content readability
+### 🎨 现代化体验
+- **响应式设计**：适应不同屏幕尺寸，模块化 JavaScript 架构
+- **音效通知**：内置多种音效，支持自定义音频上传，音量控制
+- **系统通知** (v2.6.0)：重要事件的系统级实时警报（如自动提交、会话超时）
+- **智能记忆**：输入框高度记忆、一键复制、持久化设置
+- **简体中文支持**：完整的简体中文界面，即时切换
 
-### 🎨 Modern Experience
-- **Responsive Design**: Adapts to different screen sizes, modular JavaScript architecture
-- **Audio Notifications**: Built-in multiple sound effects, custom audio upload support, volume control
-- **System Notifications** (v2.6.0): System-level real-time alerts for important events (like auto-commit, session timeout)
-- **Smart Memory**: Input box height memory, one-click copy, persistent settings
-- **Multi-language Support**: Traditional Chinese, English, Simplified Chinese, instant switching
+### 🖼️ 图片与媒体
+- **全格式支持**：PNG、JPG、JPEG、GIF、BMP、WebP
+- **便捷上传**：拖拽文件、剪贴板粘贴 (Ctrl+V)
+- **无限制处理**：支持任意大小图片，自动智能处理
 
-### 🖼️ Images & Media
-- **Full Format Support**: PNG, JPG, JPEG, GIF, BMP, WebP
-- **Convenient Upload**: Drag & drop files, clipboard paste (Ctrl+V)
-- **Unlimited Processing**: Support for any size images, automatic intelligent processing
+## 🌐 界面预览
 
-## 🌐 Interface Preview
-
-### Web UI Interface (v2.5.0 - Desktop Application Support)
+### Web UI 界面 (v2.5.0 - 桌面应用程序支持)
 
 <div align="center">
-  <img src="docs/en/images/web1.png" width="400" alt="Web UI Main Interface - Prompt Management & Auto Submit" />
+  <img src="docs/zh-CN/images/web1.png" width="400" alt="Web UI 主界面 - 提示词管理与自动提交" />
 </div>
 
 <details>
-<summary>📱 Click to view complete interface screenshots</summary>
+<summary>📱 点击查看完整界面截图</summary>
 
 <div align="center">
-  <img src="docs/en/images/web2.jpeg" width="800" alt="Web UI Complete Interface - Session Management & Settings" />
+  <img src="docs/zh-CN/images/web2.jpeg" width="800" alt="Web UI 完整界面 - 会话管理与设置" />
 </div>
 
 </details>
 
-*Web UI Interface - Supports desktop application and Web interface, providing prompt management, auto-submit, session tracking and other smart features*
+*Web UI 界面 - 支持桌面应用程序和 Web 界面，提供提示词管理、自动提交、会话追踪等智能功能*
 
-### Desktop Application Interface (v2.5.0 New Feature)
+### 桌面应用程序界面 (v2.5.0 新功能)
 
 <div align="center">
-  <img src="docs/en/images/desktop1.png" width="600" alt="Desktop Application - Native Cross-platform Desktop Experience" />
+  <img src="docs/zh-CN/images/desktop1.png" width="600" alt="桌面应用程序 - 原生跨平台桌面体验" />
 </div>
 
-*Desktop Application - Native cross-platform desktop application based on Tauri framework, supporting Windows, macOS, Linux with exactly the same functionality as Web UI*
+*桌面应用程序 - 基于 Tauri 框架的原生跨平台桌面应用程序，支持 Windows、macOS、Linux，功能与 Web UI 完全相同*
 
-**Shortcut Support**
-- `Ctrl+Enter`（Windows/Linux）/ `Cmd+Enter`（macOS）：Submit feedback (both main keyboard and numeric keypad supported)
-- `Ctrl+V`（Windows/Linux）/ `Cmd+V`（macOS）：Direct paste clipboard images
-- `Ctrl+I`（Windows/Linux）/ `Cmd+I`（macOS）：Quick focus input box (Thanks @penn201500)
+**快捷键支持**
+- `Ctrl+Enter`（Windows/Linux）/ `Cmd+Enter`（macOS）：提交反馈（支持主键盘和数字键盘）
+- `Ctrl+V`（Windows/Linux）/ `Cmd+V`（macOS）：直接粘贴剪贴板图片
+- `Ctrl+I`（Windows/Linux）/ `Cmd+I`（macOS）：快速聚焦输入框 (感谢 @penn201500)
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
-### 1. Installation & Testing
+### 1. 安装与测试
 ```bash
-# Install uv (if not already installed)
+# 安装 uv（如果尚未安装）
 pip install uv
 ```
 
-### 2. Configure MCP
-**Basic Configuration** (suitable for most users):
+### 2. 配置 MCP
+**基础配置**（适合大多数用户）：
 ```json
 {
   "mcpServers": {
@@ -111,7 +109,7 @@ pip install uv
 }
 ```
 
-**Advanced Configuration** (requires custom environment):
+**高级配置**（需要自定义环境）：
 ```json
 {
   "mcpServers": {
@@ -123,7 +121,7 @@ pip install uv
         "MCP_DEBUG": "false",
         "MCP_WEB_HOST": "127.0.0.1",
         "MCP_WEB_PORT": "8765",
-        "MCP_LANGUAGE": "en"
+        "MCP_LANGUAGE": "zh-CN"
       },
       "autoApprove": ["interactive_feedback"]
     }
@@ -131,7 +129,7 @@ pip install uv
 }
 ```
 
-**Desktop Application Configuration** (v2.5.0 new feature - using native desktop application):
+**桌面应用程序配置**（v2.5.0 新功能 - 使用原生桌面应用程序）：
 ```json
 {
   "mcpServers": {
@@ -151,127 +149,123 @@ pip install uv
 }
 ```
 
-**Configuration File Examples**:
-- Desktop Mode: [examples/mcp-config-desktop.json](examples/mcp-config-desktop.json)
-- Web Mode: [examples/mcp-config-web.json](examples/mcp-config-web.json)
+**配置文件示例**：
+- 桌面模式：[examples/mcp-config-desktop.json](examples/mcp-config-desktop.json)
+- Web 模式：[examples/mcp-config-web.json](examples/mcp-config-web.json)
 
-### 3. Prompt Engineering Setup
-For optimal results, add the following rules to your AI assistant:
+### 3. 提示工程设置
+为了获得最佳效果，请在您的 AI 助手中添加以下规则：
 
 ```
-# MCP Interactive Feedback Rules
+# MCP 交互反馈规则
 
-follow mcp-feedback-enhanced instructions
+遵循 mcp-feedback-enhanced 指令
 ```
 
-## ⚙️ Advanced Settings
+## ⚙️ 高级设置
 
-### Environment Variables
-| Variable | Purpose | Values | Default |
+### 环境变量
+| 变量 | 用途 | 值 | 默认值 |
 |----------|---------|--------|---------|
-| `MCP_DEBUG` | Debug mode | `true`/`false` | `false` |
-| `MCP_WEB_HOST` | Web UI host binding | IP address or hostname | `127.0.0.1` |
-| `MCP_WEB_PORT` | Web UI port | `1024-65535` | `8765` |
-| `MCP_DESKTOP_MODE` | Desktop application mode | `true`/`false` | `false` |
-| `MCP_LANGUAGE` | Force UI language | `zh-TW`/`zh-CN`/`en` | Auto-detect |
+| `MCP_DEBUG` | 调试模式 | `true`/`false` | `false` |
+| `MCP_WEB_HOST` | Web UI 主机绑定 | IP 地址或主机名 | `127.0.0.1` |
+| `MCP_WEB_PORT` | Web UI 端口 | `1024-65535` | `8765` |
+| `MCP_DESKTOP_MODE` | 桌面应用程序模式 | `true`/`false` | `false` |
+| `MCP_LANGUAGE` | 强制 UI 语言 | `zh-CN` | 自动检测 |
 
-**`MCP_WEB_HOST` Explanation**:
-- `127.0.0.1` (default): Local access only, higher security
-- `0.0.0.0`: Allow remote access, suitable for SSH remote development environments
+**`MCP_WEB_HOST` 说明**：
+- `127.0.0.1`（默认）：仅本地访问，安全性更高
+- `0.0.0.0`：允许远程访问，适合 SSH 远程开发环境
 
-**`MCP_LANGUAGE` Explanation**:
-- Used to force the interface language, overriding automatic system detection
-- Supported language codes:
-  - `zh-TW`: Traditional Chinese
-  - `zh-CN`: Simplified Chinese
-  - `en`: English
-- Language detection priority:
-  1. User-saved language settings in the interface (highest priority)
-  2. `MCP_LANGUAGE` environment variable
-  3. System environment variables (LANG, LC_ALL, etc.)
-  4. System default language
-  5. Fallback to default language (Traditional Chinese)
+**`MCP_LANGUAGE` 说明**：
+- 用于强制界面语言，覆盖自动系统检测
+- 支持的语言代码：
+  - `zh-CN`：简体中文
+- 语言检测优先级：
+  1. 界面中用户保存的语言设置（最高优先级）
+  2. `MCP_LANGUAGE` 环境变量
+  3. 系统环境变量（LANG、LC_ALL 等）
+  4. 系统默认语言
+  5. 回退到默认语言（简体中文）
 
-### Testing Options
+### 测试选项
 ```bash
-# Version check
-uvx mcp-feedback-enhanced@latest version       # Check version
+# 版本检查
+uvx mcp-feedback-enhanced@latest version       # 检查版本
 
-# Interface testing
-uvx mcp-feedback-enhanced@latest test --web    # Test Web UI (auto continuous running)
-uvx mcp-feedback-enhanced@latest test --desktop # Test desktop application (v2.5.0 new feature)
+# 界面测试
+uvx mcp-feedback-enhanced@latest test --web    # 测试 Web UI（自动持续运行）
+uvx mcp-feedback-enhanced@latest test --desktop # 测试桌面应用程序（v2.5.0 新功能）
 
-# Debug mode
+# 调试模式
 MCP_DEBUG=true uvx mcp-feedback-enhanced@latest test
 
-# Specify language for testing
-MCP_LANGUAGE=en uvx mcp-feedback-enhanced@latest test --web    # Force English interface
-MCP_LANGUAGE=zh-TW uvx mcp-feedback-enhanced@latest test --web  # Force Traditional Chinese
-MCP_LANGUAGE=zh-CN uvx mcp-feedback-enhanced@latest test --web  # Force Simplified Chinese
+# 指定语言进行测试
+MCP_LANGUAGE=zh-CN uvx mcp-feedback-enhanced@latest test --web  # 强制简体中文界面
 ```
 
-### Developer Installation
+### 开发者安装
 ```bash
 git clone https://github.com/Minidoracat/mcp-feedback-enhanced.git
 cd mcp-feedback-enhanced
 uv sync
 ```
 
-**Local Testing Methods**
+**本地测试方法**
 ```bash
-# Functional testing
-make test-func                                           # Standard functional testing
-make test-web                                            # Web UI testing (continuous running)
-make test-desktop-func                                   # Desktop application functional testing
+# 功能测试
+make test-func                                           # 标准功能测试
+make test-web                                            # Web UI 测试（持续运行）
+make test-desktop-func                                   # 桌面应用程序功能测试
 
-# Or use direct commands
-uv run python -m mcp_feedback_enhanced test              # Standard functional testing
-uvx --no-cache --with-editable . mcp-feedback-enhanced test --web   # Web UI testing (continuous running)
-uvx --no-cache --with-editable . mcp-feedback-enhanced test --desktop # Desktop application testing
+# 或使用直接命令
+uv run python -m mcp_feedback_enhanced test              # 标准功能测试
+uvx --no-cache --with-editable . mcp-feedback-enhanced test --web   # Web UI 测试（持续运行）
+uvx --no-cache --with-editable . mcp-feedback-enhanced test --desktop # 桌面应用程序测试
 
-# Desktop application build (v2.5.0 new feature)
-make build-desktop                                       # Build desktop application (debug mode)
-make build-desktop-release                               # Build desktop application (release mode)
-make test-desktop                                        # Test desktop application
-make clean-desktop                                       # Clean desktop build artifacts
+# 桌面应用程序构建（v2.5.0 新功能）
+make build-desktop                                       # 构建桌面应用程序（调试模式）
+make build-desktop-release                               # 构建桌面应用程序（发布模式）
+make test-desktop                                        # 测试桌面应用程序
+make clean-desktop                                       # 清理桌面构建产物
 
-# Unit testing
-make test                                                # Run all unit tests
-make test-fast                                          # Fast testing (skip slow tests)
-make test-cov                                           # Test and generate coverage report
+# 单元测试
+make test                                                # 运行所有单元测试
+make test-fast                                          # 快速测试（跳过慢速测试）
+make test-cov                                           # 测试并生成覆盖率报告
 
-# Code quality checks
-make check                                              # Complete code quality check
-make quick-check                                        # Quick check and auto-fix
+# 代码质量检查
+make check                                              # 完整代码质量检查
+make quick-check                                        # 快速检查和自动修复
 ```
 
-**Testing Descriptions**
-- **Functional Testing**: Test complete MCP tool functionality workflow
-- **Unit Testing**: Test individual module functionality
-- **Coverage Testing**: Generate HTML coverage report to `htmlcov/` directory
-- **Quality Checks**: Include linting, formatting, type checking
+**测试说明**
+- **功能测试**：测试完整的 MCP 工具功能工作流程
+- **单元测试**：测试各个模块功能
+- **覆盖率测试**：生成 HTML 覆盖率报告到 `htmlcov/` 目录
+- **质量检查**：包括代码检查、格式化、类型检查
 
-## 🆕 Version History
+## 🆕 版本历史
 
-📋 **Complete Version History:** [RELEASE_NOTES/CHANGELOG.en.md](RELEASE_NOTES/CHANGELOG.en.md)
+📋 **完整版本历史：** [RELEASE_NOTES/CHANGELOG.md](RELEASE_NOTES/CHANGELOG.md)
 
-### Latest Version Highlights (v2.6.0)
-- 🚀 **Auto Command Execution**: Automatically execute preset commands after creating new sessions or commits, improving workflow efficiency
-- 📊 **Session Export Feature**: Support exporting session records to multiple formats for easy sharing and archiving
-- ⏸️ **Auto-commit Control**: Added pause and resume buttons for better control over auto-commit timing
-- 🔔 **System Notifications**: System-level notifications for important events with real-time alerts
-- ⏱️ **Session Timeout Optimization**: Redesigned session management with more flexible configuration options
-- 🌏 **I18n Enhancement**: Refactored internationalization architecture with full multilingual support for notifications
-- 🎨 **UI Simplification**: Significantly simplified user interface for improved user experience
+### 最新版本亮点 (v2.6.0)
+- 🚀 **自动命令执行**：在创建新会话或提交后自动执行预设命令，提升工作流程效率
+- 📊 **会话导出功能**：支持将会话记录导出为多种格式，便于分享和存档
+- ⏸️ **自动提交控制**：新增暂停和恢复按钮，更好地控制自动提交时机
+- 🔔 **系统通知**：重要事件的系统级通知，实时警报
+- ⏱️ **会话超时优化**：重新设计会话管理，提供更灵活的配置选项
+- 🌏 **国际化增强**：重构国际化架构，完整的简体中文支持
+- 🎨 **UI 简化**：大幅简化用户界面，提升用户体验
 
-## 🐛 Common Issues
+## 🐛 常见问题
 
-### 🌐 SSH Remote Environment Issues
-**Q: Browser cannot launch or access in SSH Remote environment**
-A: Two solutions available:
+### 🌐 SSH 远程环境问题
+**问：SSH Remote 环境下浏览器无法启动或访问**
+答：有两种解决方案：
 
-**Solution 1: Environment Variable Setting (v2.5.5 Recommended)**
-Set `"MCP_WEB_HOST": "0.0.0.0"` in MCP configuration to allow remote access:
+**方案 1：环境变量设置（v2.5.5 推荐）**
+在 MCP 配置中设置 `"MCP_WEB_HOST": "0.0.0.0"` 以允许远程访问：
 ```json
 {
   "mcpServers": {
@@ -288,29 +282,29 @@ Set `"MCP_WEB_HOST": "0.0.0.0"` in MCP configuration to allow remote access:
   }
 }
 ```
-Then open in local browser: `http://[remote-host-IP]:8765`
+然后在本地浏览器中打开：`http://[远程主机IP]:8765`
 
-**Solution 2: SSH Port Forwarding (Traditional Method)**
-1. Use default configuration (`MCP_WEB_HOST`: `127.0.0.1`)
-2. Set up SSH port forwarding:
-   - **VS Code Remote SSH**: Press `Ctrl+Shift+P` → "Forward a Port" → Enter `8765`
-   - **Cursor SSH Remote**: Manually add port forwarding rule (port 8765)
-3. Open in local browser: `http://localhost:8765`
+**方案 2：SSH 端口转发（传统方法）**
+1. 使用默认配置（`MCP_WEB_HOST`: `127.0.0.1`）
+2. 设置 SSH 端口转发：
+   - **VS Code Remote SSH**：按 `Ctrl+Shift+P` → "Forward a Port" → 输入 `8765`
+   - **Cursor SSH Remote**：手动添加端口转发规则（端口 8765）
+3. 在本地浏览器中打开：`http://localhost:8765`
 
-For detailed solutions, refer to: [SSH Remote Environment Usage Guide](docs/en/ssh-remote/browser-launch-issues.md)
+详细解决方案请参考：[SSH 远程环境使用指南](docs/zh-CN/ssh-remote/browser-launch-issues.md)
 
-**Q: Why am I not receiving new MCP feedback?**
-A: Likely a WebSocket connection issue. **Solution**: Directly refresh the browser page.
+**问：为什么收不到新的 MCP 反馈？**
+答：可能是 WebSocket 连接问题。**解决方案**：直接刷新浏览器页面。
 
-**Q: Why isn't MCP being called?**
-A: Please confirm MCP tool status shows green light. **Solution**: Repeatedly toggle MCP tool on/off, wait a few seconds for system reconnection.
+**问：为什么 MCP 没有被调用？**
+答：请确认 MCP 工具状态显示绿灯。**解决方案**：反复切换 MCP 工具开关，等待几秒钟让系统重新连接。
 
-**Q: Augment cannot start MCP**
-A: **Solution**: Completely close and restart VS Code or Cursor, reopen the project.
+**问：Augment 无法启动 MCP**
+答：**解决方案**：完全关闭并重启 VS Code 或 Cursor，重新打开项目。
 
-### 🔧 General Issues
-**Q: How to use desktop application?**
-A: v2.5.0 introduces cross-platform desktop application support. Set `"MCP_DESKTOP_MODE": "true"` in MCP configuration to enable:
+### 🔧 一般问题
+**问：如何使用桌面应用程序？**
+答：v2.5.0 引入跨平台桌面应用程序支持。在 MCP 配置中设置 `"MCP_DESKTOP_MODE": "true"` 以启用：
 ```json
 {
   "mcpServers": {
@@ -327,90 +321,90 @@ A: v2.5.0 introduces cross-platform desktop application support. Set `"MCP_DESKT
   }
 }
 ```
-**Configuration File Example**: [examples/mcp-config-desktop.json](examples/mcp-config-desktop.json)
+**配置文件示例**：[examples/mcp-config-desktop.json](examples/mcp-config-desktop.json)
 
-**Q: How to use legacy PyQt6 GUI interface?**
-A: v2.4.0 completely removed PyQt6 GUI dependencies. To use legacy GUI, specify v2.3.0 or earlier: `uvx mcp-feedback-enhanced@2.3.0`
-**Note**: Legacy versions don't include new features (prompt management, auto-submit, session management, desktop application, etc.).
+**问：如何使用旧版 PyQt6 GUI 界面？**
+答：v2.4.0 完全移除了 PyQt6 GUI 依赖。要使用旧版 GUI，请指定 v2.3.0 或更早版本：`uvx mcp-feedback-enhanced@2.3.0`
+**注意**：旧版本不包含新功能（提示词管理、自动提交、会话管理、桌面应用程序等）。
 
-**Q: "Unexpected token 'D'" error appears**
-A: Debug output interference. Set `MCP_DEBUG=false` or remove the environment variable.
+**问：出现 "Unexpected token 'D'" 错误**
+答：调试输出干扰。设置 `MCP_DEBUG=false` 或移除环境变量。
 
-**Q: Chinese character garbled text**
-A: Fixed in v2.0.3. Update to latest version: `uvx mcp-feedback-enhanced@latest`
+**问：中文字符乱码**
+答：已在 v2.0.3 修复。更新到最新版本：`uvx mcp-feedback-enhanced@latest`
 
-**Q: Window disappears or positioning errors in multi-screen environment**
-A: Fixed in v2.1.1. Go to "⚙️ Settings" tab, check "Always show window at primary screen center" to resolve. Especially suitable for T-shaped screen arrangements and other complex multi-screen configurations.
+**问：多屏环境下窗口消失或定位错误**
+答：已在 v2.1.1 修复。前往 "⚙️ 设置" 标签页，勾选 "始终在主屏幕中央显示窗口" 来解决。特别适合 T 型屏幕排列和其他复杂多屏配置。
 
-**Q: Image upload failure**
-A: Check file format (PNG/JPG/JPEG/GIF/BMP/WebP). System supports any size image files.
+**问：图片上传失败**
+答：检查文件格式（PNG/JPG/JPEG/GIF/BMP/WebP）。系统支持任意大小的图片文件。
 
-**Q: Web UI cannot start**
-A: Check firewall settings or try using different ports.
+**问：Web UI 无法启动**
+答：检查防火墙设置或尝试使用不同端口。
 
-**Q: UV Cache occupies too much disk space**
-A: Due to frequent use of `uvx` commands, cache may accumulate to tens of GB. Regular cleanup recommended:
+**问：UV 缓存占用磁盘空间过大**
+答：由于频繁使用 `uvx` 命令，缓存可能累积到数十 GB。建议定期清理：
 ```bash
-# View cache size and detailed information
+# 查看缓存大小和详细信息
 python scripts/cleanup_cache.py --size
 
-# Preview cleanup content (no actual cleanup)
+# 预览清理内容（不实际清理）
 python scripts/cleanup_cache.py --dry-run
 
-# Execute standard cleanup
+# 执行标准清理
 python scripts/cleanup_cache.py --clean
 
-# Force cleanup (attempts to close related programs, solving Windows file occupation issues)
+# 强制清理（尝试关闭相关程序，解决 Windows 文件占用问题）
 python scripts/cleanup_cache.py --force
 
-# Or directly use uv command
+# 或直接使用 uv 命令
 uv cache clean
 ```
-For detailed instructions, refer to: [Cache Management Guide](docs/en/cache-management.md)
+详细说明请参考：[缓存管理指南](docs/zh-CN/cache-management.md)
 
-**Q: AI models cannot parse images**
-A: Various AI models (including Gemini Pro 2.5, Claude, etc.) may have instability in image parsing, sometimes correctly recognizing and sometimes unable to parse uploaded image content. This is a known limitation of AI visual understanding technology. Recommendations:
-1. Ensure good image quality (high contrast, clear text)
-2. Try uploading multiple times, retries usually succeed
-3. If parsing continues to fail, try adjusting image size or format
+**问：AI 模型无法解析图片**
+答：各种 AI 模型（包括 Gemini Pro 2.5、Claude 等）在图片解析方面可能存在不稳定性，有时能正确识别，有时无法解析上传的图片内容。这是 AI 视觉理解技术的已知限制。建议：
+1. 确保图片质量良好（高对比度、清晰文字）
+2. 尝试多次上传，重试通常会成功
+3. 如果解析持续失败，尝试调整图片大小或格式
 
-## 🙏 Acknowledgments
+## 🙏 致谢
 
-### 🌟 Support Original Author
+### 🌟 支持原作者
 **Fábio Ferreira** - [X @fabiomlferreira](https://x.com/fabiomlferreira)
-**Original Project:** [noopstudios/interactive-feedback-mcp](https://github.com/noopstudios/interactive-feedback-mcp)
+**原始项目：** [noopstudios/interactive-feedback-mcp](https://github.com/noopstudios/interactive-feedback-mcp)
 
-If you find it useful, please:
-- ⭐ [Star the original project](https://github.com/noopstudios/interactive-feedback-mcp)
-- 📱 [Follow the original author](https://x.com/fabiomlferreira)
+如果您觉得有用，请：
+- ⭐ [为原始项目点星](https://github.com/noopstudios/interactive-feedback-mcp)
+- 📱 [关注原作者](https://x.com/fabiomlferreira)
 
-### Design Inspiration
+### 设计灵感
 **sanshao85** - [mcp-feedback-collector](https://github.com/sanshao85/mcp-feedback-collector)
 
-### Contributors
+### 贡献者
 **penn201500** - [GitHub @penn201500](https://github.com/penn201500)
-- 🎯 Auto-focus input box feature ([PR #39](https://github.com/Minidoracat/mcp-feedback-enhanced/pull/39))
+- 🎯 自动聚焦输入框功能 ([PR #39](https://github.com/Minidoracat/mcp-feedback-enhanced/pull/39))
 
 **leo108** - [GitHub @leo108](https://github.com/leo108)
-- 🌐 SSH Remote Development Support (`MCP_WEB_HOST` environment variable) ([PR #113](https://github.com/Minidoracat/mcp-feedback-enhanced/pull/113))
+- 🌐 SSH 远程开发支持（`MCP_WEB_HOST` 环境变量）([PR #113](https://github.com/Minidoracat/mcp-feedback-enhanced/pull/113))
 
 **Alsan** - [GitHub @Alsan](https://github.com/Alsan)
-- 🍎 macOS PyO3 Compilation Configuration Support ([PR #93](https://github.com/Minidoracat/mcp-feedback-enhanced/pull/93))
+- 🍎 macOS PyO3 编译配置支持 ([PR #93](https://github.com/Minidoracat/mcp-feedback-enhanced/pull/93))
 
 **fireinice** - [GitHub @fireinice](https://github.com/fireinice)
-- 📝 Tool Documentation Optimization (LLM instructions moved to docstring) ([PR #105](https://github.com/Minidoracat/mcp-feedback-enhanced/pull/105))
+- 📝 工具文档优化（LLM 指令移至 docstring）([PR #105](https://github.com/Minidoracat/mcp-feedback-enhanced/pull/105))
 
-### Community Support
-- **Discord:** [https://discord.gg/Gur2V67](https://discord.gg/Gur2V67)
-- **Issues:** [GitHub Issues](https://github.com/Minidoracat/mcp-feedback-enhanced/issues)
+### 社区支持
+- **Discord：** [https://discord.gg/Gur2V67](https://discord.gg/Gur2V67)
+- **问题反馈：** [GitHub Issues](https://github.com/Minidoracat/mcp-feedback-enhanced/issues)
 
-## 📄 License
+## 📄 许可证
 
-MIT License - See [LICENSE](LICENSE) file for details
+MIT 许可证 - 详情请参见 [LICENSE](LICENSE) 文件
 
-## 📈 Star History
+## 📈 Star 历史
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Minidoracat/mcp-feedback-enhanced&type=Date)](https://star-history.com/#Minidoracat/mcp-feedback-enhanced&Date)
 
 ---
-**🌟 Welcome to Star and share with more developers!**
+**🌟 欢迎点星并分享给更多开发者！**
