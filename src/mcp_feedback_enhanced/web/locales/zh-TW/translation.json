@@ -154,6 +154,9 @@
         "sessionTimeoutDurationDesc": "設定會話超時時間，範圍：300-86400 秒（5分鐘-24小時）",
         "sessionTimeoutSeconds": "秒"
     },
+    "interfaceTimer": {
+        "label": "介面時長"
+    },
     "languages": {
         "zh-TW": "繁體中文",
         "zh-CN": "简体中文",

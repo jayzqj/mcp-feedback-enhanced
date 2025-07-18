@@ -457,6 +457,13 @@
         <span id="sessionTimeoutTimer" class="countdown-timer">--:--</span>
     </div>
 
+    <!-- 界面时长计时器 -->
+    <div id="interfaceTimerDisplay" class="countdown-display-compact interface-timer-display">
+        <span class="info-separator">·</span>
+        <span>🕐</span>
+        <span id="interfaceTimer" class="countdown-timer">00:00</span>
+    </div>
+
     <!-- 分隔符 -->
     <span class="info-separator">·</span>
 
@@ -1311,6 +1318,7 @@
 <script src="/static/js/modules/tab-manager.js?v=2025010510"></script>
 <script src="/static/js/modules/websocket-manager.js?v=2025010510"></script>
 <script src="/static/js/modules/connection-monitor.js?v=2025010510"></script>
+<script src="/static/js/modules/interface-timer.js?v=2025010510"></script>
 <script src="/static/js/modules/session-manager.js?v=2025010510"></script>
 <script src="/static/js/modules/file-upload-manager.js?v=2025010510"></script>
 <script src="/static/js/modules/image-handler.js?v=2025010510"></script>
@@ -1397,6 +1405,12 @@
                         console.log('🔧 初始化時渲染 Markdown 內容...');
                         window.feedbackApp.uiManager.updateAISummaryContent(summaryElement.textContent);
                     }
+                }
+
+                // 手動初始化界面計時器
+                if (window.initInterfaceTimer) {
+                    console.log('🕐 手動初始化界面計時器...');
+                    window.initInterfaceTimer();
                 }
             }, 100);
 

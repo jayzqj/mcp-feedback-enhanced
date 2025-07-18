@@ -148,6 +148,9 @@
         "sessionTimeoutDurationDesc": "Set session timeout duration, range: 300-86400 seconds (5 minutes - 24 hours)",
         "sessionTimeoutSeconds": "seconds"
     },
+    "interfaceTimer": {
+        "label": "Interface Duration"
+    },
     "languages": {
         "zh-TW": "繁體中文",
         "zh-CN": "简体中文",
