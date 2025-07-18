@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="/static/css/audio-management.css">
     <link rel="stylesheet" href="/static/css/notification-settings.css">
     <style>
-        /* 僅保留必要的頁面特定樣式和響應式調整 */
+        /* 仅保留必要的页面特定样式和响应式调整 */
 
-        /* 響應式調整 */
+        /* 响应式调整 */
         @media (max-width: 768px) {
             .timeout-controls {
                 flex-direction: column;
@@ -32,10 +32,10 @@
             }
         }
 
-        /* 頁面特定的佈局模式樣式 */
+        /* 页面特定的布局模式样式 */
 
-        /* 佈局模式樣式 - 工作區模式 */
-        /* 工作區模式 - 顯示工作區頁籤，隱藏回饋和AI摘要頁籤 */
+        /* 布局模式样式 - 工作区模式 */
+        /* 工作区模式 - 显示工作区页签，隐藏回馈和AI摘要页签 */
         body.layout-combined-vertical .tab-button[data-tab="combined"],
         body.layout-combined-horizontal .tab-button[data-tab="combined"] {
             display: inline-block;
@@ -48,7 +48,7 @@
             display: none;
         }
 
-        /* 響應式設計 */
+        /* 响应式设计 */
         @media (max-width: 768px) {
             .timeout-controls {
                 flex-direction: column;
@@ -62,12 +62,12 @@
         }
 
 
-        /* 工作區分頁的水平佈局樣式 */
+        /* 工作区分页的水平布局样式 */
         #tab-combined.active.combined-horizontal .combined-content {
             display: flex !important;
             flex-direction: row !important;
             gap: 16px;
-            height: calc(100% - 60px); /* 減去描述區塊的高度 */
+            height: calc(100% - 60px); /* 减去描述区块的高度 */
         }
 
         #tab-combined.active.combined-horizontal .combined-section:first-child {
@@ -76,7 +76,7 @@
             max-width: 50%;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* 確保容器不超出範圍 */
+            overflow: hidden; /* 确保容器不超出范围 */
         }
 
         #tab-combined.active.combined-horizontal .combined-section:last-child {
@@ -85,29 +85,29 @@
         }
 
         #tab-combined.active.combined-horizontal .combined-summary {
-            flex: 1; /* 讓摘要區域自動填滿剩餘空間 */
+            flex: 1; /* 让摘要区域自动填满剩余空间 */
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* 確保摘要容器不超出範圍 */
+            overflow: hidden; /* 确保摘要容器不超出范围 */
         }
 
         #tab-combined.active.combined-horizontal #combinedSummaryContent {
-            flex: 1; /* 讓內容區域自動填滿摘要容器 */
+            flex: 1; /* 让内容区域自动填满摘要容器 */
             min-height: 200px; /* 降低最小高度 */
-            overflow-y: auto; /* 添加垂直滾動條 */
-            overflow-x: hidden; /* 隱藏水平滾動條 */
+            overflow-y: auto; /* 添加垂直滚动条 */
+            overflow-x: hidden; /* 隐藏水平滚动条 */
         }
 
         #tab-combined.active.combined-horizontal .text-input {
             min-height: 200px;
         }
 
-        /* 工作區分頁的垂直佈局樣式 */
+        /* 工作区分页的垂直布局样式 */
         #tab-combined.active.combined-vertical .combined-content {
             display: flex !important;
             flex-direction: column !important;
             gap: 16px;
-            height: calc(100% - 60px); /* 減去描述區塊的高度 */
+            height: calc(100% - 60px); /* 减去描述区块的高度 */
         }
 
         #tab-combined.active.combined-vertical .combined-section:first-child {
@@ -115,7 +115,7 @@
             min-height: 200px;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* 確保容器不超出範圍 */
+            overflow: hidden; /* 确保容器不超出范围 */
         }
 
         #tab-combined.active.combined-vertical .combined-section:last-child {
@@ -124,33 +124,33 @@
         }
 
         #tab-combined.active.combined-vertical .combined-summary {
-            flex: 1; /* 讓摘要區域自動填滿剩餘空間 */
+            flex: 1; /* 让摘要区域自动填满剩余空间 */
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* 確保摘要容器不超出範圍 */
+            overflow: hidden; /* 确保摘要容器不超出范围 */
         }
 
         #tab-combined.active.combined-vertical #combinedSummaryContent {
-            flex: 1; /* 讓內容區域自動填滿摘要容器 */
+            flex: 1; /* 让内容区域自动填满摘要容器 */
             min-height: 150px; /* 降低最小高度 */
-            overflow-y: auto; /* 添加垂直滾動條 */
-            overflow-x: hidden; /* 隱藏水平滾動條 */
+            overflow-y: auto; /* 添加垂直滚动条 */
+            overflow-x: hidden; /* 隐藏水平滚动条 */
         }
 
         #tab-combined.active.combined-vertical .text-input {
             min-height: 200px;
         }
 
-        /* 預設的合併內容布局 */
+        /* 预设的合并内容布局 */
         .combined-content {
             display: flex;
             flex-direction: column;
             gap: 16px;
             flex: 1;
-            height: 100%; /* 確保充滿父容器 */
+            height: 100%; /* 确保充满父容器 */
         }
 
-        /* 工作區基礎樣式 */
+        /* 工作区基础样式 */
         .combined-section {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
@@ -159,21 +159,21 @@
             margin-bottom: 16px;
         }
 
-        /* 確保 AI 摘要區域能夠自動擴展 */
+        /* 确保 AI 摘要区域能够自动扩展 */
         .combined-section .section-header {
-            flex-shrink: 0; /* 標題區域不收縮 */
+            flex-shrink: 0; /* 标题区域不收缩 */
         }
 
         .combined-summary {
             display: flex;
             flex-direction: column;
-            flex: 1; /* 讓摘要容器自動填滿剩餘空間 */
-            min-height: 0; /* 允許收縮 */
+            flex: 1; /* 让摘要容器自动填满剩余空间 */
+            min-height: 0; /* 允许收缩 */
         }
 
         #combinedSummaryContent {
-            flex: 1; /* 讓內容區域自動填滿摘要容器 */
-            min-height: 150px; /* 設定合理的最小高度 */
+            flex: 1; /* 让内容区域自动填满摘要容器 */
+            min-height: 150px; /* 设定合理的最小高度 */
             overflow-y: auto;
             overflow-x: hidden;
         }
@@ -218,7 +218,7 @@
             overflow-wrap: break-word !important;
         }
 
-        /* 圖片設定樣式 */
+        /* 图片设定样式 */
         .image-settings-details {
             border: 1px solid var(--border-color);
             border-radius: 6px;
@@ -305,7 +305,7 @@
             border: 1px solid var(--border-color);
         }
 
-        /* 相容性提示樣式 */
+        /* 兼容性提示样式 */
         .compatibility-hint {
             background: rgba(33, 150, 243, 0.1);
             border: 1px solid var(--info-color);
@@ -334,7 +334,7 @@
             background: #1976d2;
         }
 
-        /* 回饋狀態指示器樣式 */
+        /* 回馈状态指示器样式 */
         .feedback-status-indicator {
             padding: 12px 16px;
             margin: 16px 0;
@@ -389,7 +389,7 @@
             }
         }
 
-        /* 禁用狀態的樣式 */
+        /* 禁用状态的样式 */
         .image-upload-area.disabled {
             opacity: 0.5;
             pointer-events: none;
@@ -403,9 +403,9 @@
     </style>
 </head>
 <body class="layout-{{ layout_mode }}">
-<!-- ===== 頂部連線監控狀態列（緊湊版） ===== -->
+<!-- ===== 顶部连线监控状态栏（紧凑版） ===== -->
 <div class="connection-monitor-bar compact">
-    <!-- 標題 -->
+    <!-- 标题 -->
     <div class="app-title-compact">
         <span data-i18n="app.title">MCP Feedback</span>
     </div>
@@ -413,13 +413,13 @@
     <!-- 分隔符 -->
     <span class="info-separator">·</span>
 
-    <!-- 專案路徑 -->
+    <!-- 项目路径 -->
     <div class="project-info-compact">
         <span>📂</span>
         <span id="projectPathDisplay" class="project-path-display"
               data-full-path="{{ project_directory }}"
               data-i18n-title="app.clickToCopyPath"
-              title="點擊複製完整路徑">{{ project_directory[-30:] if project_directory|length > 30 else project_directory }}</span>
+              title="点击复制完整路径">{{ project_directory[-30:] if project_directory|length > 30 else project_directory }}</span>
     </div>
 
     <!-- 分隔符 -->
@@ -431,56 +431,56 @@
         <span id="currentSessionId" class="session-id-display"
               data-full-id="{{ session_id if session_id else 'loading' }}"
               data-i18n-title="app.clickToCopySessionId"
-              title="點擊複製完整會話ID">{{ session_id[:6] if session_id else '--' }}</span>
+              title="点击复制完整会话ID">{{ session_id[:6] if session_id else '--' }}</span>
     </div>
 
-    <!-- 倒數計時器（條件顯示） -->
+    <!-- 倒数计时器（条件显示） -->
     <div id="countdownDisplay" class="countdown-display-compact auto-submit-display" style="display: none;">
         <span class="info-separator">·</span>
         <span>⏱️</span>
-        <span class="countdown-label" data-i18n="autoSubmit.countdownLabel">提交倒數:</span>
+        <span class="countdown-label" data-i18n="autoSubmit.countdownLabel">提交倒数:</span>
         <span id="countdownTimer" class="countdown-timer">--:--</span>
         <button id="countdownPauseBtn" class="countdown-control-btn"
                 data-i18n-title="autoSubmit.pauseCountdown"
-                title="暫停倒數"
-                aria-label="暫停/恢復倒數">
+                title="暂停倒数"
+                aria-label="暂停/恢复倒数">
             <span class="pause-icon">⏸</span>
             <span class="resume-icon" style="display: none;">▶</span>
         </button>
     </div>
 
-    <!-- 會話超時倒數（條件顯示） -->
+    <!-- 会话超时倒数（条件显示） -->
     <div id="sessionTimeoutDisplay" class="countdown-display-compact session-timeout-display" style="display: none;">
         <span class="info-separator">·</span>
         <span>⏰</span>
-        <span class="timeout-label" data-i18n="sessionTimeout.label">會話超時:</span>
+        <span class="timeout-label" data-i18n="sessionTimeout.label">会话超时:</span>
         <span id="sessionTimeoutTimer" class="countdown-timer">--:--</span>
     </div>
 
     <!-- 分隔符 -->
     <span class="info-separator">·</span>
 
-    <!-- 連線狀態 -->
+    <!-- 连线状态 -->
     <div class="connection-status-compact" id="connectionStatusMinimal">
         <span class="status-dot"></span>
-        <span class="status-text" data-i18n="connectionMonitor.connected">已連線</span>
+        <span class="status-text" data-i18n="connectionMonitor.connected">已连线</span>
     </div>
 </div>
 
 <div class="container">
 
 
-    <!-- ===== 主內容區域 ===== -->
+    <!-- ===== 主内容区域 ===== -->
     <main class="main-content">
-        <!-- ===== 主要內容區域 ===== -->
+        <!-- ===== 主要内容区域 ===== -->
         <div class="main-content-area">
 
-            <!-- 分頁導航 -->
+            <!-- 分页导航 -->
             <div class="tabs">
                 <div class="tab-buttons">
-                    <!-- 工作區分頁 - 主要分頁 -->
+                    <!-- 工作区分页 - 主要分页 -->
                     <button class="tab-button active" data-tab="combined" data-i18n="tabs.combined">
-                        📝 工作區
+                        📝 工作区
                     </button>
                     <button class="tab-button" data-tab="summary" data-i18n="tabs.summary">
                         📋 AI 摘要
@@ -489,19 +489,19 @@
                         ⚡ 命令
                     </button>
                     <button class="tab-button" data-tab="sessions" data-i18n="tabs.sessions">
-                        📋 會話管理
+                        📋 会话管理
                     </button>
                     <button class="tab-button" data-tab="settings" data-i18n="tabs.settings">
-                        ⚙️ 設定
+                        ⚙️ 设置
                     </button>
                     <button class="tab-button" data-tab="about" data-i18n="tabs.about">
-                        ℹ️ 關於
+                        ℹ️ 关于
                     </button>
                 </div>
             </div>
 
 
-            <!-- ===== AI 摘要分頁 ===== -->
+            <!-- ===== AI 摘要分页 ===== -->
             <div id="tab-summary" class="tab-content">
                 <div class="input-group">
                     <div id="summaryContent" class="text-input"
@@ -512,16 +512,16 @@
                 </div>
             </div>
 
-            <!-- 命令分頁 -->
+            <!-- 命令分页 -->
             <div id="tab-command" class="tab-content">
-                <!-- 命令輸出區域 - 放在上面 -->
+                <!-- 命令输出区域 - 放在上面 -->
                 <div class="input-group">
                     <div id="commandOutput" class="command-output"></div>
                 </div>
 
-                <!-- 命令輸入區域 -->
+                <!-- 命令输入区域 -->
                 <div class="input-group" style="margin-bottom: 20px;">
-                    <label class="input-label" data-i18n="command.inputLabel">命令輸入</label>
+                    <label class="input-label" data-i18n="command.inputLabel">命令输入</label>
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
                         <div style="flex: 1; display: flex; align-items: center; gap: 8px;">
                             <span style="color: var(--accent-color); font-family: 'Consolas', 'Monaco', 'Courier New', monospace; font-weight: bold;">$</span>
@@ -530,35 +530,35 @@
                                     id="commandInput"
                                     class="command-input-line"
                                     data-i18n-placeholder="command.placeholder"
-                                    placeholder="輸入要執行的命令..."
+                                    placeholder="输入要执行的命令..."
                                     style="flex: 1; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 4px; padding: 8px 12px; color: var(--text-primary); font-family: 'Consolas', 'Monaco', 'Courier New', monospace; font-size: 14px;"
                             />
                         </div>
                         <button id="runCommandBtn" class="btn btn-primary" data-i18n="command.runButton"
                                 style="white-space: nowrap;">
-                            ▶️ 執行
+                            ▶️ 执行
                         </button>
                     </div>
                 </div>
 
-                <!-- 自動執行命令設定 -->
+                <!-- 自动执行命令设置 -->
                 <div class="command-auto-settings">
                     <div class="settings-header">
-                        <h4 class="settings-title" data-i18n="command.autoCommand.title">🤖 自動執行命令設定</h4>
+                        <h4 class="settings-title" data-i18n="command.autoCommand.title">🤖 自动执行命令设置</h4>
                         <label class="toggle-switch">
                             <input type="checkbox" id="autoCommandEnabled" class="toggle-input">
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
                     <p class="settings-description" data-i18n="command.autoCommand.description">
-                        設定在特定時機自動執行的命令</p>
+                        设置在特定时机自动执行的命令</p>
 
                     <div class="settings-content" id="autoCommandContent">
-                        <!-- 新會話建立時執行 -->
+                        <!-- 新会话建立时执行 -->
                         <div class="auto-command-item">
                             <div class="command-label">
                                 <span class="command-icon">🆕</span>
-                                <span data-i18n="command.autoCommand.onNewSession">新會話建立時執行</span>
+                                <span data-i18n="command.autoCommand.onNewSession">新会话建立时执行</span>
                             </div>
                             <div class="command-input-wrapper">
                                 <span class="command-prefix">$</span>
@@ -566,21 +566,21 @@
                                        id="commandOnNewSession"
                                        class="auto-command-input"
                                        data-i18n-placeholder="command.autoCommand.onNewSessionPlaceholder"
-                                       placeholder="輸入要自動執行的命令...">
+                                       placeholder="输入要自动执行的命令...">
                             </div>
                             <div class="command-actions">
                                 <button class="btn-small btn-test" id="testNewSessionCommand"
-                                        data-i18n="command.autoCommand.testOnNewSession">測試新會話命令
+                                        data-i18n="command.autoCommand.testOnNewSession">测试新会话命令
                                 </button>
-                                <span class="command-hint" data-i18n="command.autoSettings.exampleNewSession">💡 範例：pwd, git status, ls -la</span>
+                                <span class="command-hint" data-i18n="command.autoSettings.exampleNewSession">💡 范例：pwd, git status, ls -la</span>
                             </div>
                         </div>
 
-                        <!-- 提交回饋後執行 -->
+                        <!-- 提交回馈后执行 -->
                         <div class="auto-command-item">
                             <div class="command-label">
                                 <span class="command-icon">✅</span>
-                                <span data-i18n="command.autoCommand.onFeedbackSubmit">提交回饋後執行</span>
+                                <span data-i18n="command.autoCommand.onFeedbackSubmit">提交回馈后执行</span>
                             </div>
                             <div class="command-input-wrapper">
                                 <span class="command-prefix">$</span>
@@ -588,29 +588,29 @@
                                        id="commandOnFeedbackSubmit"
                                        class="auto-command-input"
                                        data-i18n-placeholder="command.autoCommand.onFeedbackSubmitPlaceholder"
-                                       placeholder="輸入要自動執行的命令...">
+                                       placeholder="输入要自动执行的命令...">
                             </div>
                             <div class="command-actions">
                                 <button class="btn-small btn-test" id="testFeedbackCommand"
-                                        data-i18n="command.autoCommand.testOnFeedbackSubmit">測試回饋提交命令
+                                        data-i18n="command.autoCommand.testOnFeedbackSubmit">测试回馈提交命令
                                 </button>
-                                <span class="command-hint" data-i18n="command.autoSettings.exampleFeedback">💡 範例：date, echo "Done", git log -1</span>
+                                <span class="command-hint" data-i18n="command.autoSettings.exampleFeedback">💡 范例：date, echo "Done", git log -1</span>
                             </div>
                         </div>
 
-                        <!-- 說明文字 -->
+                        <!-- 说明文字 -->
                         <div class="auto-command-help">
                             <p class="help-text" data-i18n="command.autoCommand.help">
-                                這些命令會在對應的時機自動執行。留空表示不執行任何命令。</p>
+                                这些命令会在对应的时机自动执行。留空表示不执行任何命令。</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 工作區分頁 - 主要分頁 -->
+            <!-- 工作区分页 - 主要分页 -->
             <div id="tab-combined" class="tab-content active">
                 <div class="combined-content">
-                    <!-- AI 摘要區域 -->
+                    <!-- AI 摘要区域 -->
                     <div class="combined-section">
                         <div class="section-header">
                             <h3 class="combined-section-title" data-i18n="combined.summaryTitle">📋 AI 工作摘要</h3>
@@ -623,19 +623,19 @@
                         </div>
                     </div>
 
-                    <!-- 回饋輸入區域 -->
+                    <!-- 回馈输入区域 -->
                     <div class="combined-section">
                         <div class="feedback-title-container">
-                            <h3 class="combined-section-title" data-i18n="combined.feedbackTitle">💬 提供回饋</h3>
+                            <h3 class="combined-section-title" data-i18n="combined.feedbackTitle">💬 提供反馈</h3>
                             <button id="submitBtn" class="btn btn-success combined-submit-btn"
                                     data-i18n="buttons.submit">
-                                ✅ 提交回饋
+                                ✅ 提交反馈
                             </button>
                         </div>
 
                         <div class="input-group">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <label class="input-label" data-i18n="feedback.textLabel">文字回饋</label>
+                                <label class="input-label" data-i18n="feedback.textLabel">文字反馈</label>
                                 <div class="prompt-input-buttons" id="combinedPromptButtons">
                                     <button type="button" class="prompt-input-btn select-prompt-btn" data-container-index="1">
                                         <span>📝</span>
@@ -648,7 +648,7 @@
                                     <button type="button" class="prompt-input-btn copy-user-content-btn" id="copyUserFeedback">
                                         <span>📋</span>
                                         <span class="button-text"
-                                              data-i18n="sessionManagement.copyUserContent">複製用戶內容</span>
+                                              data-i18n="sessionManagement.copyUserContent">复制用户内容</span>
                                     </button>
                                 </div>
                             </div>
@@ -657,11 +657,11 @@
                                     id="combinedFeedbackText"
                                     class="text-input"
                                     data-i18n-placeholder="feedback.detailedPlaceholder"
-                                    placeholder="請在這裡輸入您的回饋...
+                                    placeholder="请在这里输入您的回馈...
 
 💡 小提示：
-• 按 Ctrl+Enter/Cmd+Enter (支援數字鍵盤) 可快速提交
-• 按 Ctrl+V/Cmd+V 可直接貼上剪貼板圖片"
+• 按 Ctrl+Enter/Cmd+Enter (支持数字键盘) 可快速提交
+• 按 Ctrl+V/Cmd+V 可直接粘贴剪贴板图片"
                                     style="min-height: 150px;"
                             ></textarea>
                         </div>
@@ -669,7 +669,7 @@
 
 
 
-                        <!-- 圖片上傳組件 -->
+                        <!-- 图片上传组件 -->
                         {% set id_prefix = "combined" %}
                         {% set min_height = "100px" %}
                         {% include 'components/image-upload.html' %}
@@ -677,15 +677,15 @@
                 </div>
             </div>
 
-            <!-- ===== 會話管理分頁 ===== -->
+            <!-- ===== 会话管理分页 ===== -->
             <div id="tab-sessions" class="tab-content">
                 <div class="section-description" data-i18n="sessionManagement.description">
-                    管理當前會話和歷史會話記錄，查看會話統計資訊。
+                    管理当前会话和历史会话记录，查看会话统计信息。
                 </div>
 
-                <!-- 面板標題和控制 -->
+                <!-- 面板标题和控制 -->
                 <div class="session-panel-header">
-                    <h3 data-i18n="sessionManagement.title">會話管理</h3>
+                    <h3 data-i18n="sessionManagement.title">会话管理</h3>
                     <div class="panel-controls">
                         <button class="btn-icon" id="refreshSessions" data-i18n-title="sessionManagement.refresh"
                                 title="重新整理">
@@ -695,12 +695,12 @@
                 </div>
 
                 <div class="session-panel-content">
-                    <!-- 當前活躍會話 -->
+                    <!-- 当前活跃会话 -->
                     <div class="current-session-section">
-                        <h4 data-i18n="sessionManagement.currentSession">當前會話</h4>
+                        <h4 data-i18n="sessionManagement.currentSession">当前会话</h4>
                         <div class="session-card active" id="currentSessionCard">
                             <div class="session-header">
-                                <div class="session-id"><span data-i18n="sessionManagement.sessionId">會話 ID</span>: {{
+                                <div class="session-id"><span data-i18n="sessionManagement.sessionId">会话 ID</span>: {{
                                     session_id[:8] if session_id else 'loading' }}...
                                 </div>
                                 <div class="session-status">
@@ -710,24 +710,24 @@
                             </div>
                             <div class="session-info">
                                 <div class="session-time"><span
-                                        data-i18n="sessionManagement.createdTime">建立時間</span>: --:--:--
+                                        data-i18n="sessionManagement.createdTime">建立时间</span>: --:--:--
                                 </div>
-                                <div class="session-project"><span data-i18n="sessionManagement.project">專案</span>: {{
+                                <div class="session-project"><span data-i18n="sessionManagement.project">项目</span>: {{
                                     project_directory }}
                                 </div>
                                 <div class="session-summary"><span
                                         data-i18n="sessionManagement.aiSummary">AI 摘要</span>: <span
-                                        data-i18n="sessionManagement.loading">載入中...</span></div>
+                                        data-i18n="sessionManagement.loading">载入中...</span></div>
                             </div>
                             <div class="session-actions">
                                 <button class="btn-small" id="viewSessionDetails"
-                                        data-i18n="sessionManagement.viewDetails">詳細資訊
+                                        data-i18n="sessionManagement.viewDetails">详细信息
                                 </button>
                                 <button class="btn-small btn-primary" id="copyCurrentSessionContent"
                                         data-i18n="sessionManagement.copySessionContent"
                                         data-i18n-title="sessionManagement.copySessionContent"
-                                        aria-label="複製會話內容">
-                                    📋 <span data-i18n="sessionManagement.copySessionContent">複製會話內容</span>
+                                        aria-label="复制会话内容">
+                                    📋 <span data-i18n="sessionManagement.copySessionContent">复制会话内容</span>
                                 </button>
                                 <button class="btn-small btn-secondary" id="copyCurrentUserContent"
                                         data-i18n="sessionManagement.copyUserContent"
@@ -739,41 +739,41 @@
                         </div>
                     </div>
 
-                    <!-- 會話歷史記錄 -->
+                    <!-- 会话历史记录 -->
                     <div class="session-history-section">
                         <div class="session-history-header">
-                            <h4 data-i18n="sessionManagement.sessionHistory">會話歷史</h4>
+                            <h4 data-i18n="sessionManagement.sessionHistory">会话历史</h4>
                             <div class="session-history-actions">
                                 <button class="btn-small btn-secondary" id="sessionTabExportAllBtn"
                                         data-i18n="sessionHistory.management.exportAll"
                                         data-i18n-title="sessionHistory.management.exportAllTitle"
-                                        aria-label="匯出全部會話">
-                                    匯出全部
+                                        aria-label="导出全部会话">
+                                    导出全部
                                 </button>
                                 <button class="btn-small btn-secondary" id="sessionTabClearMessagesBtn"
                                         style="color: var(--warning-color);"
                                         data-i18n="sessionHistory.userMessages.clearAll"
                                         data-i18n-title="sessionHistory.userMessages.clearAllTitle"
-                                        aria-label="清空訊息記錄">
-                                    清空訊息記錄
+                                        aria-label="清空消息记录">
+                                    清空消息记录
                                 </button>
                                 <button class="btn-small btn-secondary" id="sessionTabClearAllBtn"
                                         style="color: var(--error-color);"
                                         data-i18n="sessionHistory.management.clear"
                                         data-i18n-title="sessionHistory.management.clearTitle"
-                                        aria-label="清空所有會話">
+                                        aria-label="清空所有会话">
                                     清空
                                 </button>
                             </div>
                         </div>
                         <div class="session-list" id="sessionHistoryList">
-                            <div class="no-sessions" data-i18n="sessionManagement.noHistory">暫無歷史會話</div>
+                            <div class="no-sessions" data-i18n="sessionManagement.noHistory">暂无历史会话</div>
                         </div>
                     </div>
 
-                    <!-- 會話統計 -->
+                    <!-- 会话统计 -->
                     <div class="session-stats-section">
-                        <h4 data-i18n="sessionManagement.statistics">統計資訊</h4>
+                        <h4 data-i18n="sessionManagement.statistics">统计信息</h4>
                         <div class="stats-grid">
                             <div class="stat-item">
                                 <div class="stat-value stat-today-count">0</div>
