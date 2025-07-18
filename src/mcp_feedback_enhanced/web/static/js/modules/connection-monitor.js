@@ -140,9 +140,18 @@
             const statusText = minimalIndicator.querySelector('.status-text');
             if (statusText) {
                 let statusKey = '';
+                let displayText = '';
                 switch (status) {
                     case 'connected':
                         statusKey = 'connectionMonitor.connected';
+                        // 獲取當前端口號並顯示
+                        const currentPort = window.location.port || (window.location.protocol === 'https:' ? '443' : '80');
+                        if (window.i18nManager) {
+                            const baseText = window.i18nManager.t(statusKey);
+                            displayText = `${baseText} (${currentPort})`;
+                        } else {
+                            displayText = `已连线 (${currentPort})`;
+                        }
                         break;
                     case 'connecting':
                         statusKey = 'connectionMonitor.connecting';
@@ -156,8 +165,13 @@
                     default:
                         statusKey = 'connectionMonitor.unknown';
                 }
+
                 statusText.setAttribute('data-i18n', statusKey);
-                if (window.i18nManager) {
+                if (displayText) {
+                    // 對於已連接狀態，使用包含端口號的自定義文字
+                    statusText.textContent = displayText;
+                } else if (window.i18nManager) {
+                    // 對於其他狀態，使用翻譯
                     statusText.textContent = window.i18nManager.t(statusKey);
                 }
             }
