@@ -7,7 +7,7 @@ MCP Feedback Enhanced Desktop Application
 
 主要功能：
 - 原生桌面应用程序界面
-- 整合现有的 Web UI 功能
+- 集成现有的 Web UI 功能
 - 跨平台支持（Windows、macOS、Linux）
 - 无需浏览器的独立运行环境
 

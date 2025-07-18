@@ -70,17 +70,17 @@ class I18nManager {
             .then(response => response.json())
             .then(data => {
                 this.translations = data;
-                console.log('翻譯數據載入完成:', Object.keys(this.translations));
-                
-                // 檢查當前語言是否有翻譯數據
+                console.log('翻译数据载入完成:', Object.keys(this.translations));
+
+                // 检查当前语言是否有翻译数据
                 if (!this.translations[this.currentLanguage] || Object.keys(this.translations[this.currentLanguage]).length === 0) {
-                    console.warn(`當前語言 ${this.currentLanguage} 沒有翻譯數據，回退到 zh-TW`);
-                    this.currentLanguage = 'zh-TW';
+                    console.warn(`当前语言 ${this.currentLanguage} 没有翻译数据，回退到 zh-CN`);
+                    this.currentLanguage = 'zh-CN';
                 }
             })
             .catch(error => {
-                console.error('載入翻譯數據失敗:', error);
-                // 使用最小的回退翻譯
+                console.error('载入翻译数据失败:', error);
+                // 使用最小的回退翻译
                 this.translations = this.getMinimalFallbackTranslations();
             });
 
@@ -88,46 +88,46 @@ class I18nManager {
     }
 
     getMinimalFallbackTranslations() {
-        // 最小的回退翻譯，只包含關鍵項目
+        // 最小的回退翻译，只包含关键项目
         return {
-            'zh-TW': {
+            'zh-CN': {
                 'app': {
                     'title': 'MCP Feedback Enhanced',
-                    'projectDirectory': '專案目錄'
+                    'projectDirectory': '项目目录'
                 },
                 'tabs': {
-                    'feedback': '💬 回饋',
+                    'feedback': '💬 反馈',
                     'summary': '📋 AI 摘要',
                     'command': '⚡ 命令',
-                    'settings': '⚙️ 設定'
+                    'settings': '⚙️ 设置'
                 },
                 'buttons': {
                     'cancel': '❌ 取消',
-                    'submit': '✅ 提交回饋'
+                    'submit': '✅ 提交反馈'
                 },
                 'settings': {
-                    'language': '語言'
+                    'language': '语言'
                 }
             }
         };
     }
 
-    // 支援巢狀鍵值的翻譯函數，支援參數替換
+    // 支持嵌套键值的翻译函数，支持参数替换
     t(key, params = {}) {
         const langData = this.translations[this.currentLanguage] || {};
         let translation = this.getNestedValue(langData, key);
 
-        // 如果沒有找到翻譯，返回預設值或鍵名
+        // 如果没有找到翻译，返回默认值或键名
         if (!translation) {
             return typeof params === 'string' ? params : key;
         }
 
-        // 如果 params 是字串，當作預設值處理（向後相容）
+        // 如果 params 是字符串，当作默认值处理（向后兼容）
         if (typeof params === 'string') {
             return translation;
         }
 
-        // 參數替換：將 {key} 替換為對應的值
+        // 参数替换：将 {key} 替换为对应的值
         if (typeof params === 'object' && params !== null) {
             Object.keys(params).forEach(paramKey => {
                 const placeholder = `{${paramKey}}`;
@@ -373,4 +373,4 @@ class I18nManager {
 }
 
 // 創建全域實例
-window.i18nManager = new I18nManager(); 
+window.i18nManager = new I18nManager(

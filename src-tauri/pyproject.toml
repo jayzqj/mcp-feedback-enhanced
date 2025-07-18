@@ -20,20 +20,20 @@ build-backend = "setuptools.build_meta"
 
 # Maturin 配置
 [tool.maturin]
-# Python 源碼目錄
+# Python 源码目录
 python-source = "python"
-# 模組名稱
+# 模块名称
 module-name = "mcp_feedback_enhanced_desktop.ext_mod"
 # 必要的功能特性
 features = ["pyo3/extension-module", "tauri/custom-protocol"]
-# 使用 Git 作為 sdist 生成器
+# 使用 Git 作为 sdist 生成器
 sdist-generator = "git"
-# 包含前端資源
+# 包含前端资源
 include = [
     { path = "../src/mcp_feedback_enhanced/web/static/**/*", format = "sdist" }
 ]
 
-# 支援 Python 穩定 ABI
+# 支持 Python 稳定 ABI
 [tool.maturin.abi3]
 enabled = true
 minimum = "3.11"

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tooltip 方向測試</title>
+    <title>Tooltip 方向测试</title>
     <style>
         :root {
             --bg-primary: #1e1e1e;
@@ -46,7 +46,7 @@
             align-items: center;
         }
 
-        /* 會話ID顯示樣式 */
+        /* 会话ID显示样式 */
         .session-id-display {
             font-family: 'Consolas', 'Monaco', monospace;
             color: var(--accent-color);
@@ -71,7 +71,7 @@
             transform: scale(0.98);
         }
 
-        /* 會話ID tooltip - 向下顯示 */
+        /* 会话ID tooltip - 向下显示 */
         .session-id-display::after {
             content: attr(data-full-id);
             position: absolute;
@@ -98,7 +98,7 @@
             visibility: visible;
         }
 
-        /* 對比：向上顯示的tooltip */
+        /* 对比：向上显示的tooltip */
         .session-id-display-up {
             font-family: 'Consolas', 'Monaco', monospace;
             color: var(--accent-color);
@@ -175,56 +175,56 @@
 </head>
 <body>
     <div class="test-container">
-        <h1>Tooltip 方向測試</h1>
+        <h1>Tooltip 方向测试</h1>
 
-        <!-- 頂部測試 - 模擬實際使用場景 -->
+        <!-- 顶部测试 - 模拟实际使用场景 -->
         <div class="test-header">
-            <span>📋 當前會話:
+            <span>📋 当前会话:
                 <span class="session-id-display"
                       data-full-id="6a674dda-1b98-4f86-824b-afdfd8c581f2"
-                      title="點擊複製完整會話ID">6a674dda...</span>
+                      title="点击复制完整会话ID">6a674dda...</span>
             </span>
         </div>
 
         <div class="test-section">
-            <h3>測試說明</h3>
+            <h3>测试说明</h3>
             <div class="description">
-                以下是不同位置的tooltip顯示測試。將滑鼠懸停在會話ID上查看tooltip的顯示方向。
+                以下是不同位置的tooltip显示测试。将鼠标悬停在会话ID上查看tooltip的显示方向。
             </div>
 
             <div class="test-item">
-                <span class="test-label">✅ 新版本 - 向下顯示 (推薦)</span>
+                <span class="test-label">✅ 新版本 - 向下显示 (推荐)</span>
                 <span class="session-id-display"
                       data-full-id="6a674dda-1b98-4f86-824b-afdfd8c581f2">6a674dda...</span>
             </div>
 
             <div class="test-item">
-                <span class="test-label">❌ 舊版本 - 向上顯示 (會超出畫面)</span>
+                <span class="test-label">❌ 旧版本 - 向上显示 (会超出画面)</span>
                 <span class="session-id-display-up"
                       data-full-id="6a674dda-1b98-4f86-824b-afdfd8c581f2">6a674dda...</span>
             </div>
 
             <div class="status-message">
-                ✅ 新版本的tooltip向下顯示，確保在頁面頂部也能完整看到完整的會話ID
+                ✅ 新版本的tooltip向下显示，确保在页面顶部也能完整看到完整的会话ID
             </div>
         </div>
 
         <div class="test-section">
-            <h3>實際應用場景</h3>
+            <h3>实际应用场景</h3>
             <div class="description">
-                在實際應用中，會話ID位於頁面頂部的連線狀態欄中。向下顯示tooltip可以確保用戶始終能看到完整的會話ID，而不會被瀏覽器視窗邊界截斷。
+                在实际应用中，会话ID位于页面顶部的连接状态栏中。向下显示tooltip可以确保用户始终能看到完整的会话ID，而不会被浏览器窗口边界截断。
             </div>
 
             <div style="text-align: center; margin-top: 20px;">
                 <span style="color: var(--text-secondary);">
-                    💡 提示：將滑鼠懸停在上方頂部區域的會話ID上測試實際效果
+                    💡 提示：将鼠标悬停在上方顶部区域的会话ID上测试实际效果
                 </span>
             </div>
         </div>
     </div>
 
     <script>
-        // 添加點擊複製功能
+        // 添加点击复制功能
         document.addEventListener('DOMContentLoaded', function() {
             const sessionIdElements = document.querySelectorAll('.session-id-display, .session-id-display-up');
 
@@ -234,9 +234,9 @@
 
                     if (navigator.clipboard) {
                         navigator.clipboard.writeText(fullId).then(function() {
-                            showMessage('會話ID已複製到剪貼板: ' + fullId);
+                            showMessage('会话ID已复制到剪贴板: ' + fullId);
                         }).catch(function(err) {
-                            console.error('複製失敗:', err);
+                            console.error('复制失败:', err);
                             fallbackCopy(fullId);
                         });
                     } else {
@@ -253,11 +253,11 @@
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            showMessage('會話ID已複製到剪貼板: ' + text);
+            showMessage('会话ID已复制到剪贴板: ' + text);
         }
 
         function showMessage(message) {
-            // 創建臨時消息提示
+            // 创建临时消息提示
             const messageEl = document.createElement('div');
             messageEl.textContent = message;
             messageEl.style.cssText = `
