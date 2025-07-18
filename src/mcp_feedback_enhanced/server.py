@@ -31,7 +31,6 @@ import sys
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
-from fastmcp.utilities.types import Image as MCPImage
 from mcp.types import TextContent
 from pydantic import Field
 
@@ -360,69 +359,8 @@ def create_feedback_text(feedback_data: dict) -> str:
     return "\n\n".join(text_parts) if text_parts else "用戶未提供任何回饋內容。"
 
 
-def process_images(images_data: list[dict]) -> list[MCPImage]:
-    """
-    處理圖片資料，轉換為 MCP 圖片對象
-
-    Args:
-        images_data: 圖片資料列表
-
-    Returns:
-        List[MCPImage]: MCP 圖片對象列表
-    """
-    mcp_images = []
-
-    for i, img in enumerate(images_data, 1):
-        try:
-            if not img.get("data"):
-                debug_log(f"圖片 {i} 沒有資料，跳過")
-                continue
-
-            # 檢查數據類型並相應處理
-            if isinstance(img["data"], bytes):
-                # 如果是原始 bytes 數據，直接使用
-                image_bytes = img["data"]
-                debug_log(
-                    f"圖片 {i} 使用原始 bytes 數據，大小: {len(image_bytes)} bytes"
-                )
-            elif isinstance(img["data"], str):
-                # 如果是 base64 字符串，進行解碼
-                image_bytes = base64.b64decode(img["data"])
-                debug_log(f"圖片 {i} 從 base64 解碼，大小: {len(image_bytes)} bytes")
-            else:
-                debug_log(f"圖片 {i} 數據類型不支援: {type(img['data'])}")
-                continue
-
-            if len(image_bytes) == 0:
-                debug_log(f"圖片 {i} 數據為空，跳過")
-                continue
-
-            # 根據文件名推斷格式
-            file_name = img.get("name", "image.png")
-            if file_name.lower().endswith((".jpg", ".jpeg")):
-                image_format = "jpeg"
-            elif file_name.lower().endswith(".gif"):
-                image_format = "gif"
-            else:
-                image_format = "png"  # 默認使用 PNG
-
-            # 創建 MCPImage 對象
-            mcp_image = MCPImage(data=image_bytes, format=image_format)
-            mcp_images.append(mcp_image)
-
-            debug_log(f"圖片 {i} ({file_name}) 處理成功，格式: {image_format}")
-
-        except Exception as e:
-            # 使用統一錯誤處理（不影響 JSON RPC）
-            error_id = ErrorHandler.log_error_with_context(
-                e,
-                context={"operation": "圖片處理", "image_index": i},
-                error_type=ErrorType.FILE_IO,
-            )
-            debug_log(f"圖片 {i} 處理失敗 [錯誤ID: {error_id}]: {e}")
-
-    debug_log(f"共處理 {len(mcp_images)} 張圖片")
-    return mcp_images
+# 注意：不再需要 process_images 函数，因为我们不直接返回 MCPImage 对象
+# 图片数据通过 create_feedback_text() 函数包含在文本内容中
 
 
 # ===== MCP 工具定義 =====
@@ -489,20 +427,18 @@ async def interactive_feedback(
             feedback_items.append(TextContent(type="text", text=feedback_text))
             debug_log("文字回饋已添加")
 
-        # 添加圖片回饋
+        # 注意：不直接添加 MCPImage 对象，因为 FastMCP 无法序列化
+        # 图片数据已经包含在 create_feedback_text() 生成的文本中
         if result.get("images"):
-            mcp_images = process_images(result["images"])
-            # 修復 arg-type 錯誤 - 直接擴展列表
-            feedback_items.extend(mcp_images)
-            debug_log(f"已添加 {len(mcp_images)} 張圖片")
+            debug_log(f"图片数据已包含在文本反馈中，共 {len(result['images'])} 张图片")
 
-        # 確保至少有一個回饋項目
+        # 确保至少有一个反馈项目
         if not feedback_items:
             feedback_items.append(
-                TextContent(type="text", text="用戶未提供任何回饋內容。")
+                TextContent(type="text", text="用户未提供任何反馈内容。")
             )
 
-        debug_log(f"回饋收集完成，共 {len(feedback_items)} 個項目")
+        debug_log(f"反馈收集完成，共 {len(feedback_items)} 个项目")
         return feedback_items
 
     except Exception as e:
