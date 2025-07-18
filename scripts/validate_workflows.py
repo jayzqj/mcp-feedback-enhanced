@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-GitHub Actions 工作流程驗證腳本
+GitHub Actions 工作流程验证脚本
 
-此腳本驗證 GitHub Actions 工作流程文件的語法和配置正確性。
+此脚本验证 GitHub Actions 工作流程文件的语法和配置正确性。
 """
 
 import sys
@@ -12,17 +12,17 @@ import yaml
 
 
 def validate_yaml_syntax(file_path: Path) -> bool:
-    """驗證 YAML 文件語法"""
+    """验证 YAML 文件语法"""
     try:
         with open(file_path, encoding="utf-8") as f:
             yaml.safe_load(f)
-        print(f"✅ {file_path.name}: YAML 語法正確")
+        print(f"✅ {file_path.name}: YAML 语法正确")
         return True
     except yaml.YAMLError as e:
-        print(f"❌ {file_path.name}: YAML 語法錯誤 - {e}")
+        print(f"❌ {file_path.name}: YAML 语法错误 - {e}")
         return False
     except Exception as e:
-        print(f"❌ {file_path.name}: 讀取文件失敗 - {e}")
+        print(f"❌ {file_path.name}: 读取文件失败 - {e}")
         return False
 
 
@@ -70,12 +70,12 @@ def validate_workflow_structure(file_path: Path) -> bool:
 
 
 def validate_build_desktop_workflow(file_path: Path) -> bool:
-    """驗證桌面構建工作流程的特定配置"""
+    """验证桌面构建工作流程的特定配置"""
     try:
         with open(file_path, encoding="utf-8") as f:
             workflow = yaml.safe_load(f)
 
-        # 檢查 matrix 配置
+        # 检查 matrix 配置
         build_job = workflow["jobs"].get("build-desktop", {})
         strategy = build_job.get("strategy", {})
         matrix = strategy.get("matrix", {})
@@ -84,7 +84,7 @@ def validate_build_desktop_workflow(file_path: Path) -> bool:
             print(f"❌ {file_path.name}: 缺少 matrix.include 配置")
             return False
 
-        # 檢查平台配置
+        # 检查平台配置
         platforms = matrix["include"]
         expected_platforms = {"windows", "macos-intel", "macos-arm64", "linux"}
         actual_platforms = {item.get("name") for item in platforms}
@@ -167,26 +167,26 @@ def main():
         print(f"❌ 在 {workflows_dir} 中沒有找到工作流程文件")
         sys.exit(1)
 
-    print(f"📁 找到 {len(workflow_files)} 個工作流程文件")
+    print(f"📁 找到 {len(workflow_files)} 个工作流程文件")
     print()
 
-    # 驗證每個文件
+    # 验证每个文件
     all_valid = True
 
     for workflow_file in sorted(workflow_files):
-        print(f"🔍 驗證 {workflow_file.name}...")
+        print(f"🔍 验证 {workflow_file.name}...")
 
-        # 基本語法驗證
+        # 基本语法验证
         if not validate_yaml_syntax(workflow_file):
             all_valid = False
             continue
 
-        # 結構驗證
+        # 结构验证
         if not validate_workflow_structure(workflow_file):
             all_valid = False
             continue
 
-        # 特定工作流程驗證
+        # 特定工作流程验证
         if workflow_file.name == "build-desktop.yml":
             if not validate_build_desktop_workflow(workflow_file):
                 all_valid = False

@@ -89,7 +89,7 @@ pre-commit-all: ## Run pre-commit on all files
 pre-commit-update: ## Update pre-commit hooks
 	uv run pre-commit autoupdate
 
-# 測試相關命令
+# 测试相关命令
 test: ## Run tests
 	uv run pytest
 
@@ -99,7 +99,7 @@ test-cov: ## Run tests with coverage
 test-fast: ## Run tests without slow tests
 	uv run pytest -m "not slow"
 
-# 功能測試命令
+# 功能测试命令
 test-func: ## Run functional tests (standard)
 	uv run python -m mcp_feedback_enhanced test
 
@@ -109,7 +109,7 @@ test-web: ## Run Web UI tests (continuous)
 test-desktop-func: ## Run desktop application functional tests
 	uvx --no-cache --with-editable . mcp-feedback-enhanced test --desktop
 
-# 維護相關命令
+# 维护相关命令
 clean: ## Clean up cache and temporary files
 	@echo "Cleaning up..."
 	@if exist ".mypy_cache" rmdir /s /q ".mypy_cache" 2>nul || true
@@ -156,10 +156,10 @@ dev-setup: install-dev install-hooks ## Complete development setup
 # CI 流程模擬
 ci: clean install-dev pre-commit-all test ## Simulate CI pipeline locally
 
-# 快速開發命令
+# 快速开发命令
 quick-check: lint-fix format type-check ## Quick check with auto-fix (recommended for development)
 
-# Windows PowerShell 專用命令
+# Windows PowerShell 专用命令
 ps-clean: ## PowerShell version of clean (Windows)
 	powershell -Command "Get-ChildItem -Path . -Recurse -Name '__pycache__' | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue; Get-ChildItem -Path . -Recurse -Name '*.pyc' | Remove-Item -Force -ErrorAction SilentlyContinue; @('.mypy_cache', '.ruff_cache', '.pytest_cache', 'htmlcov', 'dist', 'build') | ForEach-Object { if (Test-Path $$_) { Remove-Item $$_ -Recurse -Force } }"
 
@@ -187,10 +187,10 @@ clean-desktop: ## Clean desktop build artifacts
 	@echo "🧹 Cleaning desktop build artifacts..."
 	uv run python scripts/build_desktop.py --clean
 
-# 完整構建流程（包含桌面應用程式）
+# 完整构建流程（包含桌面应用程序）
 build-all: clean build-desktop-release build ## Build complete package with desktop app
 	@echo "🎉 Complete build finished!"
 
-# 測試所有功能
+# 测试所有功能
 test-all: test test-func test-desktop ## Run all tests including desktop and functional tests
 	@echo "✅ All tests completed!"

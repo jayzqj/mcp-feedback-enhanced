@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-訊息代碼驗證腳本
+消息代码验证脚本
 
-驗證後端訊息代碼、前端常量和翻譯文件的一致性。
-確保所有訊息代碼都有對應的定義和翻譯。
+验证后端消息代码、前端常量和翻译文件的一致性。
+确保所有消息代码都有对应的定义和翻译。
 
 使用方式：
     python scripts/validate_message_codes.py
@@ -16,10 +16,10 @@ from pathlib import Path
 
 
 def extract_backend_codes():
-    """從後端 Python 文件中提取所有訊息代碼"""
+    """从后端 Python 文件中提取所有消息代码"""
     codes = set()
 
-    # 讀取 MessageCodes 類別
+    # 读取 MessageCodes 类别
     message_codes_file = Path(
         "src/mcp_feedback_enhanced/web/constants/message_codes.py"
     )
@@ -190,13 +190,13 @@ def validate_message_codes():
 
 
 if __name__ == "__main__":
-    # 切換到專案根目錄
+    # 切换到项目根目录
     script_dir = Path(__file__).parent
     project_root = script_dir.parent
     import os
 
     os.chdir(project_root)
 
-    # 執行驗證
+    # 执行验证
     success = validate_message_codes()
     sys.exit(0 if success else 1)

@@ -26,56 +26,56 @@
    cargo install tauri-cli
    ```
 
-### 開發依賴
+### 开发依赖
 
 ```bash
-# 安裝 Python 開發依賴
+# 安装 Python 开发依赖
 uv sync --dev
 
 # 或使用 pip
 pip install -e ".[dev]"
 ```
 
-## 構建方法
+## 构建方法
 
-### 方法 1: 使用 Makefile (推薦)
+### 方法 1: 使用 Makefile (推荐)
 
 ```bash
-# 構建 Debug 版本
+# 构建 Debug 版本
 make build-desktop
 
-# 構建 Release 版本
+# 构建 Release 版本
 make build-desktop-release
 
-# 構建並測試
+# 构建并测试
 make test-desktop
 
-# 清理構建產物
+# 清理构建产物
 make clean-desktop
 
-# 完整構建流程 (包含 PyPI 包)
+# 完整构建流程 (包含 PyPI 包)
 make build-all
 ```
 
-### 方法 2: 直接使用 Python 腳本
+### 方法 2: 直接使用 Python 脚本
 
 ```bash
-# 構建 Debug 版本
+# 构建 Debug 版本
 python scripts/build_desktop.py
 
-# 構建 Release 版本
+# 构建 Release 版本
 python scripts/build_desktop.py --release
 
-# 清理構建產物
+# 清理构建产物
 python scripts/build_desktop.py --clean
 
-# 查看幫助
+# 查看帮助
 python scripts/build_desktop.py --help
 ```
 
-## 構建產物
+## 构建产物
 
-構建完成後，產物將位於：
+构建完成后，产物将位于：
 
 ```
 src/mcp_feedback_enhanced/
@@ -105,43 +105,43 @@ src-tauri/python/mcp_feedback_enhanced_desktop/        # 開發環境模組
 - **macOS Apple Silicon**: `mcp-feedback-enhanced-desktop-macos-arm64`
 - **Linux**: `mcp-feedback-enhanced-desktop-linux`
 
-桌面應用會根據運行平台自動選擇對應的二進制文件。
+桌面应用会根据运行平台自动选择对应的二进制文件。
 
-## 測試桌面應用程式
+## 测试桌面应用程序
 
 ```bash
-# 方法 1: 直接測試
+# 方法 1: 直接测试
 python -m mcp_feedback_enhanced test --desktop
 
 # 方法 2: 使用 Makefile
 make test-desktop
 ```
 
-## 跨平台注意事項
+## 跨平台注意事项
 
 ### Windows
-- 桌面應用程式不會顯示額外的 CMD 視窗
-- 二進制檔案: `mcp-feedback-enhanced-desktop.exe`
+- 桌面应用程序不会显示额外的 CMD 窗口
+- 二进制文件: `mcp-feedback-enhanced-desktop.exe`
 
 ### Linux/macOS
-- 二進制檔案: `mcp-feedback-enhanced-desktop`
-- 自動設置執行權限
+- 二进制文件: `mcp-feedback-enhanced-desktop`
+- 自动设置执行权限
 
 ## 故障排除
 
-### 常見問題
+### 常见问题
 
-1. **Rust 未安裝**
+1. **Rust 未安装**
    ```
-   ❌ Rust 未安裝，請訪問 https://rustup.rs/
+   ❌ Rust 未安装，请访问 https://rustup.rs/
    ```
-   解決方案: 安裝 Rust 工具鏈
+   解决方案: 安装 Rust 工具链
 
-2. **Tauri CLI 未安裝**
+2. **Tauri CLI 未安装**
    ```
-   ⚠️ Tauri CLI 未安裝，正在安裝...
+   ⚠️ Tauri CLI 未安装，正在安装...
    ```
-   解決方案: 腳本會自動安裝，或手動執行 `cargo install tauri-cli`
+   解决方案: 脚本会自动安装，或手动执行 `cargo install tauri-cli`
 
 3. **構建失敗**
    ```

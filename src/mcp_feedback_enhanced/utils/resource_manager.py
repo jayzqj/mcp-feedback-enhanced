@@ -747,7 +747,7 @@ class ResourceManager:
             self.cleanup_interval = max(60, cleanup_interval)  # 最小1分鐘
 
         if temp_file_max_age is not None:
-            self.temp_file_max_age = max(300, temp_file_max_age)  # 最小5分鐘
+            self.temp_file_max_age = max(300, temp_file_max_age)  # 最小5分钟
 
         debug_log(
             f"ResourceManager 配置已更新: auto_cleanup={self.auto_cleanup_enabled}, "
@@ -755,16 +755,16 @@ class ResourceManager:
         )
 
 
-# 全局資源管理器實例
+# 全局资源管理器实例
 _resource_manager = None
 
 
 def get_resource_manager() -> ResourceManager:
     """
-    獲取全局資源管理器實例
+    获取全局资源管理器实例
 
     Returns:
-        ResourceManager: 資源管理器實例
+        ResourceManager: 资源管理器实例
     """
     global _resource_manager
     if _resource_manager is None:
@@ -772,16 +772,16 @@ def get_resource_manager() -> ResourceManager:
     return _resource_manager
 
 
-# 便捷函數
+# 便捷函数
 def create_temp_file(suffix: str = "", prefix: str = "mcp_", **kwargs) -> str:
-    """創建臨時文件的便捷函數"""
+    """创建临时文件的便捷函数"""
     return get_resource_manager().create_temp_file(
         suffix=suffix, prefix=prefix, **kwargs
     )
 
 
 def create_temp_dir(suffix: str = "", prefix: str = "mcp_", **kwargs) -> str:
-    """創建臨時目錄的便捷函數"""
+    """创建临时目录的便捷函数"""
     return get_resource_manager().create_temp_dir(
         suffix=suffix, prefix=prefix, **kwargs
     )
@@ -790,12 +790,12 @@ def create_temp_dir(suffix: str = "", prefix: str = "mcp_", **kwargs) -> str:
 def register_process(
     process: subprocess.Popen | int, description: str = "", **kwargs
 ) -> int:
-    """註冊進程的便捷函數"""
+    """注册进程的便捷函数"""
     return get_resource_manager().register_process(
         process, description=description, **kwargs
     )
 
 
 def cleanup_all_resources(force: bool = False) -> dict[str, int]:
-    """清理所有資源的便捷函數"""
+    """清理所有资源的便捷函数"""
     return get_resource_manager().cleanup_all(force=force)

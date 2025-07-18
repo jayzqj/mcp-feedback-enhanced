@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Web 回饋會話模型
+Web 反馈会话模型
 ===============
 
-管理 Web 回饋會話的資料和邏輯。
+管理 Web 反馈会话的数据和逻辑。
 
-注意：此文件中的 subprocess 調用已經過安全處理，使用 shlex.split() 解析命令
-並禁用 shell=True 以防止命令注入攻擊。
+注意：此文件中的 subprocess 调用已经过安全处理，使用 shlex.split() 解析命令
+并禁用 shell=True 以防止命令注入攻击。
 """
 
 import asyncio
@@ -30,26 +30,26 @@ from ..constants import get_message_code
 
 
 class SessionStatus(Enum):
-    """會話狀態枚舉 - 單向流轉設計"""
+    """会话状态枚举 - 单向流转设计"""
 
     WAITING = "waiting"  # 等待中
-    ACTIVE = "active"  # 活躍狀態
-    FEEDBACK_SUBMITTED = "feedback_submitted"  # 已提交反饋
+    ACTIVE = "active"  # 活跃状态
+    FEEDBACK_SUBMITTED = "feedback_submitted"  # 已提交反馈
     COMPLETED = "completed"  # 已完成
-    ERROR = "error"  # 錯誤（終態）
-    TIMEOUT = "timeout"  # 超時（終態）
-    EXPIRED = "expired"  # 已過期（終態）
+    ERROR = "error"  # 错误（终态）
+    TIMEOUT = "timeout"  # 超时（终态）
+    EXPIRED = "expired"  # 已过期（终态）
 
 
 class CleanupReason(Enum):
-    """清理原因枚舉"""
+    """清理原因枚举"""
 
-    TIMEOUT = "timeout"  # 超時清理
-    EXPIRED = "expired"  # 過期清理
-    MEMORY_PRESSURE = "memory_pressure"  # 內存壓力清理
-    MANUAL = "manual"  # 手動清理
-    ERROR = "error"  # 錯誤清理
-    SHUTDOWN = "shutdown"  # 系統關閉清理
+    TIMEOUT = "timeout"  # 超时清理
+    EXPIRED = "expired"  # 过期清理
+    MEMORY_PRESSURE = "memory_pressure"  # 内存压力清理
+    MANUAL = "manual"  # 手动清理
+    ERROR = "error"  # 错误清理
+    SHUTDOWN = "shutdown"  # 系统关闭清理
 
 
 # 常數定義
@@ -64,19 +64,19 @@ SUPPORTED_IMAGE_TYPES = {
 }
 TEMP_DIR = Path.home() / ".cache" / "interactive-feedback-mcp-web"
 
-# 訊息代碼現在從統一的常量文件導入
-# 使用 get_message_code 函數來獲取訊息代碼
+# 消息代码现在从统一的常量文件导入
+# 使用 get_message_code 函数来获取消息代码
 
 
 def _safe_parse_command(command: str) -> list[str]:
     """
-    安全解析命令字符串，避免 shell 注入攻擊
+    安全解析命令字符串，避免 shell 注入攻击
 
     Args:
         command: 命令字符串
 
     Returns:
-        list[str]: 解析後的命令參數列表
+        list[str]: 解析后的命令参数列表
 
     Raises:
         ValueError: 如果命令包含不安全的字符
@@ -85,7 +85,7 @@ def _safe_parse_command(command: str) -> list[str]:
         # 使用 shlex 安全解析命令
         parsed = shlex.split(command)
 
-        # 基本安全檢查：禁止某些危險字符和命令
+        # 基本安全检查：禁止某些危险字符和命令
         dangerous_patterns = [
             ";",
             "&&",
@@ -112,8 +112,8 @@ def _safe_parse_command(command: str) -> list[str]:
         return parsed
 
     except Exception as e:
-        debug_log(f"命令解析失敗: {e}")
-        raise ValueError(f"無法安全解析命令: {e}") from e
+        debug_log(f"命令解析失败: {e}")
+        raise ValueError(f"无法安全解析命令: {e}") from e
 
 
 class WebFeedbackSession:

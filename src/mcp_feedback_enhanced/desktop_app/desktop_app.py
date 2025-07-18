@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-桌面應用程式主要模組
+桌面应用程序主要模块
 
-此模組提供桌面應用程式的核心功能，包括：
-- 桌面模式檢測
-- Tauri 應用程式啟動
-- 與現有 Web UI 的整合
+此模块提供桌面应用程序的核心功能，包括：
+- 桌面模式检测
+- Tauri 应用程序启动
+- 与现有 Web UI 的整合
 """
 
 import asyncio
@@ -14,13 +14,13 @@ import sys
 import time
 
 
-# 導入現有的 MCP Feedback Enhanced 模組
+# 导入现有的 MCP Feedback Enhanced 模块
 try:
     from mcp_feedback_enhanced.debug import server_debug_log as debug_log
     from mcp_feedback_enhanced.web.main import WebUIManager, get_web_ui_manager
 except ImportError as e:
-    # 在這裡無法使用 debug_log，因為導入失敗
-    sys.stderr.write(f"無法導入 MCP Feedback Enhanced 模組: {e}\n")
+    # 在这里无法使用 debug_log，因为导入失败
+    sys.stderr.write(f"无法导入 MCP Feedback Enhanced 模块: {e}\n")
     sys.exit(1)
 
 

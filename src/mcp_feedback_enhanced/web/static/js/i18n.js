@@ -14,33 +14,33 @@ class I18nManager {
     }
     
     getDefaultLanguage() {
-        // 1. 先檢查本地儲存的設定
+        // 1. 先检查本地存储的设定
         const savedLanguage = localStorage.getItem('language');
         if (savedLanguage && ['zh-TW', 'zh-CN', 'en'].includes(savedLanguage)) {
-            console.log('🌐 使用儲存的語言設定:', savedLanguage);
+            console.log('🌐 使用存储的语言设定:', savedLanguage);
             return savedLanguage;
         }
-        
-        // 2. 檢查瀏覽器語言
+
+        // 2. 检查浏览器语言
         const browserLang = navigator.language || navigator.userLanguage;
-        console.log('🌐 瀏覽器語言:', browserLang);
-        
+        console.log('🌐 浏览器语言:', browserLang);
+
         if (browserLang.startsWith('zh-TW') || browserLang.includes('Hant')) {
-            console.log('🌐 偵測到繁體中文環境');
+            console.log('🌐 检测到繁体中文环境');
             return 'zh-TW';
         }
         if (browserLang.startsWith('zh') || browserLang.includes('Hans')) {
-            console.log('🌐 偵測到簡體中文環境');
+            console.log('🌐 检测到简体中文环境');
             return 'zh-CN';
         }
         if (browserLang.startsWith('en')) {
-            console.log('🌐 偵測到英文環境');
+            console.log('🌐 检测到英文环境');
             return 'en';
         }
-        
-        // 3. 預設使用繁體中文
-        console.log('🌐 使用預設語言: zh-TW');
-        return 'zh-TW';
+
+        // 3. 默认使用简体中文
+        console.log('🌐 使用默认语言: zh-CN');
+        return 'zh-CN';
     }
 
     async init() {
@@ -163,7 +163,7 @@ class I18nManager {
     }
 
     applyTranslations() {
-        // 翻譯所有有 data-i18n 屬性的元素
+        // 翻译所有有 data-i18n 属性的元素
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(element => {
             const key = element.getAttribute('data-i18n');
@@ -173,7 +173,7 @@ class I18nManager {
             }
         });
 
-        // 翻譯有 data-i18n-placeholder 屬性的元素
+        // 翻译有 data-i18n-placeholder 属性的元素
         const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
         placeholderElements.forEach(element => {
             const key = element.getAttribute('data-i18n-placeholder');

@@ -186,8 +186,8 @@ jobs:
         echo "### 🇺🇸 English" >> release_body.md
         echo "📖 **[View Complete English Release Notes](https://github.com/Minidoracat/mcp-feedback-enhanced/blob/main/RELEASE_NOTES/CHANGELOG.en.md)**" >> release_body.md
         echo "" >> release_body.md
-        echo "### 🇹🇼 繁體中文" >> release_body.md
-        echo "📖 **[查看完整繁體中文發布說明](https://github.com/Minidoracat/mcp-feedback-enhanced/blob/main/RELEASE_NOTES/CHANGELOG.zh-TW.md)**" >> release_body.md
+        echo "### 🇹🇼 繁体中文" >> release_body.md
+        echo "📖 **[查看完整繁体中文发布说明](https://github.com/Minidoracat/mcp-feedback-enhanced/blob/main/RELEASE_NOTES/CHANGELOG.zh-TW.md)**" >> release_body.md
         echo "" >> release_body.md
         echo "### 🇨🇳 简体中文" >> release_body.md
         echo "📖 **[查看完整简体中文发布说明](https://github.com/Minidoracat/mcp-feedback-enhanced/blob/main/RELEASE_NOTES/CHANGELOG.zh-CN.md)**" >> release_body.md

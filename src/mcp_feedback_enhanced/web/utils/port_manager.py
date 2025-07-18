@@ -17,19 +17,19 @@ from ...debug import debug_log
 
 
 class PortManager:
-    """端口管理器 - 提供增強的端口管理功能"""
+    """端口管理器 - 提供增强的端口管理功能"""
 
     @staticmethod
     def find_process_using_port(port: int) -> dict[str, Any] | None:
         """
-        查找占用指定端口的進程
+        查找占用指定端口的进程
 
         Args:
-            port: 要檢查的端口號
+            port: 要检查的端口号
 
         Returns:
-            Dict[str, Any]: 進程信息字典，包含 pid, name, cmdline 等
-            None: 如果沒有進程占用該端口
+            Dict[str, Any]: 进程信息字典，包含 pid, name, cmdline 等
+            None: 如果没有进程占用该端口
         """
         try:
             for conn in psutil.net_connections(kind="inet"):
@@ -44,10 +44,10 @@ class PortManager:
                             "status": process.status(),
                         }
                     except (psutil.NoSuchProcess, psutil.AccessDenied):
-                        # 進程可能已經結束或無權限訪問
+                        # 进程可能已经结束或无权限访问
                         continue
         except Exception as e:
-            debug_log(f"查找端口 {port} 占用進程時發生錯誤: {e}")
+            debug_log(f"查找端口 {port} 占用进程时发生错误: {e}")
 
         return None
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-桌面應用程式主要模組
+桌面应用程序主要模块
 
-此模組提供桌面應用程式的核心功能，包括：
-- 桌面模式檢測
-- Tauri 應用程式啟動
-- 與現有 Web UI 的整合
+此模块提供桌面应用程序的核心功能，包括：
+- 桌面模式检测
+- Tauri 应用程序启动
+- 与现有 Web UI 的整合
 """
 
 import asyncio
@@ -14,12 +14,12 @@ import sys
 import time
 
 
-# 導入現有的 MCP Feedback Enhanced 模組
+# 导入现有的 MCP Feedback Enhanced 模块
 try:
     from mcp_feedback_enhanced.debug import server_debug_log as debug_log
     from mcp_feedback_enhanced.web.main import WebUIManager, get_web_ui_manager
 except ImportError as e:
-    print(f"無法導入 MCP Feedback Enhanced 模組: {e}")
+    print(f"无法导入 MCP Feedback Enhanced 模块: {e}")
     sys.exit(1)
 
 
@@ -208,16 +208,16 @@ class DesktopApp:
                     "找不到 Tauri 可執行檔案，已嘗試的路徑包括開發和發布目錄"
                 ) from None
 
-        debug_log(f"找到 Tauri 可執行檔案: {tauri_exe}")
+        debug_log(f"找到 Tauri 可执行文件: {tauri_exe}")
 
-        # 設置環境變數
+        # 设置环境变量
         env = os.environ.copy()
         env["MCP_DESKTOP_MODE"] = "true"
         env["MCP_WEB_URL"] = server_url
 
-        # 啟動 Tauri 應用程式
+        # 启动 Tauri 应用程序
         try:
-            # Windows 下隱藏控制台視窗
+            # Windows 下隐藏控制台窗口
             creation_flags = 0
             if os.name == "nt":
                 creation_flags = subprocess.CREATE_NO_WINDOW
@@ -229,13 +229,13 @@ class DesktopApp:
                 stderr=subprocess.PIPE,
                 creationflags=creation_flags,
             )
-            debug_log("Tauri 桌面應用程式已啟動")
+            debug_log("Tauri 桌面应用程序已启动")
 
-            # 等待一下確保應用程式啟動
+            # 等待一下确保应用程序启动
             await asyncio.sleep(2)
 
         except Exception as e:
-            debug_log(f"啟動 Tauri 應用程式失敗: {e}")
+            debug_log(f"启动 Tauri 应用程序失败: {e}")
             raise
 
     def stop(self):
@@ -268,35 +268,35 @@ class DesktopApp:
 
 
 async def launch_desktop_app(test_mode: bool = False) -> DesktopApp:
-    """啟動桌面應用程式
+    """启动桌面应用程序
 
     Args:
-        test_mode: 是否為測試模式，測試模式下會創建測試會話
+        test_mode: 是否为测试模式，测试模式下会创建测试会话
     """
-    debug_log("正在啟動桌面應用程式...")
+    debug_log("正在启动桌面应用程序...")
 
     app = DesktopApp()
 
     try:
-        # 啟動 Web 後端
+        # 启动 Web 后端
         server_url = await app.start_web_backend()
 
         if test_mode:
-            # 測試模式：創建測試會話
-            debug_log("測試模式：創建測試會話")
+            # 测试模式：创建测试会话
+            debug_log("测试模式：创建测试会话")
             app.create_test_session()
         else:
-            # MCP 調用模式：使用現有會話
-            debug_log("MCP 調用模式：使用現有 MCP 會話，不創建新的測試會話")
+            # MCP 调用模式：使用现有会话
+            debug_log("MCP 调用模式：使用现有 MCP 会话，不创建新的测试会话")
 
-        # 啟動 Tauri 桌面應用程式
+        # 启动 Tauri 桌面应用程序
         await app.launch_tauri_app(server_url)
 
-        debug_log(f"桌面應用程式已啟動，後端服務: {server_url}")
+        debug_log(f"桌面应用程序已启动，后端服务: {server_url}")
         return app
 
     except Exception as e:
-        debug_log(f"桌面應用程式啟動失敗: {e}")
+        debug_log(f"桌面应用程序启动失败: {e}")
         app.stop()
         raise
 

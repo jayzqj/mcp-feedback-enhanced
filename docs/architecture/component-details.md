@@ -20,7 +20,7 @@ graph TB
         SERVER[server.py<br/>MCP 服務器<br/>FastMCP 實現]
         TOOL[interactive_feedback<br/>核心工具<br/>參數驗證]
         I18N[i18n.py<br/>國際化支援<br/>多語言管理]
-        DEBUG[debug.py<br/>統一調試<br/>日誌輸出]
+        DEBUG[debug.py<br/>统一调试<br/>日志输出]
     end
 
     subgraph "第二層：Web UI 管理層"
@@ -37,17 +37,17 @@ graph TB
 
     subgraph "第四層：前端交互層"
         HTML[templates/<br/>HTML 模板<br/>Jinja2 渲染]
-        JS[static/js/<br/>JavaScript 模組<br/>ES6+ 架構]
-        CSS[static/css/<br/>樣式系統<br/>響應式設計]
-        LOCALES[locales/<br/>翻譯文件<br/>JSON 格式]
-        PROMPT_MODULES[prompt/<br/>提示詞管理模組<br/>CRUD 操作]
-        SESSION_MODULES[session/<br/>會話管理模組<br/>歷史追蹤]
+        JS[static/js/<br/>JavaScript 模块<br/>ES6+ 架构]
+        CSS[static/css/<br/>样式系统<br/>响应式设计]
+        LOCALES[locales/<br/>翻译文件<br/>JSON 格式]
+        PROMPT_MODULES[prompt/<br/>提示词管理模块<br/>CRUD 操作]
+        SESSION_MODULES[session/<br/>会话管理模块<br/>历史追踪]
     end
 
     subgraph "工具層 - 核心工具"
-        ERROR[utils/error_handler.py<br/>錯誤處理<br/>統一異常管理]
-        MEMORY[utils/memory_monitor.py<br/>記憶體監控<br/>資源追蹤]
-        RESOURCE[utils/resource_manager.py<br/>資源管理<br/>生命週期控制]
+        ERROR[utils/error_handler.py<br/>错误处理<br/>统一异常管理]
+        MEMORY[utils/memory_monitor.py<br/>内存监控<br/>资源追踪]
+        RESOURCE[utils/resource_manager.py<br/>资源管理<br/>生命周期控制]
     end
 
     subgraph "工具層 - Web 工具"
@@ -206,32 +206,32 @@ class I18nManager:
 - **参数替换**: 支持 `{name}` 格式的动态内容
 - **回退机制**: 翻译缺失时自动使用简体中文
 
-**翻譯文件結構**：
+**翻译文件结构**：
 ```json
 {
     "app": {
         "title": "MCP Feedback Enhanced",
-        "subtitle": "AI 輔助開發回饋收集器"
+        "subtitle": "AI 辅助开发反馈收集器"
     },
     "buttons": {
-        "submit": "提交回饋",
+        "submit": "提交反馈",
         "cancel": "取消"
     }
 }
 ```
 
-### debug.py - 統一調試系統
+### debug.py - 统一调试系统
 
-**調試功能**：
-- **條件輸出**: 只在 `MCP_DEBUG=true` 時輸出
-- **分類日誌**: 不同模組使用不同前綴
-- **安全輸出**: 輸出到 stderr 避免干擾 MCP 通信
-- **編碼處理**: 自動處理中文字符編碼問題
+**调试功能**：
+- **条件输出**: 只在 `MCP_DEBUG=true` 时输出
+- **分类日志**: 不同模块使用不同前缀
+- **安全输出**: 输出到 stderr 避免干扰 MCP 通信
+- **编码处理**: 自动处理中文字符编码问题
 
 **使用方式**：
 ```python
 from .debug import server_debug_log as debug_log
-debug_log("伺服器啟動完成")  # [SERVER] 伺服器啟動完成
+debug_log("服务器启动完成")  # [SERVER] 服务器启动完成
 ```
 
 ## 🎛️ 第二層：Web UI 管理層
