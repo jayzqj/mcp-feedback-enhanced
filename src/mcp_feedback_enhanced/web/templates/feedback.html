@@ -36,7 +36,7 @@
     <style>
         /* 仅保留必要的页面特定样式和响应式调整 */
 
-        /* 🚀 全新布局：固定导航栏 + 内容区域独立滚动 */
+        /* 🎯 固定导航栏 + 禁止页面滚动方案 */
 
         /* 禁止整个页面滚动 */
         html, body {
@@ -44,16 +44,16 @@
             height: 100vh !important;
         }
 
-        /* 容器占满全屏，无滚动 */
+        /* 容器占满全屏 */
         .container {
             height: 100vh !important;
             overflow: hidden !important;
-            padding: 0 !important;
             display: flex !important;
             flex-direction: column !important;
+            padding: 0 !important;
         }
 
-        /* 主内容区域布局 */
+        /* 主内容区域 */
         .main-content {
             flex: 1 !important;
             display: flex !important;
@@ -62,7 +62,6 @@
             height: calc(100vh - 32px) !important; /* 减去状态栏高度 */
         }
 
-        /* 主内容区域 */
         .main-content-area {
             flex: 1 !important;
             display: flex !important;
@@ -71,38 +70,38 @@
             padding: 12px !important;
         }
 
-        /* 固定导航栏 */
+        /* 导航栏固定在状态栏正下方 */
         .tabs {
-            flex-shrink: 0 !important; /* 不收缩 */
+            position: sticky !important;
+            top: 0 !important;
+            flex-shrink: 0 !important;
             background: var(--bg-primary) !important;
             border-bottom: 2px solid var(--border-color) !important;
             margin: 0 0 12px 0 !important;
             padding: 8px 0 !important;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
             z-index: 10 !important;
         }
 
-        /* 内容区域独立滚动 */
+        /* 恢复完整的内容区域样式 */
         .tab-content {
-            flex: 1 !important;
+            display: none !important;
             overflow-y: auto !important;
-            overflow-x: hidden !important;
+            max-height: calc(100vh - 120px) !important;
             background: var(--bg-secondary) !important;
             border: 1px solid var(--border-color) !important;
             border-radius: 8px !important;
             padding: 20px !important;
-            display: none !important; /* 默认隐藏 */
         }
 
         /* 激活的tab内容显示 */
         .tab-content.active {
-            display: flex !important;
-            flex-direction: column !important;
+            display: block !important;
         }
 
-        /* 设置页面特殊布局 */
+        /* 设置页面正常布局 */
         #tab-settings.active {
-            display: block !important; /* 设置页面使用block布局 */
+            display: block !important;
             overflow-y: auto !important;
         }
 
@@ -110,7 +109,10 @@
         #tab-combined.active {
             display: flex !important;
             flex-direction: column !important;
-            overflow: hidden !important; /* 工作区本身不滚动 */
+            flex: 1 !important;
+            overflow: hidden !important;
+            padding: 0 !important;
+            height: 100% !important;
         }
 
         /* 工作区内容容器 */
@@ -120,6 +122,8 @@
             gap: 16px !important;
             overflow: hidden !important;
             min-height: 0 !important;
+            padding: 20px !important;
+            height: 100% !important;
         }
 
         /* 左右两个区域独立滚动 */
