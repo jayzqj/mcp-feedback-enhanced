@@ -164,6 +164,50 @@
             padding: 0 16px 16px 16px !important;
         }
 
+        /* 🎯 垂直布局模式优化 */
+        body.layout-combined-vertical #tab-combined .combined-content {
+            flex-direction: column !important; /* 垂直排列 */
+            gap: 8px !important; /* 保持小间距 */
+        }
+
+        /* 垂直布局下的AI摘要区域 - 占50%高度，去掉拖拽 */
+        body.layout-combined-vertical #tab-combined .combined-section:first-child {
+            flex: 0 0 50% !important; /* 默认占50%高度 */
+            min-height: 300px !important; /* 增加最小高度 */
+            overflow: hidden !important; /* 防止内容溢出 */
+        }
+
+        /* 垂直布局下AI摘要内容区域 */
+        body.layout-combined-vertical #tab-combined .combined-summary {
+            flex: 1 !important;
+            overflow-y: auto !important;
+            min-height: 250px !important; /* 确保内容区域有足够高度 */
+        }
+
+        /* 垂直布局下AI摘要文本框 */
+        body.layout-combined-vertical #combinedSummaryContent {
+            min-height: 250px !important; /* 增加文本框最小高度 */
+            height: 100% !important;
+        }
+
+        /* 垂直布局下的反馈输入区域 */
+        body.layout-combined-vertical #tab-combined .combined-section:last-child {
+            flex: 1 !important; /* 占剩余空间 */
+            min-height: 200px !important; /* 最小高度 */
+        }
+
+        /* 🎯 水平布局保持原有效果 - AI摘要区域充满整个高度 */
+        body:not(.layout-combined-vertical) #tab-combined .combined-summary {
+            flex: 1 !important; /* 充满整个高度 */
+            overflow-y: auto !important;
+        }
+
+        /* 水平布局下AI摘要文本框保持原有样式 */
+        body:not(.layout-combined-vertical) #combinedSummaryContent {
+            min-height: 200px !important; /* 保持原有最小高度 */
+            height: 100% !important; /* 充满容器高度 */
+        }
+
         /* 确保tab-content可以正常滚动 */
         .tab-content {
             overflow-y: auto !important;
