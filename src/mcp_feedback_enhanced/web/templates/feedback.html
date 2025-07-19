@@ -36,6 +36,136 @@
     <style>
         /* 仅保留必要的页面特定样式和响应式调整 */
 
+        /* 🚀 全新布局：固定导航栏 + 内容区域独立滚动 */
+
+        /* 禁止整个页面滚动 */
+        html, body {
+            overflow: hidden !important;
+            height: 100vh !important;
+        }
+
+        /* 容器占满全屏，无滚动 */
+        .container {
+            height: 100vh !important;
+            overflow: hidden !important;
+            padding: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* 主内容区域布局 */
+        .main-content {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            overflow: hidden !important;
+            height: calc(100vh - 32px) !important; /* 减去状态栏高度 */
+        }
+
+        /* 主内容区域 */
+        .main-content-area {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            overflow: hidden !important;
+            padding: 12px !important;
+        }
+
+        /* 固定导航栏 */
+        .tabs {
+            flex-shrink: 0 !important; /* 不收缩 */
+            background: var(--bg-primary) !important;
+            border-bottom: 2px solid var(--border-color) !important;
+            margin: 0 0 12px 0 !important;
+            padding: 8px 0 !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+            z-index: 10 !important;
+        }
+
+        /* 内容区域独立滚动 */
+        .tab-content {
+            flex: 1 !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            background: var(--bg-secondary) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            display: none !important; /* 默认隐藏 */
+        }
+
+        /* 激活的tab内容显示 */
+        .tab-content.active {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* 设置页面特殊布局 */
+        #tab-settings.active {
+            display: block !important; /* 设置页面使用block布局 */
+            overflow-y: auto !important;
+        }
+
+        /* 🎯 工作区独立滚动布局 */
+        #tab-combined.active {
+            display: flex !important;
+            flex-direction: column !important;
+            overflow: hidden !important; /* 工作区本身不滚动 */
+        }
+
+        /* 工作区内容容器 */
+        #tab-combined .combined-content {
+            display: flex !important;
+            flex: 1 !important;
+            gap: 16px !important;
+            overflow: hidden !important;
+            min-height: 0 !important;
+        }
+
+        /* 左右两个区域独立滚动 */
+        #tab-combined .combined-section {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            overflow: hidden !important;
+            background: var(--bg-tertiary) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 8px !important;
+            min-height: 0 !important;
+        }
+
+        /* 区域标题固定 */
+        #tab-combined .section-header,
+        #tab-combined .feedback-title-container {
+            flex-shrink: 0 !important;
+            padding: 16px 16px 0 16px !important;
+        }
+
+        /* AI摘要区域独立滚动 */
+        #tab-combined .combined-summary {
+            flex: 1 !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            padding: 16px !important;
+            min-height: 0 !important;
+        }
+
+        /* 反馈输入区域独立滚动 */
+        #tab-combined .combined-section:last-child {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+        }
+
+        #tab-combined .combined-section:last-child > .input-group {
+            padding: 0 16px 16px 16px !important;
+        }
+
+        /* 确保tab-content可以正常滚动 */
+        .tab-content {
+            overflow-y: auto !important;
+            max-height: calc(100vh - 150px) !important;
+        }
+
         /* 响应式调整 */
         @media (max-width: 768px) {
             .timeout-controls {

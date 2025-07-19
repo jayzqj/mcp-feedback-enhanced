@@ -1079,7 +1079,7 @@ body {
     min-width: 0;
     min-height: 0; /* 允許內容自然收縮 */
     padding: 12px;
-    overflow: hidden;
+    overflow: visible; /* 改为 visible 以支持 sticky 定位 */
     transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
     background: var(--bg-primary);
     border-radius: 8px 0 0 0;
@@ -1095,8 +1095,14 @@ body {
 
 /* 分頁樣式 */
 .tabs {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
     border-bottom: 2px solid var(--border-color);
     margin-bottom: 12px;
+    padding-top: 8px;
+    margin-top: -8px; /* 抵消 padding-top，保持原有间距 */
 }
 
 .tab-buttons {
