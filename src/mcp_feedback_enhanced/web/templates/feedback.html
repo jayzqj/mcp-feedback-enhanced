@@ -67,10 +67,10 @@
             display: flex !important;
             flex-direction: column !important;
             overflow: hidden !important;
-            padding: 12px !important;
+            padding: 0 12px 12px 12px !important; /* 移除顶部padding */
         }
 
-        /* 导航栏固定在状态栏正下方 */
+        /* 导航栏固定在状态栏正下方 - 紧贴无空白 */
         .tabs {
             position: sticky !important;
             top: 0 !important;
@@ -78,7 +78,7 @@
             background: var(--bg-primary) !important;
             border-bottom: 2px solid var(--border-color) !important;
             margin: 0 0 12px 0 !important;
-            padding: 8px 0 !important;
+            padding: 8px 12px !important; /* 左右padding保持对齐 */
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
             z-index: 10 !important;
         }
