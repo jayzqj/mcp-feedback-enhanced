@@ -55,6 +55,39 @@ fn main() {
                 *state = Some(app.handle().clone());
             }
 
+            // 獲取主視窗並設置高度為屏幕高度，寬度保持合理比例
+            if let Some(window) = app.get_webview_window("main") {
+                // 獲取主顯示器信息
+                if let Ok(monitor) = window.primary_monitor() {
+                    if let Some(monitor) = monitor {
+                        let screen_size = monitor.size();
+                        println!("檢測到屏幕尺寸: {}x{}", screen_size.width, screen_size.height);
+
+                        // 設置窗口高度為屏幕高度，寬度保持合理比例（約1200-1400px）
+                        let window_width = std::cmp::min(1400, (screen_size.width as f64 * 0.75) as u32);
+                        let window_height = screen_size.height;
+
+                        let _ = window.set_size(tauri::Size::Physical(tauri::PhysicalSize {
+                            width: window_width,
+                            height: window_height,
+                        }));
+
+                        // 計算居中位置
+                        let center_x = (screen_size.width - window_width) / 2;
+                        let center_y = (screen_size.height - window_height) / 2;
+
+                        // 將窗口移動到屏幕中央
+                        let _ = window.set_position(tauri::Position::Physical(tauri::PhysicalPosition {
+                            x: center_x as i32,
+                            y: center_y as i32,
+                        }));
+
+                        println!("窗口已設置為: 寬度{}px, 高度{}px (屏幕高度), 位置({}, {})",
+                                window_width, window_height, center_x, center_y);
+                    }
+                }
+            }
+
             // 檢查是否有 MCP_WEB_URL 環境變數
             if let Ok(web_url) = std::env::var("MCP_WEB_URL") {
                 println!("檢測到 Web URL: {}", web_url);

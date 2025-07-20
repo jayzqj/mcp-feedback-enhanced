@@ -105,7 +105,7 @@ def setup_routes(manager: "WebUIManager"):
                 "request": request,
                 "project_directory": current_session.project_directory,
                 "summary": current_session.summary,
-                "title": "Interactive Feedback - 回饋收集",
+                "title": "AI Interactive Feedback - 回饋收集",
                 "version": __version__,
                 "has_session": True,
                 "layout_mode": layout_mode,

@@ -12,10 +12,10 @@ MCP Feedback Enhanced Desktop Application
 - 無需瀏覽器的獨立運行環境
 
 作者: jayzqj
-版本: 2025.0720.01
+版本: 2025.0720.03
 """
 
-__version__ = "2025.0720.01"
+__version__ = "2025.0720.03"
 __author__ = "jayzqj"
 __email__ = ""
 

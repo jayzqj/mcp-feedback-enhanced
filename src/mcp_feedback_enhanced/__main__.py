@@ -34,7 +34,7 @@ if sys.platform == "win32":
 def main():
     """主程式入口點"""
     parser = argparse.ArgumentParser(
-        description="MCP Feedback Enhanced Enhanced - 互動式回饋收集 MCP 伺服器"
+        description="AI Interactive Feedback - 互動式回饋收集 MCP 伺服器"
     )
 
     subparsers = parser.add_subparsers(dest="command", help="可用命令")
