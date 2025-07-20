@@ -1,6 +1,6 @@
 {
     "app": {
-        "title": "MCP Interactive Feedback System",
+        "title": "ai-interactive-feedback",
         "subtitle": "AI Assistant Interactive Feedback Platform",
         "projectDirectory": "Project Directory",
         "clickToCopyPath": "Click to copy full path",

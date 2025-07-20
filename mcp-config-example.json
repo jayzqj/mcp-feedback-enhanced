@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "ai-interactive-feedback": {
+      "command": "uvx",
+      "args": [
+        "ai-interactive-feedback@2025.0720.01"
+      ],
+      "env": {
+        "MCP_DESKTOP_MODE": "true",
+        "MCP_WEB_PORT": "8765",
+        "MCP_DEBUG": "false"
+      }
+    }
+  }
+}

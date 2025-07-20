@@ -87,7 +87,7 @@ def setup_routes(manager: "WebUIManager"):
                 "index.html",
                 {
                     "request": request,
-                    "title": "MCP Feedback Enhanced",
+                    "title": "AI Interactive Feedback",
                     "has_session": False,
                     "version": __version__,
                 },

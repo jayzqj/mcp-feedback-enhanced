@@ -1,7 +1,7 @@
 {
-  "productName": "MCP Feedback Enhanced",
-  "version": "2.4.3",
-  "identifier": "com.minidoracat.mcp-feedback-enhanced",
+  "productName": "ai-interactive-feedback",
+  "version": "2025.0720.01",
+  "identifier": "com.jayzqj.mcp-feedback-enhanced",
   "build": {
     "frontendDist": "../src/mcp_feedback_enhanced/web/static",
     "devUrl": "http://127.0.0.1:8765",
@@ -12,7 +12,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "MCP Feedback Enhanced",
+        "title": "ai-interactive-feedback",
         "width": 1200,
         "height": 800,
         "minWidth": 800,
@@ -42,10 +42,10 @@
     ],
     "resources": [],
     "externalBin": [],
-    "copyright": "Copyright © 2024 Minidoracat",
+    "copyright": "Copyright © 2024 jayzqj",
     "category": "DeveloperTool",
-    "shortDescription": "Enhanced MCP server for interactive user feedback",
-    "longDescription": "An enhanced MCP server that provides interactive user feedback functionality for AI-assisted development, featuring Web UI with intelligent environment detection.",
+    "shortDescription": "Enhanced AI interactive feedback server",
+    "longDescription": "An enhanced AI interactive feedback server that provides interactive user feedback functionality for AI-assisted development, featuring Web UI with intelligent environment detection.",
     "windows": {
       "certificateThumbprint": null,
       "digestAlgorithm": "sha256",

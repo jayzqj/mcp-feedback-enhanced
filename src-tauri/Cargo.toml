@@ -1,10 +1,10 @@
 [package]
 name = "mcp-feedback-enhanced-desktop"
-version = "2.4.3"
+version = "2025.0720.01"
 edition = "2021"
 rust-version = "1.70"
 description = "Desktop application for MCP Feedback Enhanced using Tauri"
-authors = ["Minidoracat <minidora0702@gmail.com>"]
+authors = ["jayzqj"]
 license = "MIT"
 
 # 設置 crate 類型為 cdylib，用於 Python 擴展

@@ -98,7 +98,7 @@
     FeedbackApp.prototype.init = function() {
         const self = this;
 
-        console.log('🚀 初始化 MCP Feedback Enhanced 應用程式');
+        console.log('🚀 初始化 ai-interactive-feedback 應用程式');
 
         return new Promise(function(resolve, reject) {
             try {
@@ -115,7 +115,7 @@
                     })
                     .then(function() {
                         self.isInitialized = true;
-                        console.log('✅ MCP Feedback Enhanced 應用程式初始化完成');
+                        console.log('✅ ai-interactive-feedback 應用程式初始化完成');
                         resolve();
                     })
                     .catch(function(error) {
