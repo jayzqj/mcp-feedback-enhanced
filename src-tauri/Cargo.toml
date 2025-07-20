@@ -1,6 +1,6 @@
 [package]
 name = "mcp-feedback-enhanced-desktop"
-version = "2025.0720.01"
+version = "2025.720.1"
 edition = "2021"
 rust-version = "1.70"
 description = "Desktop application for MCP Feedback Enhanced using Tauri"

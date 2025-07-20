@@ -1584,6 +1584,10 @@
             logger.debug('初始化 FeedbackApp...');
             await window.feedbackApp.init();
 
+            // 強制設置正確的窗口標題
+            document.title = 'AI Interactive Feedback';
+            logger.debug('窗口標題已設置為: AI Interactive Feedback');
+
             // 設置全域引用，讓 SessionManager 可以被 HTML 中的 onclick 調用
             if (window.feedbackApp.sessionManager) {
                 window.MCPFeedback.app = window.feedbackApp;

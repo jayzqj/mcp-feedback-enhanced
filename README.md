@@ -6,6 +6,20 @@
 
 ## 主要改进
 
+### 版本 2025.0720.06 更新内容
+
+#### 🖥️ 桌面应用完善优化
+- **窗口标题修复**：桌面应用标题正确显示为"AI Interactive Feedback"
+- **窗口尺寸优化**：窗口高度精确占用工作区域97%（自动排除任务栏），宽度为屏幕90%
+- **内容显示完整**：确保所有UI元素包括底部详细信息区域都能完整显示
+- **代码简体中文化**：Rust代码中的所有繁体中文注释和字符串统一改为简体中文
+
+### 版本 2025.0720.05 更新内容
+
+#### 📝 文档优化
+- **配图完善**：README.md中的功能展示图片已正确引用
+- **路径修正**：统一图片资源路径为docs/zh-CN/images目录
+
 ### 版本 2025.0720.03 更新内容
 
 #### 🖥️ 桌面应用窗口优化
@@ -88,10 +102,9 @@ pip install uv
 ### 3. 测试
 ```bash
 # 测试 Web UI
-uvx ai-interactive-feedback@latest test --web
-
+uvx --no-cache --with-editable . ai-interactive-feedback test --web   # Web UI 测试 (持续运行)
 # 测试桌面应用
-uvx ai-interactive-feedback@latest test --desktop
+uvx --no-cache --with-editable . ai-interactive-feedback test --desktop # 桌面应用测试
 
 # 强制简体中文界面
 MCP_LANGUAGE=zh-CN uvx ai-interactive-feedback@latest test --web

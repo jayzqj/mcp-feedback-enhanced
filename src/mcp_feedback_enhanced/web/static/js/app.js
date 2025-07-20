@@ -984,10 +984,7 @@
             }, 200); // 延遲確保狀態更新完成
 
             // 更新頁面標題
-            if (data.session_info.project_directory) {
-                const projectName = data.session_info.project_directory.split(/[/\\]/).pop();
-                document.title = 'AI Interactive Feedback - ' + projectName;
-            }
+            document.title = 'AI Interactive Feedback';
 
             // 使用局部更新替代整頁刷新
             this.refreshPageContent();
@@ -1031,11 +1028,8 @@
             this.sessionManager.updateStatusInfo(statusInfo);
         }
 
-        // 更新頁面標題顯示會話信息
-        if (statusInfo.project_directory) {
-            const projectName = statusInfo.project_directory.split(/[/\\]/).pop();
-            document.title = 'AI Interactive Feedback - ' + projectName;
-        }
+        // 更新頁面標題
+        document.title = 'AI Interactive Feedback';
 
         // 使用之前已聲明的 sessionId
 
@@ -1715,10 +1709,7 @@
                 }
 
                 // 更新頁面標題
-                if (sessionData.project_directory) {
-                    const projectName = sessionData.project_directory.split(/[/\\]/).pop();
-                    document.title = 'AI Interactive Feedback - ' + projectName;
-                }
+                document.title = 'AI Interactive Feedback';
 
                 console.log('✅ 局部更新完成');
             })

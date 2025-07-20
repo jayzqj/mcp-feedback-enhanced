@@ -102,7 +102,7 @@ class WebUIManager:
             self.port = PortManager.find_free_port_enhanced(
                 preferred_port=preferred_port, auto_cleanup=auto_cleanup, host=self.host
             )
-        self.app = FastAPI(title="AI Interactive Feedback")
+        self.app = FastAPI(title="AI 交互反馈")
 
         # 設置壓縮和緩存中間件
         self._setup_compression_middleware()

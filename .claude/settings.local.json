@@ -3,7 +3,31 @@
     "allow": [
       "Bash(find:*)",
       "Bash(grep:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(ls:*)",
+      "Bash(cargo:*)",
+      "Bash(make:*)",
+      "Bash(uv run:*)",
+      "Bash(rustc:*)",
+      "Bash(mv:*)",
+      "Bash(uvx:*)",
+      "Bash(where cargo)",
+      "Bash(set PYTHONIOENCODING=utf-8)",
+      "Bash($env:PATH += \";$env:USERPROFILE\\.cargo\\bin\")",
+      "Bash(powershell:*)",
+      "Bash(where cl)",
+      "Bash(\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvarsall.bat\" x64)",
+      "Bash(\"D:\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvarsall.bat\" x64)",
+      "Bash(cmd /c:*)",
+      "Bash(echo $USERPROFILE)",
+      "Bash(dir \"C:\\Users\\jayzq\\.cargo\")",
+      "Bash(\"C:\\Users\\jayzq\\.cargo\\bin\\cargo.exe\" --version)",
+      "Bash(\"C:\\Users\\jayzq\\.cargo\\bin\\cargo.exe\" build)",
+      "Bash(copy \"src-tauri\\target\\debug\\mcp-feedback-enhanced-desktop.exe\" \"src\\mcp_feedback_enhanced\\desktop_release\\mcp-feedback-enhanced-desktop.exe\")",
+      "Bash(cp:*)",
+      "Bash(uv build:*)",
+      "Bash(uv publish:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

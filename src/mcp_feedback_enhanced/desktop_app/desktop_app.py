@@ -93,14 +93,14 @@ class DesktopApp:
         if not self.web_manager:
             raise RuntimeError("Web 管理器未初始化")
 
-        import tempfile
-
-        with tempfile.TemporaryDirectory() as temp_dir:
-            session_id = self.web_manager.create_session(
-                temp_dir, "桌面应用程序测试 - 验证 Tauri 整合功能"
-            )
-            debug_log(f"测试会话已创建: {session_id}")
-            return session_id
+        import os
+        # 使用当前工作目录而不是临时目录，避免路径中包含不需要的名称
+        current_dir = os.getcwd()
+        session_id = self.web_manager.create_session(
+            current_dir, "桌面应用程序测试 - 验证 Tauri 整合功能"
+        )
+        debug_log(f"测试会话已创建: {session_id}")
+        return session_id
 
     async def launch_tauri_app(self, server_url: str):
         """启动 Tauri 桌面应用程序"""

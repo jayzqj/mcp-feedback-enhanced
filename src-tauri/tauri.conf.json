@@ -1,6 +1,6 @@
 {
   "productName": "AI交互反馈",
-  "version": "2025.0720.03",
+  "version": "2025.720.3",
   "identifier": "com.jayzqj.mcp-feedback-enhanced",
   "build": {
     "frontendDist": "../src/mcp_feedback_enhanced/web/static",
@@ -12,9 +12,9 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "AI交互反馈",
+        "title": "AI Interactive Feedback",
         "width": 1400,
-        "height": 1080,
+        "height": 900,
         "minWidth": 800,
         "minHeight": 600,
         "resizable": true,
