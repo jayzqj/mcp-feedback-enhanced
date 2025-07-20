@@ -2,6 +2,22 @@
 
 本文件記錄了 **MCP Feedback Enhanced** 的所有版本更新內容。
 
+## [v2025.0720.01] - 2025-07-20 - PyPI發布更新
+
+### 🌟 版本亮點
+重新發布版本2025.0720.01到PyPI，更新了套件元數據和文檔。
+
+### 📦 套件更新
+- ✅ **PyPI發布**: 成功發布版本2025.0720.01到PyPI
+- 📝 **文檔更新**: 更新了專案文檔和發布說明
+- 🔧 **套件元數據**: 刷新了套件資訊和相依性
+
+### 🚀 改進功能
+- 📋 **發布流程**: 簡化了PyPI發布工作流程
+- 🔄 **版本規範化**: 處理了Python版本規範化 (2025.0720.01 → 2025.720.1)
+
+---
+
 ## [v2.6.0] - 2025-06-28 - 智能會話管理與自動化功能強化
 
 ### 🌟 版本亮點
@@ -424,4 +440,4 @@
 
 ---
 
-**完整專案資訊：** [GitHub - mcp-feedback-enhanced](https://github.com/Minidoracat/mcp-feedback-enhanced)
+**完整專案資訊：** [GitHub - mcp-feedback-enhanced](https://github.com/jayzqj/mcp-feedback-enhanced)

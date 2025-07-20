@@ -400,4 +400,4 @@ This version focuses on improving system stability and user experience, particul
 
 ---
 
-**Full Project Info:** [GitHub - mcp-feedback-enhanced](https://github.com/Minidoracat/mcp-feedback-enhanced)
+**Full Project Info:** [GitHub - mcp-feedback-enhanced](https://github.com/jayzqj/mcp-feedback-enhanced)
