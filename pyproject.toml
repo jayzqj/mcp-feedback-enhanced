@@ -1,6 +1,6 @@
 [project]
 name = "ai-interactive-feedback"
-version = "2025.0720.03"
+version = "2025.0720.4"
 description = "Enhanced MCP server for interactive user feedback and command execution in AI-assisted development, featuring dual interface support (Web UI and Desktop Application) with intelligent environment detection and cross-platform compatibility."
 readme = "README.md"
 requires-python = ">=3.11"
