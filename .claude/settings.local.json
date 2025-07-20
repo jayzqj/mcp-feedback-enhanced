@@ -27,7 +27,9 @@
       "Bash(cp:*)",
       "Bash(uv build:*)",
       "Bash(uv publish:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git tag:*)"
     ],
     "deny": []
   }
