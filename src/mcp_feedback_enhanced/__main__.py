@@ -412,7 +412,7 @@ def show_version():
 
     print(f"MCP Feedback Enhanced Enhanced v{__version__}")
     print(f"作者: {__author__}")
-    print("GitHub: https://github.com/Minidoracat/mcp-feedback-enhanced")
+    print("GitHub: https://github.com/jayzqj/mcp-feedback-enhanced")
 
 
 if __name__ == "__main__":
