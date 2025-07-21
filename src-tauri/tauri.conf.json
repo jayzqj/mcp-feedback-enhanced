@@ -1,6 +1,6 @@
 {
   "productName": "AI交互反馈",
-  "version": "2025.720.3",
+  "version": "2025.721.1",
   "identifier": "com.jayzqj.mcp-feedback-enhanced",
   "build": {
     "frontendDist": "../src/mcp_feedback_enhanced/web/static",
@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "AI Interactive Feedback",
-        "width": 1400,
-        "height": 900,
+        "width": 1260,
+        "height": 850,
         "minWidth": 800,
         "minHeight": 600,
         "resizable": true,
@@ -23,6 +23,7 @@
         "alwaysOnTop": false,
         "skipTaskbar": false,
         "center": true,
+        "visible": false,
         "url": "index.html"
       }
     ],

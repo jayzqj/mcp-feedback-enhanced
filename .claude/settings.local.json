@@ -31,7 +31,9 @@
       "Bash(git commit:*)",
       "Bash(git tag:*)",
       "Bash(rm:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(./mcp-feedback-enhanced-desktop.exe)",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }

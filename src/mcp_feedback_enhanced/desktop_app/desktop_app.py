@@ -111,103 +111,116 @@ class DesktopApp:
         from pathlib import Path
 
         # 找到 Tauri 可执行文件
-        # 首先尝试从打包后的位置找（PyPI 安装后的位置）
-        try:
-            from mcp_feedback_enhanced.desktop_release import __file__ as desktop_init
+        # 首先尝试开发环境的 debug 版本（优先使用最新构建的版本）
+        project_root = Path(__file__).parent.parent.parent.parent
+        debug_exe = (
+            project_root
+            / "src-tauri"
+            / "target"
+            / "debug"
+            / "mcp-feedback-enhanced-desktop.exe"
+        )
+        
+        if debug_exe.exists():
+            tauri_exe = debug_exe
+            debug_log(f"使用开发环境的 debug 版本: {tauri_exe}")
+        else:
+            # 回退到打包后的位置找（PyPI 安装后的位置）
+            try:
+                from mcp_feedback_enhanced.desktop_release import __file__ as desktop_init
 
-            desktop_dir = Path(desktop_init).parent
+                desktop_dir = Path(desktop_init).parent
 
-            # 根据平台选择对应的二进制文件
-            import platform
+                # 根据平台选择对应的二进制文件
+                import platform
 
-            system = platform.system().lower()
-            machine = platform.machine().lower()
+                system = platform.system().lower()
+                machine = platform.machine().lower()
 
-            # 定义平台到二进制文件的映射
-            if system == "windows":
-                tauri_exe = desktop_dir / "mcp-feedback-enhanced-desktop.exe"
-            elif system == "darwin":  # macOS
-                # 检测 Apple Silicon 或 Intel
-                if machine in ["arm64", "aarch64"]:
-                    tauri_exe = (
-                        desktop_dir / "mcp-feedback-enhanced-desktop-macos-arm64"
-                    )
+                # 定义平台到二进制文件的映射
+                if system == "windows":
+                    tauri_exe = desktop_dir / "mcp-feedback-enhanced-desktop.exe"
+                elif system == "darwin":  # macOS
+                    # 检测 Apple Silicon 或 Intel
+                    if machine in ["arm64", "aarch64"]:
+                        tauri_exe = (
+                            desktop_dir / "mcp-feedback-enhanced-desktop-macos-arm64"
+                        )
+                    else:
+                        tauri_exe = (
+                            desktop_dir / "mcp-feedback-enhanced-desktop-macos-intel"
+                        )
+                elif system == "linux":
+                    tauri_exe = desktop_dir / "mcp-feedback-enhanced-desktop-linux"
                 else:
-                    tauri_exe = (
-                        desktop_dir / "mcp-feedback-enhanced-desktop-macos-intel"
-                    )
-            elif system == "linux":
-                tauri_exe = desktop_dir / "mcp-feedback-enhanced-desktop-linux"
-            else:
-                # 回退到通用名称
-                tauri_exe = desktop_dir / "mcp-feedback-enhanced-desktop"
+                    # 回退到通用名称
+                    tauri_exe = desktop_dir / "mcp-feedback-enhanced-desktop"
 
-            if tauri_exe.exists():
-                debug_log(f"找到打包后的 Tauri 可执行文件: {tauri_exe}")
-            else:
-                # 尝试回退选项
-                fallback_files = [
-                    desktop_dir / "mcp-feedback-enhanced-desktop.exe",
-                    desktop_dir / "mcp-feedback-enhanced-desktop-macos-intel",
-                    desktop_dir / "mcp-feedback-enhanced-desktop-macos-arm64",
-                    desktop_dir / "mcp-feedback-enhanced-desktop-linux",
-                    desktop_dir / "mcp-feedback-enhanced-desktop",
-                ]
-
-                for fallback in fallback_files:
-                    if fallback.exists():
-                        tauri_exe = fallback
-                        debug_log(f"使用回退的可执行文件: {tauri_exe}")
-                        break
+                if tauri_exe.exists():
+                    debug_log(f"找到打包后的 Tauri 可执行文件: {tauri_exe}")
                 else:
-                    raise FileNotFoundError(
-                        f"找不到任何可执行文件，检查的路径: {tauri_exe}"
-                    )
+                    # 尝试回退选项
+                    fallback_files = [
+                        desktop_dir / "mcp-feedback-enhanced-desktop.exe",
+                        desktop_dir / "mcp-feedback-enhanced-desktop-macos-intel",
+                        desktop_dir / "mcp-feedback-enhanced-desktop-macos-arm64",
+                        desktop_dir / "mcp-feedback-enhanced-desktop-linux",
+                        desktop_dir / "mcp-feedback-enhanced-desktop",
+                    ]
 
-        except (ImportError, FileNotFoundError):
-            # 回退到开发环境路径
-            debug_log("未找到打包后的可执行文件，尝试开发环境路径...")
-            project_root = Path(__file__).parent.parent.parent.parent
-            tauri_exe = (
-                project_root
-                / "src-tauri"
-                / "target"
-                / "debug"
-                / "mcp-feedback-enhanced-desktop.exe"
-            )
+                    for fallback in fallback_files:
+                        if fallback.exists():
+                            tauri_exe = fallback
+                            debug_log(f"使用回退的可执行文件: {tauri_exe}")
+                            break
+                    else:
+                        raise FileNotFoundError(
+                            f"找不到任何可执行文件，检查的路径: {tauri_exe}"
+                        )
 
-            if not tauri_exe.exists():
-                # 尝试其他可能的路径
+            except (ImportError, FileNotFoundError):
+                # 回退到开发环境路径
+                debug_log("未找到打包后的可执行文件，尝试开发环境路径...")
                 tauri_exe = (
                     project_root
                     / "src-tauri"
                     / "target"
                     / "debug"
-                    / "mcp-feedback-enhanced-desktop"
-                )
-
-            if not tauri_exe.exists():
-                # 尝试 release 版本
-                tauri_exe = (
-                    project_root
-                    / "src-tauri"
-                    / "target"
-                    / "release"
                     / "mcp-feedback-enhanced-desktop.exe"
                 )
+
                 if not tauri_exe.exists():
+                    # 尝试其他可能的路径
+                    tauri_exe = (
+                        project_root
+                        / "src-tauri"
+                        / "target"
+                        / "debug"
+                        / "mcp-feedback-enhanced-desktop"
+                    )
+
+                if not tauri_exe.exists():
+                    # 尝试 release 版本
                     tauri_exe = (
                         project_root
                         / "src-tauri"
                         / "target"
                         / "release"
-                        / "mcp-feedback-enhanced-desktop"
+                        / "mcp-feedback-enhanced-desktop.exe"
                     )
+                    if not tauri_exe.exists():
+                        tauri_exe = (
+                            project_root
+                            / "src-tauri"
+                            / "target"
+                            / "release"
+                            / "mcp-feedback-enhanced-desktop"
+                        )
 
-            if not tauri_exe.exists():
-                raise FileNotFoundError(
-                    "找不到 Tauri 可执行文件，已尝试的路径包括开发和发布目录"
-                ) from None
+                if not tauri_exe.exists():
+                    raise FileNotFoundError(
+                        "找不到 Tauri 可执行文件，已尝试的路径包括开发和发布目录"
+                    ) from None
 
         debug_log(f"找到 Tauri 可执行文件: {tauri_exe}")
 

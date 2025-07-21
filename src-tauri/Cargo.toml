@@ -1,6 +1,6 @@
 [package]
 name = "mcp-feedback-enhanced-desktop"
-version = "2025.720.1"
+version = "2025.721.1"
 edition = "2021"
 rust-version = "1.70"
 description = "Desktop application for MCP Feedback Enhanced using Tauri"
@@ -35,6 +35,9 @@ tokio = { version = "1.0", features = ["full"] }
 # 日誌記錄
 log = "0.4"
 env_logger = "0.11"
+
+# 文件系統操作
+dirs = "5.0"
 
 [build-dependencies]
 tauri-build = { version = "2.2", features = [] }
