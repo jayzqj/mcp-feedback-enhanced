@@ -31,7 +31,8 @@ import sys
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
-from mcp.types import TextContent, ImageContent
+from fastmcp.utilities.types import Image as MCPImage
+from mcp.types import TextContent
 from pydantic import Field
 
 # 导入统一的调试功能
@@ -359,15 +360,15 @@ def create_feedback_text(feedback_data: dict) -> str:
     return "\n\n".join(text_parts) if text_parts else "用户未提供任何反馈内容。"
 
 
-def process_images(images_data: list[dict]) -> list[ImageContent]:
+def process_images(images_data: list[dict]) -> list[MCPImage]:
     """
-    处理图片数据，转换为 MCP ImageContent 对象
+    处理图片数据，转换为 MCP 图片对象
 
     Args:
         images_data: 图片数据列表
 
     Returns:
-        List[ImageContent]: MCP ImageContent 对象列表
+        List[MCPImage]: MCP 图片对象列表
     """
     mcp_images = []
 
@@ -405,13 +406,9 @@ def process_images(images_data: list[dict]) -> list[ImageContent]:
             else:
                 image_format = "png"  # 默认使用 PNG
 
-            # 创建 ImageContent 对象（MCP协议原生类型）
-            image_content = ImageContent(
-                type="image",
-                data=base64.b64encode(image_bytes).decode('utf-8'),
-                mimeType=f"image/{image_format}"
-            )
-            mcp_images.append(image_content)
+            # 创建 MCPImage 对象
+            mcp_image = MCPImage(data=image_bytes, format=image_format)
+            mcp_images.append(mcp_image)
 
             debug_log(f"图片 {i} ({file_name}) 处理成功，格式: {image_format}")
 
@@ -452,7 +449,7 @@ async def interactive_feedback(
         timeout: Timeout in seconds for waiting user feedback (default: 600 seconds)
 
     Returns:
-        list: List containing TextContent and ImageContent objects representing user feedback
+        list: List containing TextContent and MCPImage objects representing user feedback
     """
     # 环境检测
     is_remote = is_remote_environment()

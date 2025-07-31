@@ -17,7 +17,7 @@ MCP Interactive Feedback Enhanced
 - 重構的模組化架構
 """
 
-__version__ = "2025.0731.01"
+__version__ = "2025.0721.01"
 __author__ = "jayzqj"
 __email__ = ""
 
