@@ -1,6 +1,6 @@
 {
   "productName": "AI交互反馈",
-  "version": "2025.808.1",
+  "version": "2025.808.2",
   "identifier": "com.jayzqj.mcp-feedback-enhanced",
   "build": {
     "frontendDist": "../src/mcp_feedback_enhanced/web/static",

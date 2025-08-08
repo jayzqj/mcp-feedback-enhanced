@@ -134,15 +134,24 @@ build: ## Build the package
 build-check: ## Check the built package
 	uv run twine check dist/*
 
-# 版本發布命令
+# 版本管理命令
+sync-version: ## Sync version across all files
+	python scripts/sync_version.py
+
+check-version: ## Check version consistency
+	python scripts/sync_version.py --check-only
+
 bump-patch: ## Bump patch version
 	uv run bump2version patch
+	$(MAKE) sync-version
 
 bump-minor: ## Bump minor version
 	uv run bump2version minor
+	$(MAKE) sync-version
 
 bump-major: ## Bump major version
 	uv run bump2version major
+	$(MAKE) sync-version
 
 # 開發工作流程
 dev-setup: install-dev install-hooks ## Complete development setup

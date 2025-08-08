@@ -12,12 +12,25 @@ MCP Feedback Enhanced Desktop Application
 - 無需瀏覽器的獨立運行環境
 
 作者: jayzqj
-版本: 2025.0720.03
+版本: 使用统一版本管理 (见主项目 _version.py)
 """
 
-__version__ = "2025.0720.03"
-__author__ = "jayzqj"
-__email__ = ""
+# 从统一版本文件导入版本信息
+# 注意：这里需要相对路径导入主项目的版本文件
+import sys
+from pathlib import Path
+
+# 添加主项目路径到 sys.path
+main_project_path = Path(__file__).parent.parent.parent.parent / "src"
+sys.path.insert(0, str(main_project_path))
+
+try:
+    from mcp_feedback_enhanced._version import __version__, __author__, __email__
+except ImportError:
+    # 如果导入失败，使用默认值
+    __version__ = "2025.808.1"
+    __author__ = "jayzqj"
+    __email__ = ""
 
 from .desktop_app import DesktopApp, launch_desktop_app
 

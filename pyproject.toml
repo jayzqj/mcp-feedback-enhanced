@@ -1,6 +1,6 @@
 [project]
 name = "ai-interactive-feedback"
-version = "2025.731.2"
+version = "2025.808.2"
 description = "Enhanced MCP server for interactive user feedback and command execution in AI-assisted development, featuring dual interface support (Web UI and Desktop Application) with intelligent environment detection and cross-platform compatibility."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -84,7 +84,7 @@ dev-dependencies = [
 # ===== Ruff 配置 =====
 [tool.ruff]
 # 目標 Python 版本
-target-version = "py311"
+target-version = "2025.808.2"
 
 # 程式碼行長度
 line-length = 88
@@ -251,7 +251,7 @@ lines-after-imports = 2
 # ===== mypy 配置 =====
 [tool.mypy]
 # Python 版本
-python_version = "3.11"
+python_version = "2025.808.2"
 
 # 基本設定 - 2024-12-19 更新：經過三階段改善，74% 錯誤已修復
 warn_return_any = true

@@ -17,9 +17,8 @@ MCP Interactive Feedback Enhanced
 - 重構的模組化架構
 """
 
-__version__ = "2025.731.2"
-__author__ = "jayzqj"
-__email__ = ""
+# 从统一版本文件导入版本信息
+from ._version import __version__, __author__, __email__
 
 import os
 

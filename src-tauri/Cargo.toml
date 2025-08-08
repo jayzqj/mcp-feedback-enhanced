@@ -1,8 +1,8 @@
 [package]
 name = "mcp-feedback-enhanced-desktop"
-version = "2025.808.1"
+version = "2025.808.2"
 edition = "2021"
-rust-version = "1.70"
+rust-version = "2025.808.2"
 description = "Desktop application for MCP Feedback Enhanced using Tauri"
 authors = ["jayzqj"]
 license = "MIT"
@@ -19,18 +19,18 @@ path = "src/main.rs"
 
 [dependencies]
 # Tauri 核心依賴
-tauri = { version = "2.2", features = ["custom-protocol"] }
+tauri = { version = "2025.808.2", features = ["custom-protocol"] }
 tauri-plugin-shell = "2.2"
 
 # PyO3 用於 Python 綁定
-pyo3 = { version = "0.22", features = ["extension-module"] }
+pyo3 = { version = "2025.808.2", features = ["extension-module"] }
 
 # 序列化支援
-serde = { version = "1.0", features = ["derive"] }
+serde = { version = "2025.808.2", features = ["derive"] }
 serde_json = "1.0"
 
 # 異步運行時
-tokio = { version = "1.0", features = ["full"] }
+tokio = { version = "2025.808.2", features = ["full"] }
 
 # 日誌記錄
 log = "0.4"
@@ -40,7 +40,7 @@ env_logger = "0.11"
 dirs = "5.0"
 
 [build-dependencies]
-tauri-build = { version = "2.2", features = [] }
+tauri-build = { version = "2025.808.2", features = [] }
 
 # 開發配置文件
 [profile.dev]

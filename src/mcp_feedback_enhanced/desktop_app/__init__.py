@@ -12,12 +12,11 @@ MCP Feedback Enhanced Desktop Application
 - 無需瀏覽器的獨立運行環境
 
 作者: jayzqj
-版本: 2025.0720.03
+版本: 使用统一版本管理 (见 _version.py)
 """
 
-__version__ = "2025.0720.03"
-__author__ = "jayzqj"
-__email__ = ""
+# 从统一版本文件导入版本信息
+from .._version import __version__, __author__, __email__
 
 from .desktop_app import DesktopApp, launch_desktop_app
 
