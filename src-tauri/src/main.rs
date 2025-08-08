@@ -139,6 +139,46 @@ fn calculate_default_window_config(window: &tauri::WebviewWindow) -> Option<Wind
     None
 }
 
+/// 检查给定窗口配置是否位于任意显示器的工作区域内
+fn is_config_on_any_monitor(app: &tauri::AppHandle, config: &WindowConfig) -> bool {
+    let monitors = app.available_monitors().unwrap_or_default();
+    let wx1 = config.x as i32;
+    let wy1 = config.y as i32;
+    let wx2 = wx1 + config.width as i32;
+    let wy2 = wy1 + config.height as i32;
+
+    for monitor in monitors {
+        let area = monitor.work_area();
+        let mx1 = area.position.x as i32;
+        let my1 = area.position.y as i32;
+        let mx2 = mx1 + area.size.width as i32;
+        let my2 = my1 + area.size.height as i32;
+
+        let intersects = wx1 < mx2 && wx2 > mx1 && wy1 < my2 && wy2 > my1;
+        if intersects {
+            return true;
+        }
+    }
+    false
+}
+
+/// 如果窗口配置离屏，则回退到合适的默认配置
+fn adjust_config_into_visible_area(
+    app: &tauri::AppHandle,
+    window: &tauri::WebviewWindow,
+    config: &WindowConfig,
+) -> WindowConfig {
+    if is_config_on_any_monitor(app, config) {
+        return config.clone();
+    }
+
+    if let Some(default_cfg) = calculate_default_window_config(window) {
+        return default_cfg;
+    }
+
+    WindowConfig::default()
+}
+
 fn main() {
     // 初始化日誌
     env_logger::init();
@@ -171,6 +211,21 @@ fn main() {
                         // 保存新计算的配置
                         let _ = save_window_config(&config);
                     }
+                }
+                
+                // 防止窗口位置离屏，必要时自动回退到可见区域
+                let adjusted = adjust_config_into_visible_area(&app.handle(), &window, &config);
+                if adjusted.x != config.x
+                    || adjusted.y != config.y
+                    || adjusted.width != config.width
+                    || adjusted.height != config.height
+                {
+                    println!(
+                        "检测到离屏或无效窗口配置，自动调整为: {:?}",
+                        adjusted
+                    );
+                    config = adjusted;
+                    let _ = save_window_config(&config);
                 }
                 
                 // 应用窗口配置
