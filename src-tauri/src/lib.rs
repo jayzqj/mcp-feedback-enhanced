@@ -1,4 +1,5 @@
-use pyo3::prelude::*;
+// 暂时禁用 PyO3 以简化构建
+// use pyo3::prelude::*;
 use tauri::{Builder, Context, Manager};
 use std::sync::Mutex;
 
@@ -72,6 +73,8 @@ fn set_desktop_mode(enabled: bool, _state: tauri::State<AppState>) {
     println!("設置桌面模式: {}", enabled);
 }
 
+// 暂时禁用 PyO3 模块以简化构建
+/*
 /// PyO3 模組定義
 #[pymodule]
 #[pyo3(name = "ext_mod")]
@@ -130,3 +133,4 @@ pub mod ext_mod {
         }
     }
 }
+*/

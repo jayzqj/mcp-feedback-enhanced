@@ -28,7 +28,7 @@ try:
     from mcp_feedback_enhanced._version import __version__, __author__, __email__
 except ImportError:
     # 如果导入失败，使用默认值
-    __version__ = "2025.808.1"
+    __version__ = "2025.828.1"
     __author__ = "jayzqj"
     __email__ = ""
 

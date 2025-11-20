@@ -119,15 +119,27 @@ fn calculate_default_window_config(window: &tauri::WebviewWindow) -> Option<Wind
         if let Some(monitor) = monitor {
             let screen_size = monitor.size();
             let work_area = monitor.work_area();
-            
-            // 设置窗口宽度为屏幕宽度的90%，高度为工作区域的97%
+
+            // 计算任务栏高度和位置
+            let taskbar_height = screen_size.height - work_area.size.height;
+            let taskbar_top_offset = work_area.position.y;
+
+            // 设置窗口宽度为屏幕宽度的90%
             let window_width = (screen_size.width as f64 * 0.9) as u32;
+
+            // 设置窗口高度为工作区域高度的97%，确保不被任务栏遮挡
             let window_height = (work_area.size.height as f64 * 0.97) as u32;
-            
+
             // 计算居中位置
             let center_x = (screen_size.width - window_width) / 2;
-            let pos_y = work_area.position.y;
-            
+            // 从屏幕顶部开始显示
+            let pos_y = 0;
+
+            println!("屏幕尺寸: {}x{}", screen_size.width, screen_size.height);
+            println!("工作区域: {}x{} at ({}, {})", work_area.size.width, work_area.size.height, work_area.position.x, work_area.position.y);
+            println!("任务栏高度: {}, 顶部偏移: {}", taskbar_height, taskbar_top_offset);
+            println!("计算窗口: {}x{} at ({}, {})", window_width, window_height, center_x, pos_y);
+
             return Some(WindowConfig {
                 width: window_width,
                 height: window_height,
@@ -201,32 +213,12 @@ fn main() {
                 // 首先隐藏窗口
                 let _ = window.hide();
                 
-                // 尝试加载保存的窗口配置
-                let mut config = load_window_config();
-                
-                // 如果配置是默认值，说明没有保存的配置，需要计算合适的大小
-                if config.width == 1260 && config.height == 850 && config.x == 0 && config.y == 0 {
-                    if let Some(calculated_config) = calculate_default_window_config(&window) {
-                        config = calculated_config;
-                        // 保存新计算的配置
-                        let _ = save_window_config(&config);
-                    }
-                }
-                
-                // 防止窗口位置离屏，必要时自动回退到可见区域
-                let adjusted = adjust_config_into_visible_area(&app.handle(), &window, &config);
-                if adjusted.x != config.x
-                    || adjusted.y != config.y
-                    || adjusted.width != config.width
-                    || adjusted.height != config.height
-                {
-                    println!(
-                        "检测到离屏或无效窗口配置，自动调整为: {:?}",
-                        adjusted
-                    );
-                    config = adjusted;
-                    let _ = save_window_config(&config);
-                }
+                // 每次都使用计算的默认窗口配置，不保存和恢复位置大小
+                let config = if let Some(calculated_config) = calculate_default_window_config(&window) {
+                    calculated_config
+                } else {
+                    WindowConfig::default()
+                };
                 
                 // 应用窗口配置
                 let _ = window.set_size(Size::Physical(PhysicalSize {
@@ -245,30 +237,6 @@ fn main() {
                 // 等待一下确保设置生效，然后显示窗口
                 std::thread::sleep(std::time::Duration::from_millis(100));
                 let _ = window.show();
-                
-                // 监听窗口大小和位置变化事件
-                let window_clone = window.clone();
-                window.on_window_event(move |event| {
-                    match event {
-                        tauri::WindowEvent::Resized(_) | tauri::WindowEvent::Moved(_) => {
-                            // 获取当前窗口大小和位置
-                            if let (Ok(size), Ok(position)) = (window_clone.outer_size(), window_clone.outer_position()) {
-                                let current_config = WindowConfig {
-                                    width: size.width,
-                                    height: size.height,
-                                    x: position.x,
-                                    y: position.y,
-                                };
-                                
-                                // 同步保存配置，避免Tokio上下文问题
-                                std::thread::spawn(move || {
-                                    let _ = save_window_config(&current_config);
-                                });
-                            }
-                        }
-                        _ => {}
-                    }
-                });
             }
 
             // 检查是否有 MCP_WEB_URL 环境变量

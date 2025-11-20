@@ -116,7 +116,7 @@ mcp = FastMCP("mcp-feedback-enhanced")
 async def interactive_feedback(
     project_directory: Annotated[str, Field(description="專案目錄路徑")] = ".",
     summary: Annotated[str, Field(description="AI 工作完成的摘要說明")] = "我已完成了您請求的任務。",
-    timeout: Annotated[int, Field(description="等待用戶回饋的超時時間（秒）")] = 600,
+    timeout: Annotated[int, Field(description="等待用戶回饋的超時時間（秒）")] = 3600,
 ) -> list:
     """
     收集用戶的互動回饋，支援文字和圖片
